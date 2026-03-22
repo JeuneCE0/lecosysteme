@@ -680,7 +680,10 @@
     /* Nav & Proof */
     .nav{padding:14px 16px;}
     .nav img{height:18px;}
-    .proof-bar{font-size:11px;padding:8px 12px;gap:8px;}
+    .proof-bar{display:none;}
+
+    /* Scroll progress hidden on mobile */
+    .scroll-progress{display:none;}
 
     /* VSL */
     .vsl-wrap{padding:0 12px;}
@@ -694,10 +697,21 @@
     .dark-zone{padding:40px 16px;margin-top:48px;}
     .st{font-size:clamp(20px,5.5vw,28px);margin-bottom:28px;}
 
-    /* Bento */
+    /* Bento — active state replaces hover on mobile */
     .bento{grid-template-columns:1fr;gap:12px;}
     .bento-item{padding:22px 18px;}
     .bento-item h3{font-size:15px;}
+    .bento-item.bento-active{
+      border-color:rgba(255,157,0,.2);
+      transform:translateY(-3px);
+      box-shadow:0 8px 30px rgba(0,0,0,.25),0 0 0 1px rgba(255,157,0,.08);
+    }
+    .bento-item.bento-active::before{opacity:1;}
+    .bento-item.bento-active .bento-num{
+      background:var(--orange);color:#fff;border-color:var(--orange);
+      box-shadow:0 0 12px rgba(255,157,0,.3);
+    }
+    .bento-item.bento-active .bento-icon{transform:scale(1.25) rotate(-8deg);}
 
     /* Counter */
     .counter{grid-template-columns:repeat(3,1fr);gap:8px;}
@@ -718,7 +732,7 @@
     .reassure{flex-direction:column;gap:5px;font-size:11px;}
 
     /* Senja */
-    .senja-section,.senja-section-2{padding:0 12px;}
+    .senja-section,.senja-section-2{padding:0 12px;overflow:hidden;}
 
     /* Urgency */
     .urgency{padding:18px 16px;}
@@ -732,8 +746,13 @@
     /* Sticky CTA — always visible on mobile */
     .sticky-cta{display:block;}
 
-    /* Notification above sticky */
-    .notif-bubble{bottom:calc(76px + env(safe-area-inset-bottom));left:10px;right:10px;max-width:none;padding:10px 12px;gap:10px;border-radius:12px;}
+    /* Notification at top on mobile */
+    .notif-bubble{
+      bottom:auto;top:calc(12px + env(safe-area-inset-top));
+      left:10px;right:10px;max-width:none;padding:10px 12px;gap:10px;border-radius:12px;
+      transform:translateY(-120%);
+    }
+    .notif-bubble.show{transform:translateY(0);}
     .notif-avatar{width:32px;height:32px;}
     .notif-text{font-size:12px;}
     .notif-time{font-size:10px;}
@@ -1153,6 +1172,20 @@ function animateCounter(el){
   requestAnimationFrame(update);
 }
 
+
+// === BENTO SCROLL ACTIVE (mobile) ===
+if(window.innerWidth<=640){
+  const bentoObs=new IntersectionObserver(entries=>{
+    entries.forEach(x=>{
+      if(x.isIntersecting){
+        x.target.classList.add('bento-active');
+      } else {
+        x.target.classList.remove('bento-active');
+      }
+    });
+  },{threshold:.6});
+  document.querySelectorAll('.bento-item').forEach(el=>bentoObs.observe(el));
+}
 
 // === BENTO MOUSE GLOW ===
 document.querySelectorAll('.bento-item').forEach(card=>{
