@@ -1212,12 +1212,42 @@ function playVSL(){
 }
 
 // === FORM SUBMIT ===
-function handleSubmit(e,form){
+// === GHL CONFIG ===
+const GHL={
+  baseUrl:'https://services.leadconnectorhq.com',
+  locationId:'NsV7HI2MbE6qHtRp410y',
+  apiKey:'pit-892a9601-3e0c-4f75-a860-06cd08f9f314',
+  pipelineId:'MxyTTXuiKLVC4gb7rm4F',
+  stageId:'3a042ecc-5422-4ccb-9a05-02c7421b8ee2',
+  tag:'Optin Skool',
+  source:'Skool'
+};
+
+async function ghlRequest(endpoint,body){
+  const res=await fetch(GHL.baseUrl+endpoint,{
+    method:'POST',
+    headers:{
+      'Authorization':'Bearer '+GHL.apiKey,
+      'Version':'2021-07-28',
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify(body)
+  });
+  return res.json();
+}
+
+async function handleSubmit(e,form){
   e.preventDefault();
   const btn=form.querySelector('.fb');
   btn.textContent='ENVOI EN COURS...';
   btn.style.opacity='0.7';btn.style.pointerEvents='none';
   btn.style.animation='none';
+
+  // Get form data
+  const prenom=form.querySelector('[name="prenom"]').value.trim();
+  const nom=form.querySelector('[name="nom"]').value.trim();
+  const email=form.querySelector('[name="email"]').value.trim();
+  const tel=form.querySelector('[name="tel"]').value.trim();
 
   // Close modal, show fullscreen loader
   closeModal();
@@ -1225,24 +1255,55 @@ function handleSubmit(e,form){
   const bar=document.getElementById('loaderBar');
   loader.classList.add('active');
 
-  // Animate progress bar
   setTimeout(()=>{bar.style.width='30%';},200);
-  setTimeout(()=>{bar.style.width='60%';},800);
-  setTimeout(()=>{bar.style.width='85%';},1400);
 
-  // En prod: POST vers webhook GHL
-  // const fd=new FormData(form);
-  // fetch('WEBHOOK_GHL',{method:'POST',body:fd}).then(()=>{...})
+  try{
+    // 1. Create/update contact
+    const contactRes=await ghlRequest('/contacts/upsert',{
+      locationId:GHL.locationId,
+      firstName:prenom,
+      lastName:nom,
+      email:email,
+      phone:tel,
+      source:GHL.source,
+      tags:[GHL.tag]
+    });
 
-  setTimeout(()=>{
+    bar.style.width='60%';
+
+    const contactId=contactRes.contact?.id;
+
+    if(contactId){
+      // 2. Create opportunity
+      await ghlRequest('/opportunities/upsert',{
+        locationId:GHL.locationId,
+        pipelineId:GHL.pipelineId,
+        pipelineStageId:GHL.stageId,
+        contactId:contactId,
+        name:prenom+' '+nom,
+        source:GHL.source,
+        status:'open'
+      });
+    }
+
     bar.style.width='100%';
     document.querySelector('.loader-text').textContent='✓ Inscription confirmée !';
     document.querySelector('.loader-sub').textContent='Redirection vers la communauté...';
-  },1800);
 
-  setTimeout(()=>{
-    window.location.href='https://www.skool.com/lecosysteme-7916/about';
-  },2800);
+    setTimeout(()=>{
+      window.location.href='https://www.skool.com/lecosysteme-7916/about';
+    },1200);
+
+  }catch(err){
+    console.error('GHL Error:',err);
+    // Redirect anyway even if API fails
+    bar.style.width='100%';
+    document.querySelector('.loader-text').textContent='✓ Inscription confirmée !';
+    document.querySelector('.loader-sub').textContent='Redirection vers la communauté...';
+    setTimeout(()=>{
+      window.location.href='https://www.skool.com/lecosysteme-7916/about';
+    },1200);
+  }
 }
 
 // === FAQ TOGGLE ===
