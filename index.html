@@ -68,6 +68,62 @@
     pointer-events:none;z-index:0;
   }
 
+  /* === HERO VISUAL ELEMENTS === */
+  /* Converging lines pointing down to VSL */
+  .hero-line-left,.hero-line-right{
+    position:absolute;top:60px;width:1px;height:calc(100% - 60px);
+    pointer-events:none;z-index:0;opacity:.5;
+  }
+  .hero-line-left{left:12%;background:linear-gradient(to bottom,transparent,rgba(255,157,0,.08) 40%,rgba(255,157,0,.15) 80%,transparent);}
+  .hero-line-right{right:12%;background:linear-gradient(to bottom,transparent,rgba(255,157,0,.08) 40%,rgba(255,157,0,.15) 80%,transparent);}
+
+  /* Diagonal guide lines converging to center */
+  .hero-diag-left,.hero-diag-right{
+    position:absolute;bottom:0;width:1px;height:55%;
+    pointer-events:none;z-index:0;opacity:.3;
+    background:linear-gradient(to bottom,transparent,rgba(255,157,0,.12));
+  }
+  .hero-diag-left{left:20%;transform:rotate(8deg);transform-origin:bottom center;}
+  .hero-diag-right{right:20%;transform:rotate(-8deg);transform-origin:bottom center;}
+
+  /* Scroll chevrons */
+  .hero-chevrons{
+    position:relative;z-index:1;display:flex;flex-direction:column;
+    align-items:center;gap:4px;padding:16px 0 8px;
+    animation:fadeUp .7s cubic-bezier(.525,0,0,1) .5s forwards;opacity:0;
+  }
+  .hero-chevron{
+    width:24px;height:24px;opacity:.2;
+    animation:chevronPulse 2s ease infinite;
+  }
+  .hero-chevron:nth-child(2){animation-delay:.15s;opacity:.35;}
+  .hero-chevron:nth-child(3){animation-delay:.3s;opacity:.5;}
+  .hero-chevron svg{width:100%;height:100%;fill:none;stroke:var(--orange);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* Floating dots decorative */
+  .hero-dot{
+    position:absolute;border-radius:50%;pointer-events:none;z-index:0;
+    background:var(--orange);
+  }
+  .hero-dot-1{width:6px;height:6px;top:20%;left:8%;opacity:.12;animation:floatDot 6s ease-in-out infinite;}
+  .hero-dot-2{width:4px;height:4px;top:35%;right:10%;opacity:.1;animation:floatDot 7s ease-in-out infinite 1s;}
+  .hero-dot-3{width:5px;height:5px;top:55%;left:6%;opacity:.08;animation:floatDot 8s ease-in-out infinite 2s;}
+  .hero-dot-4{width:3px;height:3px;top:15%;right:15%;opacity:.15;animation:floatDot 5s ease-in-out infinite .5s;}
+  .hero-dot-5{width:4px;height:4px;top:70%;right:7%;opacity:.1;animation:floatDot 7s ease-in-out infinite 1.5s;}
+
+  /* Small cross accents */
+  .hero-cross{
+    position:absolute;width:12px;height:12px;pointer-events:none;z-index:0;opacity:.1;
+  }
+  .hero-cross::before,.hero-cross::after{
+    content:'';position:absolute;background:var(--orange);border-radius:1px;
+  }
+  .hero-cross::before{width:12px;height:1.5px;top:50%;left:0;transform:translateY(-50%);}
+  .hero-cross::after{width:1.5px;height:12px;left:50%;top:0;transform:translateX(-50%);}
+  .hero-cross-1{top:25%;left:15%;}
+  .hero-cross-2{top:45%;right:12%;}
+  .hero-cross-3{top:65%;left:10%;}
+
   /* === SCROLL PROGRESS BAR === */
   .scroll-progress{
     position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange-hover));
@@ -458,6 +514,8 @@
   @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.3}}
   @keyframes dotPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
   @keyframes shimmer{0%{left:-100%}50%{left:120%}100%{left:120%}}
+  @keyframes chevronPulse{0%,100%{transform:translateY(0);opacity:.2}50%{transform:translateY(4px);opacity:.6}}
+  @keyframes floatDot{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
   .reveal{opacity:0;transform:translateY(24px);filter:blur(4px);transition:opacity .6s cubic-bezier(.525,0,0,1),transform .6s cubic-bezier(.525,0,0,1),filter .6s cubic-bezier(.525,0,0,1);}
   .reveal.v{opacity:1;transform:translateY(0);filter:blur(0);}
@@ -501,6 +559,9 @@
   @media(max-width:640px){
     .hero{padding:36px 20px 0;}
     .hero h1{letter-spacing:-1px;}
+    .hero-line-left,.hero-line-right,.hero-diag-left,.hero-diag-right,.hero-cross{display:none;}
+    .hero-dot{display:none;}
+    .hero-chevrons{padding:10px 0 4px;}
     .vsl-wrap{padding:0 16px;}
     .vsl-player{border-radius:12px 12px 0 0;}
     .vsl-cta{padding:0 16px;}
@@ -600,6 +661,18 @@
 <!-- HERO BACKGROUND WRAPPER -->
 <div class="hero-bg">
 <div class="hero-orb-left"></div>
+<div class="hero-line-left"></div>
+<div class="hero-line-right"></div>
+<div class="hero-diag-left"></div>
+<div class="hero-diag-right"></div>
+<div class="hero-dot hero-dot-1"></div>
+<div class="hero-dot hero-dot-2"></div>
+<div class="hero-dot hero-dot-3"></div>
+<div class="hero-dot hero-dot-4"></div>
+<div class="hero-dot hero-dot-5"></div>
+<div class="hero-cross hero-cross-1"></div>
+<div class="hero-cross hero-cross-2"></div>
+<div class="hero-cross hero-cross-3"></div>
 
 <!-- 2. HEADLINE -->
 <section class="hero">
@@ -620,6 +693,13 @@
       <div class="bullet-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
       Process de vente
     </div>
+  </div>
+
+  <!-- SCROLL CHEVRONS pointing to VSL -->
+  <div class="hero-chevrons">
+    <div class="hero-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+    <div class="hero-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+    <div class="hero-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
   </div>
 </section>
 
