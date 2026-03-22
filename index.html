@@ -63,18 +63,18 @@
     position:absolute;border-radius:50%;pointer-events:none;z-index:0;
     background:var(--orange);
   }
-  .hero-dot-1{width:5px;height:5px;top:18%;left:7%;opacity:.35;animation:floatDot 6s ease-in-out infinite;}
-  .hero-dot-2{width:4px;height:4px;top:32%;right:9%;opacity:.3;animation:floatDot 7s ease-in-out infinite 1s;}
-  .hero-dot-3{width:5px;height:5px;top:52%;left:5%;opacity:.28;animation:floatDot 8s ease-in-out infinite 2s;}
-  .hero-dot-4{width:3px;height:3px;top:12%;right:14%;opacity:.4;animation:floatDot 5s ease-in-out infinite .5s;}
-  .hero-dot-5{width:4px;height:4px;top:68%;right:6%;opacity:.32;animation:floatDot 7s ease-in-out infinite 1.5s;}
-  .hero-dot-6{width:3px;height:3px;top:42%;left:11%;opacity:.3;animation:floatDot 9s ease-in-out infinite .8s;}
-  .hero-dot-7{width:4px;height:4px;top:75%;left:14%;opacity:.25;animation:floatDot 6.5s ease-in-out infinite 1.2s;}
-  .hero-dot-8{width:5px;height:5px;top:28%;right:5%;opacity:.28;animation:floatDot 8s ease-in-out infinite 2.5s;}
+  .hero-dot-1{width:5px;height:5px;top:18%;left:7%;opacity:.55;animation:floatDot 6s ease-in-out infinite;}
+  .hero-dot-2{width:4px;height:4px;top:32%;right:9%;opacity:.5;animation:floatDot 7s ease-in-out infinite 1s;}
+  .hero-dot-3{width:5px;height:5px;top:52%;left:5%;opacity:.45;animation:floatDot 8s ease-in-out infinite 2s;}
+  .hero-dot-4{width:3px;height:3px;top:12%;right:14%;opacity:.6;animation:floatDot 5s ease-in-out infinite .5s;}
+  .hero-dot-5{width:4px;height:4px;top:68%;right:6%;opacity:.5;animation:floatDot 7s ease-in-out infinite 1.5s;}
+  .hero-dot-6{width:3px;height:3px;top:42%;left:11%;opacity:.5;animation:floatDot 9s ease-in-out infinite .8s;}
+  .hero-dot-7{width:4px;height:4px;top:75%;left:14%;opacity:.4;animation:floatDot 6.5s ease-in-out infinite 1.2s;}
+  .hero-dot-8{width:5px;height:5px;top:28%;right:5%;opacity:.45;animation:floatDot 8s ease-in-out infinite 2.5s;}
 
   /* Cross accents — BIGGER and more visible */
   .hero-cross{
-    position:absolute;width:16px;height:16px;pointer-events:none;z-index:0;opacity:.2;
+    position:absolute;width:16px;height:16px;pointer-events:none;z-index:0;opacity:.35;
   }
   .hero-cross::before,.hero-cross::after{
     content:'';position:absolute;background:var(--orange);border-radius:1px;
@@ -84,8 +84,8 @@
   .hero-cross-1{top:22%;left:14%;animation:floatDot 10s ease-in-out infinite 1s;}
   .hero-cross-2{top:40%;right:11%;animation:floatDot 8s ease-in-out infinite 2s;}
   .hero-cross-3{top:62%;left:9%;animation:floatDot 9s ease-in-out infinite 0s;}
-  .hero-cross-4{top:15%;right:8%;opacity:.15;animation:floatDot 7s ease-in-out infinite 1.5s;}
-  .hero-cross-5{top:55%;right:13%;opacity:.12;animation:floatDot 11s ease-in-out infinite .5s;}
+  .hero-cross-4{top:15%;right:8%;opacity:.3;animation:floatDot 7s ease-in-out infinite 1.5s;}
+  .hero-cross-5{top:55%;right:13%;opacity:.25;animation:floatDot 11s ease-in-out infinite .5s;}
 
   /* Decorative ring */
   .hero-ring{
@@ -429,21 +429,6 @@
   }
   .bento-item p{font-size:13.5px;color:var(--text-muted);line-height:1.7;position:relative;z-index:1;}
 
-  /* === BENTO CONNECTOR LINES (horizontal, between rows) === */
-  .bento-connector{
-    position:absolute;pointer-events:none;z-index:0;
-    height:2px;
-    background:linear-gradient(90deg,transparent,var(--orange),#FFD700,var(--orange),transparent);
-    filter:drop-shadow(0 0 6px rgba(255,157,0,.35));
-    opacity:.4;
-  }
-  .bento-connector::after{
-    content:'';position:absolute;inset:0;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
-    background-size:60px 100%;
-    animation:connectorFlow 2s linear infinite;
-  }
-  @keyframes connectorFlow{from{background-position:-60px 0}to{background-position:60px 0}}
 
   /* === DARK ZONE CTA === */
   .dark-cta{
@@ -455,20 +440,34 @@
   .dark-cta .reassure svg{fill:var(--green);}
 
   /* === FAQ === */
-  .faq{margin-bottom:64px;}
-  .faq-item{border-bottom:1px solid var(--border-dark);padding:20px 0;cursor:pointer;transition:background .2s;}
-  .faq-item:hover{background:rgba(255,255,255,.02);}
-  .faq-item:first-child{border-top:1px solid var(--border-dark);}
-  .faq-q{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-h);font-size:15px;font-weight:600;color:var(--text-light);}
-  .faq-q .arrow{
-    font-size:18px;color:var(--text-muted);transition:transform .3s cubic-bezier(.25,.46,.45,.94),color .3s;
-    width:28px;height:28px;display:flex;align-items:center;justify-content:center;
-    border-radius:50%;background:rgba(255,255,255,.04);flex-shrink:0;
+  .faq{margin-bottom:64px;display:flex;flex-direction:column;gap:12px;}
+  .faq-item{
+    background:var(--bg-card);border:1px solid var(--border-dark);border-radius:14px;
+    padding:0;cursor:pointer;overflow:hidden;
+    transition:border-color .3s,box-shadow .3s;
   }
-  .faq-item.open .arrow{transform:rotate(45deg);color:var(--orange);background:var(--orange-dim);}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.25,.46,.45,.94),padding .4s cubic-bezier(.25,.46,.45,.94),opacity .4s ease;opacity:0;}
-  .faq-item.open .faq-a{opacity:1;max-height:200px;padding-top:12px;}
-  .faq-a p{font-size:14px;color:var(--text-muted);line-height:1.7;}
+  .faq-item:hover{border-color:var(--border-hover);box-shadow:0 4px 16px rgba(0,0,0,.2);}
+  .faq-item.open{border-color:rgba(255,157,0,.2);box-shadow:0 4px 20px rgba(0,0,0,.25),0 0 0 1px rgba(255,157,0,.06);}
+  .faq-q{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--font-h);font-size:15px;font-weight:600;color:var(--text-light);
+    padding:20px 24px;
+  }
+  .faq-q .arrow{
+    font-size:18px;color:var(--text-muted);
+    transition:transform .35s cubic-bezier(.25,.46,.45,.94),color .3s,background .3s;
+    width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+    border-radius:8px;background:rgba(255,255,255,.04);flex-shrink:0;
+  }
+  .faq-item:hover .arrow{background:rgba(255,255,255,.06);}
+  .faq-item.open .arrow{transform:rotate(45deg);color:#fff;background:var(--orange);box-shadow:0 0 10px rgba(255,157,0,.25);}
+  .faq-a{
+    max-height:0;overflow:hidden;padding:0 24px;
+    transition:max-height .5s cubic-bezier(.25,.46,.45,.94),padding .4s cubic-bezier(.25,.46,.45,.94),opacity .4s ease;
+    opacity:0;
+  }
+  .faq-item.open .faq-a{opacity:1;max-height:250px;padding:0 24px 20px;}
+  .faq-a p{font-size:14px;color:var(--text-muted);line-height:1.8;border-top:1px solid var(--border-dark);padding-top:16px;}
 
   /* === URGENCY === */
   .urgency{
@@ -623,7 +622,6 @@
     .vsl-cta .fb{border-radius:0 0 12px 12px;padding:14px;font-size:15px;}
     .dark-zone{padding:48px 20px;}
     .bento{grid-template-columns:1fr;}
-    .bento-connector{display:none;}
     .counter{grid-template-columns:1fr;gap:10px;}
     .counter-item{padding:20px 16px;}
     .reassure{flex-direction:column;gap:6px;}
@@ -1040,44 +1038,6 @@ function animateCounter(el){
   requestAnimationFrame(update);
 }
 
-// === BENTO CONNECTORS (horizontal lines between rows) ===
-function placeBentoConnectors(){
-  const bento=document.querySelector('.bento');
-  if(!bento||window.innerWidth<=640)return;
-  // Remove old
-  bento.querySelectorAll('.bento-connector').forEach(c=>c.remove());
-
-  const items=bento.querySelectorAll('.bento-item');
-  const br=bento.getBoundingClientRect();
-  const gap=16;
-
-  // Find row breaks (items where top changes)
-  let lastTop=null;const rows=[];let row=[];
-  items.forEach(it=>{
-    const t=Math.round(it.getBoundingClientRect().top-br.top);
-    if(lastTop!==null&&Math.abs(t-lastTop)>10){rows.push(row);row=[];}
-    row.push(it);lastTop=t;
-  });
-  rows.push(row);
-
-  // Place a horizontal connector between each row
-  for(let i=0;i<rows.length-1;i++){
-    const botItem=rows[i][0];
-    const topItem=rows[i+1][0];
-    const botY=botItem.getBoundingClientRect().bottom-br.top;
-    const topY=topItem.getBoundingClientRect().top-br.top;
-    const midY=(botY+topY)/2;
-
-    const line=document.createElement('div');
-    line.className='bento-connector';
-    line.style.top=midY+'px';
-    line.style.left='10%';
-    line.style.right='10%';
-    bento.appendChild(line);
-  }
-}
-setTimeout(placeBentoConnectors,800);
-window.addEventListener('resize',placeBentoConnectors);
 
 // === BENTO MOUSE GLOW ===
 document.querySelectorAll('.bento-item').forEach(card=>{
