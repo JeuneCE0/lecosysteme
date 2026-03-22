@@ -26,16 +26,16 @@
 <style>
   :root {
     --bg-light: #FAFAF8;
-    --bg-dark: #0C0C0C;
-    --bg-card: #141414;
+    --bg-dark: #16130C;
+    --bg-card: #1E1A14;
     --border-light: #E8E8E4;
-    --border-dark: #1E1E1E;
-    --border-hover: #2A2A2A;
+    --border-dark: #2A2518;
+    --border-hover: #3A3428;
     --orange: #FF9D00;
     --orange-hover: #FFAB24;
     --orange-dim: rgba(255,157,0,0.10);
     --orange-glow: rgba(255,157,0,0.05);
-    --text-dark: #111;
+    --text-dark: #131313;
     --text-body: #555;
     --text-light: #F5F5F5;
     --text-muted: #999;
@@ -52,7 +52,7 @@
 
   /* Noise texture overlay */
   body::before{
-    content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.03;
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.07;
     background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-repeat:repeat;background-size:200px;
   }
@@ -367,7 +367,7 @@
   /* === FLOATING LABEL INPUTS === */
   .fg{margin-bottom:12px;position:relative;}
   .fi{
-    width:100%;padding:16px 14px 8px;background:#0A0A0A;border:1px solid var(--border-dark);
+    width:100%;padding:16px 14px 8px;background:#1A1610;border:1px solid var(--border-dark);
     border-radius:10px;color:var(--text-light);font-family:var(--font-b);font-size:14px;
     outline:none;transition:all .25s;
   }
@@ -380,7 +380,7 @@
   .fi:focus+label,.fi:not(:placeholder-shown)+label{
     top:8px;transform:translateY(0);font-size:10px;color:var(--orange);
   }
-  .fi:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-dim);background:#0E0E0E;}
+  .fi:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-dim);background:#201C14;}
   .f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
   /* === DARK ZONE === */
