@@ -529,13 +529,16 @@
 
   /* === URGENCY === */
   .urgency{
-    text-align:center;margin-bottom:48px;padding:24px 20px;
-    background:var(--bg-card);border:1px solid var(--border-dark);border-radius:14px;
-    transition:border-color .3s;
+    text-align:center;margin-bottom:48px;padding:28px 24px;
+    background:var(--bg-card);border:1px solid rgba(255,157,0,.15);border-radius:16px;
+    position:relative;overflow:hidden;
   }
-  .urgency:hover{border-color:rgba(255,157,0,.3);}
+  .urgency::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--orange),transparent);
+  }
   .urgency-live{
-    display:inline-flex;align-items:center;gap:8px;margin-bottom:8px;
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;
     font-family:var(--font-m);font-size:11px;letter-spacing:1.5px;
     text-transform:uppercase;color:var(--orange);
   }
@@ -543,8 +546,32 @@
     content:'';width:8px;height:8px;background:var(--orange);
     border-radius:50%;animation:livePulse 1.5s infinite;
   }
-  .urgency p{font-size:14px;color:var(--text-muted);line-height:1.6;}
-  .urgency strong{color:var(--text-light);}
+  .urgency-title{
+    font-family:var(--font-h);font-size:17px;font-weight:600;
+    color:var(--text-light);margin-bottom:16px;
+  }
+  .countdown{
+    display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:16px;
+  }
+  .cd-block{
+    display:flex;flex-direction:column;align-items:center;
+    background:rgba(255,157,0,.08);border:1px solid rgba(255,157,0,.12);
+    border-radius:10px;padding:12px 16px;min-width:64px;
+  }
+  .cd-num{
+    font-family:var(--font-m);font-size:28px;font-weight:700;
+    color:var(--orange);line-height:1;letter-spacing:-1px;
+  }
+  .cd-label{
+    font-size:10px;color:var(--text-muted);text-transform:uppercase;
+    letter-spacing:1px;margin-top:4px;
+  }
+  .cd-sep{
+    font-family:var(--font-m);font-size:24px;color:rgba(255,157,0,.3);
+    font-weight:700;animation:livePulse 1s infinite;
+  }
+  .urgency-sub{font-size:13px;color:var(--text-muted);line-height:1.5;}
+  .urgency-sub strong{color:var(--text-light);}
 
   /* === CTA FINAL (button only, no form) === */
   .cta-final{max-width:none;margin:0 auto;margin-bottom:50px;}
@@ -779,7 +806,12 @@
     .senja-bottom{padding:0 12px 48px;}
 
     /* Urgency */
-    .urgency{padding:18px 16px;}
+    .urgency{padding:20px 16px;}
+    .countdown{gap:8px;}
+    .cd-block{padding:10px 12px;min-width:52px;}
+    .cd-num{font-size:22px;}
+    .cd-sep{font-size:18px;}
+    .urgency-title{font-size:15px;}
 
     /* CTA Final */
     .cta-final-card{padding:22px 18px;}
@@ -861,7 +893,7 @@
           <input class="fi" type="tel" name="tel" placeholder="Téléphone (+262...)" required id="fmTel">
           <label for="fmTel">Téléphone (+262...)</label>
         </div>
-        <button type="submit" class="fb">REJOINDRE LA COMMUNAUTÉ GRATUITE →</button>
+        <button type="submit" class="fb">OBTENIR MON ACCÈS GRATUIT →</button>
       </form>
       <div class="reassure" style="margin-top:14px;">
         <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
@@ -950,7 +982,7 @@
 
 <!-- CTA UNDER VSL -->
 <div class="vsl-cta">
-  <button class="fb" onclick="openModal()">REJOINDRE LA COMMUNAUTÉ GRATUITE →</button>
+  <button class="fb" onclick="openModal()">OBTENIR MON ACCÈS GRATUIT →</button>
   <div class="reassure">
     <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
     <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
@@ -1046,7 +1078,7 @@
 
   <!-- CTA MID-FUNNEL -->
   <div class="dark-cta reveal">
-    <button class="fb" onclick="openModal()">REJOINDRE LA COMMUNAUTÉ GRATUITE →</button>
+    <button class="fb" onclick="openModal()">OBTENIR MON ACCÈS GRATUIT →</button>
     <div class="reassure">
       <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
       <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
@@ -1074,7 +1106,17 @@
   <!-- URGENCY -->
   <div class="urgency reveal">
     <div class="urgency-live">En ce moment</div>
-    <p><strong>47 membres</strong> ont rejoint la communauté cette semaine.<br>Prochain live de groupe : <strong>jeudi à 18h</strong>.</p>
+    <div class="urgency-title">Prochain live de groupe dans :</div>
+    <div class="countdown" id="countdown">
+      <div class="cd-block"><span class="cd-num" id="cdDays">0</span><span class="cd-label">Jours</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block"><span class="cd-num" id="cdHours">0</span><span class="cd-label">Heures</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block"><span class="cd-num" id="cdMins">0</span><span class="cd-label">Min</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block"><span class="cd-num" id="cdSecs">0</span><span class="cd-label">Sec</span></div>
+    </div>
+    <p class="urgency-sub"><strong>47 membres</strong> ont rejoint cette semaine — places limitées sur le live.</p>
   </div>
 
   <!-- CTA FINAL -->
@@ -1082,7 +1124,7 @@
     <div class="cta-final-card reveal">
       <h2>Arrête de te former. Commence à structurer.</h2>
       <p class="sub">Rejoins la communauté — c'est gratuit, c'est maintenant.</p>
-      <button class="fb" onclick="openModal()">REJOINDRE LA COMMUNAUTÉ GRATUITE →</button>
+      <button class="fb" onclick="openModal()">OBTENIR MON ACCÈS GRATUIT →</button>
       <div class="reassure">
         <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
         <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
@@ -1109,7 +1151,7 @@
   <div class="big-cta-inner reveal">
     <h2>Prêt à structurer ton activité ?</h2>
     <p>Rejoins +1 338 entrepreneurs qui ont structuré leur business.<br>Accès gratuit, immédiat, sans carte bancaire.</p>
-    <button class="fb-white" onclick="openModal()">REJOINDRE LA COMMUNAUTÉ GRATUITE →</button>
+    <button class="fb-white" onclick="openModal()">OBTENIR MON ACCÈS GRATUIT →</button>
     <div class="reassure">
       <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
       <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
@@ -1120,7 +1162,7 @@
 
 <!-- STICKY CTA MOBILE -->
 <div class="sticky-cta" id="stickyCta">
-  <button class="fb" onclick="openModal()">REJOINDRE LA COMMUNAUTÉ GRATUITE →</button>
+  <button class="fb" onclick="openModal()">OBTENIR MON ACCÈS GRATUIT →</button>
   <div class="sticky-cta-sub">
     <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Gratuit · Accès immédiat · Sans carte bancaire
   </div>
@@ -1233,6 +1275,36 @@ function animateCounter(el){
   requestAnimationFrame(update);
 }
 
+
+// === COUNTDOWN (next Thursday 18h) ===
+(function(){
+  function getNextThursday18h(){
+    const now=new Date();
+    const target=new Date(now);
+    const day=now.getDay(); // 0=Sun
+    let diff=4-day; // Thursday=4
+    if(diff<0||(diff===0&&now.getHours()>=18)) diff+=7;
+    target.setDate(now.getDate()+diff);
+    target.setHours(18,0,0,0);
+    return target;
+  }
+  const target=getNextThursday18h();
+  function tick(){
+    const now=new Date();
+    let diff=Math.max(0,Math.floor((target-now)/1000));
+    const d=Math.floor(diff/86400);diff%=86400;
+    const h=Math.floor(diff/3600);diff%=3600;
+    const m=Math.floor(diff/60);
+    const s=diff%60;
+    const el=id=>document.getElementById(id);
+    if(el('cdDays'))el('cdDays').textContent=String(d).padStart(2,'0');
+    if(el('cdHours'))el('cdHours').textContent=String(h).padStart(2,'0');
+    if(el('cdMins'))el('cdMins').textContent=String(m).padStart(2,'0');
+    if(el('cdSecs'))el('cdSecs').textContent=String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick,1000);
+})();
 
 // === BENTO SCROLL ACTIVE (mobile) ===
 if(window.innerWidth<=640){
