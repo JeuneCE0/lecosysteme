@@ -68,11 +68,7 @@
     opacity:0;animation:fadeUp .5s ease .1s forwards;
   }
   .hero h1 .a{
-    background:linear-gradient(90deg,var(--orange),#FFD700,var(--orange));
-    background-size:200% auto;
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    background-clip:text;
-    animation:gradientShift 3s ease infinite;
+    color:var(--orange);
   }
   .hero-sub{
     font-size:16px;color:var(--text-body);line-height:1.7;max-width:540px;
@@ -250,7 +246,8 @@
     border-radius:50%;background:rgba(255,255,255,.04);flex-shrink:0;
   }
   .faq-item.open .arrow{transform:rotate(45deg);color:var(--orange);background:var(--orange-dim);}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.25,.46,.45,.94),padding .3s ease;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.25,.46,.45,.94),padding .4s cubic-bezier(.25,.46,.45,.94),opacity .4s ease;opacity:0;}
+  .faq-item.open .faq-a{opacity:1;}
   .faq-item.open .faq-a{max-height:200px;padding-top:12px;}
   .faq-a p{font-size:14px;color:var(--text-muted);line-height:1.7;}
 
@@ -307,9 +304,7 @@
   @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.3}}
   @keyframes dotPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
   @keyframes shimmer{0%{left:-100%}50%{left:120%}100%{left:120%}}
-  @keyframes gradientShift{0%{background-position:0% center}50%{background-position:200% center}100%{background-position:0% center}}
   @keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes shakeCta{0%,100%{transform:translateX(0)}15%{transform:translateX(-3px) rotate(-1deg)}30%{transform:translateX(3px) rotate(1deg)}45%{transform:translateX(-2px)}60%{transform:translateX(2px)}75%{transform:translateX(0)}}
 
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94);}
   .reveal.v{opacity:1;transform:translateY(0);}
@@ -324,6 +319,30 @@
   .faq-item.reveal:nth-child(2){transition-delay:.08s;}
   .faq-item.reveal:nth-child(3){transition-delay:.16s;}
   .faq-item.reveal:nth-child(4){transition-delay:.24s;}
+
+  /* === NOTIFICATION BUBBLE === */
+  .notif-bubble{
+    position:fixed;bottom:24px;left:24px;
+    background:#141414;border:1px solid #1E1E1E;border-radius:12px;
+    padding:12px 16px;display:flex;align-items:center;gap:12px;
+    box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:998;
+    transform:translateX(-120%);opacity:0;
+    transition:transform .5s cubic-bezier(.25,.46,.45,.94),opacity .4s ease;
+    max-width:340px;
+  }
+  .notif-bubble.show{transform:translateX(0);opacity:1;}
+  .notif-avatar{
+    width:36px;height:36px;border-radius:50%;background:var(--orange);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    font-family:var(--font-h);font-size:15px;font-weight:700;color:#fff;
+  }
+  .notif-content{display:flex;flex-direction:column;gap:2px;}
+  .notif-text{font-size:13px;color:var(--text-light);font-weight:500;line-height:1.3;}
+  .notif-time{font-size:11px;color:var(--text-muted);}
+  .notif-dot{
+    width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;
+    animation:livePulse 1.5s infinite;
+  }
 
   /* === RESPONSIVE === */
   @media(max-width:640px){
@@ -345,6 +364,10 @@
     .senja-section{padding:0 16px;}
     .sticky-cta{display:block;}
     body{padding-bottom:70px;}
+    .notif-bubble{bottom:80px;left:12px;right:12px;max-width:none;padding:10px 12px;gap:10px;}
+    .notif-avatar{width:30px;height:30px;font-size:13px;}
+    .notif-text{font-size:12px;}
+    .notif-time{font-size:10px;}
   }
 </style>
 </head>
@@ -683,15 +706,48 @@ if(stickyCta&&ctaSection){
   stickyObs.observe(ctaSection);
 }
 
-// === PERIODIC CTA ATTENTION (subtle shake every 8s on visible buttons) ===
-setInterval(()=>{
-  document.querySelectorAll('.cta-card .fb').forEach(btn=>{
-    if(btn.style.pointerEvents!=='none'){
-      btn.style.animation='shakeCta .5s ease';
-      setTimeout(()=>{btn.style.animation='shimmer 2.5s infinite';},600);
-    }
-  });
-},8000);
+// === NOTIFICATION BUBBLE (social proof) ===
+(function(){
+  const names=['Thomas','Sarah','Mehdi','Julie','Alexandre','Fatima','Lucas','Camille','Youssef','Marie','Hugo','Léa','Karim','Emma','Antoine'];
+  const actions=[
+    '{name} vient de rejoindre la communauté',
+    '{name} a rejoint il y a {t} min',
+    '{name} vient de s\'inscrire',
+    '{name} a rejoint le groupe',
+    '{name} vient d\'accéder à la formation'
+  ];
+  let bubble=document.createElement('div');
+  bubble.className='notif-bubble';
+  bubble.innerHTML='<div class="notif-dot"></div><div class="notif-avatar"></div><div class="notif-content"><div class="notif-text"></div><div class="notif-time">À l\'instant</div></div>';
+  document.body.appendChild(bubble);
+
+  let usedNames=[];
+  function pickName(){
+    if(usedNames.length>=names.length) usedNames=[];
+    let n;
+    do{ n=names[Math.floor(Math.random()*names.length)]; }while(usedNames.includes(n));
+    usedNames.push(n);
+    return n;
+  }
+
+  function showNotif(){
+    const name=pickName();
+    const mins=Math.floor(Math.random()*12)+1;
+    const action=actions[Math.floor(Math.random()*actions.length)]
+      .replace('{name}',name)
+      .replace('{t}',mins);
+    bubble.querySelector('.notif-avatar').textContent=name.charAt(0).toUpperCase();
+    bubble.querySelector('.notif-text').textContent=action;
+    bubble.querySelector('.notif-time').textContent='il y a '+mins+' min';
+    bubble.classList.add('show');
+    setTimeout(()=>{ bubble.classList.remove('show'); },4000);
+  }
+
+  setTimeout(()=>{
+    showNotif();
+    setInterval(showNotif,7500);
+  },5000);
+})();
 </script>
 
 </body>
