@@ -2,7 +2,12 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0C0C0C">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
 <title>L'ÉCOSYSTÈME — Passe de 0 à 2-3K€/mois</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -159,20 +164,25 @@
   }
   .proof-roller-inner{
     display:flex;flex-direction:column;
-    animation:rollerSlide 10s cubic-bezier(.4,0,.2,1) infinite;
+    animation:rollerSlide 18s cubic-bezier(.4,0,.2,1) infinite;
   }
   .proof-roller-inner span{
     height:1.4em;line-height:1.4em;display:block;
     color:var(--orange);font-weight:700;white-space:nowrap;
   }
   @keyframes rollerSlide{
-    0%,12%{transform:translateY(0);}
-    14.28%,26.28%{transform:translateY(-1.4em);}
-    28.56%,40.56%{transform:translateY(-2.8em);}
-    42.84%,54.84%{transform:translateY(-4.2em);}
-    57.12%,69.12%{transform:translateY(-5.6em);}
-    71.4%,83.4%{transform:translateY(-7em);}
-    85.68%,97.68%{transform:translateY(-8.4em);}
+    0%,6.5%{transform:translateY(0);}
+    8.33%,14.83%{transform:translateY(-1.4em);}
+    16.66%,23.16%{transform:translateY(-2.8em);}
+    25%,31.5%{transform:translateY(-4.2em);}
+    33.33%,39.83%{transform:translateY(-5.6em);}
+    41.66%,48.16%{transform:translateY(-7em);}
+    50%,56.5%{transform:translateY(-8.4em);}
+    58.33%,64.83%{transform:translateY(-9.8em);}
+    66.66%,73.16%{transform:translateY(-11.2em);}
+    75%,81.5%{transform:translateY(-12.6em);}
+    83.33%,89.83%{transform:translateY(-14em);}
+    91.66%,98.16%{transform:translateY(-15.4em);}
     100%{transform:translateY(0);}
   }
 
@@ -550,16 +560,16 @@
   /* === STICKY CTA MOBILE === */
   .sticky-cta{
     display:none;position:fixed;bottom:0;left:0;right:0;
-    background:rgba(12,12,12,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-    padding:12px 16px;z-index:999;
-    border-top:1px solid var(--border-dark);
+    background:rgba(12,12,12,.97);backdrop-filter:blur(16px) saturate(1.5);-webkit-backdrop-filter:blur(16px) saturate(1.5);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:999;
+    border-top:1px solid rgba(255,157,0,.1);
     transform:translateY(100%);transition:transform .35s cubic-bezier(.25,.46,.45,.94);
   }
   .sticky-cta.visible{transform:translateY(0);}
-  .sticky-cta .fb{margin:0;padding:12px;font-size:14px;}
+  .sticky-cta .fb{margin:0;padding:14px;font-size:15px;font-weight:700;border-radius:12px;}
   .sticky-cta .fb::after{animation:shimmer 3s infinite;}
-  .sticky-cta-sub{text-align:center;font-size:11px;color:var(--text-muted);margin-top:6px;}
-  .sticky-cta-sub svg{width:11px;height:11px;fill:var(--green);vertical-align:-1px;margin-right:2px;}
+  .sticky-cta-sub{text-align:center;font-size:10px;color:var(--text-muted);margin-top:5px;letter-spacing:.2px;}
+  .sticky-cta-sub svg{width:10px;height:10px;fill:var(--green);vertical-align:-1px;margin-right:2px;}
 
   /* === FULLSCREEN LOADER === */
   .loader-overlay{
@@ -656,37 +666,90 @@
 
   /* === RESPONSIVE === */
   @media(max-width:640px){
-    .hero{padding:36px 20px 0;}
-    .hero h1{letter-spacing:-1px;}
-    .hero-cross,.hero-ring{display:none;}
-    .hero-dot{display:none;}
-    .vsl-badge{display:none;}
-    .vsl-wrap{padding:0 16px;}
+    /* Immersive mobile feel */
+    body{padding-bottom:calc(72px + env(safe-area-inset-bottom));-webkit-text-size-adjust:100%;}
+    html{scroll-padding-top:20px;}
+
+    /* Hero */
+    .hero{padding:28px 16px 0;max-width:100%;}
+    .hero h1{font-size:clamp(26px,8vw,36px);letter-spacing:-.8px;line-height:1.15;}
+    .hero-sub{font-size:15px;line-height:1.65;margin-bottom:20px;}
+    .hero-badge{font-size:12px;padding:5px 12px 5px 7px;margin-bottom:12px;}
+    .hero-cross,.hero-ring,.hero-dot,.light-beam{display:none;}
+
+    /* Nav & Proof */
+    .nav{padding:14px 16px;}
+    .nav img{height:18px;}
+    .proof-bar{font-size:11px;padding:8px 12px;gap:8px;}
+
+    /* VSL */
+    .vsl-wrap{padding:0 12px;}
     .vsl-player{border-radius:12px 12px 0 0;}
-    .vsl-cta{padding:0 16px;}
-    .vsl-cta .fb{border-radius:0 0 12px 12px;padding:14px;font-size:15px;}
-    .dark-zone{padding:48px 20px;}
-    .bento{grid-template-columns:1fr;}
-    .counter{grid-template-columns:1fr;gap:10px;}
-    .counter-item{padding:20px 16px;}
-    .reassure{flex-direction:column;gap:6px;}
-    .proof-bar{font-size:12px;}
-    .bullets{gap:12px;}
+    .vsl-cta{padding:0 12px;}
+    .vsl-cta .fb{border-radius:0 0 12px 12px;padding:14px;font-size:14px;}
+    .vsl-thumb-hook{font-size:15px;margin-bottom:16px;}
+    .play-btn{width:60px;height:60px;}
+
+    /* Dark zone */
+    .dark-zone{padding:40px 16px;margin-top:48px;}
+    .st{font-size:clamp(20px,5.5vw,28px);margin-bottom:28px;}
+
+    /* Bento */
+    .bento{grid-template-columns:1fr;gap:12px;}
+    .bento-item{padding:22px 18px;}
+    .bento-item h3{font-size:15px;}
+
+    /* Counter */
+    .counter{grid-template-columns:repeat(3,1fr);gap:8px;}
+    .counter-item{padding:16px 8px;border-radius:10px;}
+    .counter-num{font-size:clamp(22px,6vw,30px);}
+    .counter-label{font-size:11px;}
+
+    /* Bullets */
+    .bullets{gap:10px;margin-bottom:24px;}
     .bullet{font-size:13px;}
-    .senja-section,.senja-section-2{padding:0 16px;}
+
+    /* FAQ */
+    .faq-q{font-size:14px;padding:16px 18px;}
+    .faq-item.open .faq-a{padding:0 18px 16px;}
+    .faq-a p{font-size:13px;}
+
+    /* Reassure */
+    .reassure{flex-direction:column;gap:5px;font-size:11px;}
+
+    /* Senja */
+    .senja-section,.senja-section-2{padding:0 12px;}
+
+    /* Urgency */
+    .urgency{padding:18px 16px;}
+
+    /* CTA Final */
+    .cta-final-card{padding:22px 18px;}
+    .cta-final-card h2{font-size:18px;}
+    .cta-final-card .fb{font-size:15px;padding:14px;}
+    .dark-cta .fb{font-size:15px;padding:14px;}
+
+    /* Sticky CTA — always visible on mobile */
     .sticky-cta{display:block;}
-    body{padding-bottom:70px;}
-    .notif-bubble{bottom:80px;left:12px;right:12px;max-width:none;padding:10px 12px;gap:10px;}
-    .notif-avatar{width:30px;height:30px;}
+
+    /* Notification above sticky */
+    .notif-bubble{bottom:calc(76px + env(safe-area-inset-bottom));left:10px;right:10px;max-width:none;padding:10px 12px;gap:10px;border-radius:12px;}
+    .notif-avatar{width:32px;height:32px;}
     .notif-text{font-size:12px;}
     .notif-time{font-size:10px;}
-    .modal-box{border-radius:16px;}
-    .modal-header{padding:22px 20px 20px;}
-    .modal-body{padding:22px 20px 24px;}
+
+    /* Modal fullscreen on mobile */
+    .modal-overlay{padding:0;align-items:flex-end;}
+    .modal-box{border-radius:20px 20px 0 0;max-width:100%;max-height:92vh;overflow-y:auto;
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    .modal-header{padding:20px 20px 18px;}
+    .modal-body{padding:20px 20px calc(20px + env(safe-area-inset-bottom));}
     .modal-box h2{font-size:19px;}
     .f-row{grid-template-columns:1fr;}
-    .cta-final-card{padding:24px 20px;}
-    .dark-cta .fb{font-size:15px;padding:14px;}
+
+    /* Footer */
+    .foot{padding:28px 16px calc(16px + env(safe-area-inset-bottom));}
   }
 </style>
 </head>
@@ -754,7 +817,7 @@
 <!-- 1. PROOF BAR -->
 <div class="proof-bar">
   <img src="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83931ba1821d12edf408e_Avatar%20group.avif" alt="Membres" style="height:28px;width:auto;margin-right:4px;">
-  Rejoins <strong>+1 338</strong> <span class="proof-roller"><span class="proof-roller-inner"><span>entrepreneurs</span><span>coachs</span><span>freelances</span><span>monteurs</span><span>développeurs</span><span>graphistes</span><span>consultants</span></span></span> accompagnés depuis 2021
+  Rejoins <strong>+1 338</strong> <span class="proof-roller"><span class="proof-roller-inner"><span>entrepreneurs</span><span>coachs</span><span>freelances</span><span>monteurs</span><span>développeurs</span><span>graphistes</span><span>consultants</span><span>agences</span><span>media buyers</span><span>community managers</span><span>formateurs</span><span>copywriters</span></span></span> accompagnés depuis 2021
 </div>
 
 <!-- HERO BACKGROUND WRAPPER -->

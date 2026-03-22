@@ -1,0 +1,16 @@
+{
+  "name": "L'ÉCOSYSTÈME",
+  "short_name": "Écosystème",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0C0C0C",
+  "theme_color": "#0C0C0C",
+  "description": "Passe de 0 à 2-3K€/mois récurrents",
+  "icons": [
+    {
+      "src": "https://assets.cdn.filesafe.space/NsV7HI2MbE6qHtRp410y/media/68dfdf4dc70a6de3cdc87350.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
