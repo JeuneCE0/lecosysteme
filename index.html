@@ -382,6 +382,33 @@
   .sticky-cta-sub{text-align:center;font-size:11px;color:var(--text-muted);margin-top:6px;}
   .sticky-cta-sub svg{width:11px;height:11px;fill:var(--green);vertical-align:-1px;margin-right:2px;}
 
+  /* === FULLSCREEN LOADER === */
+  .loader-overlay{
+    position:fixed;inset:0;background:var(--bg-dark);z-index:99999;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+  }
+  .loader-overlay.active{opacity:1;visibility:visible;}
+  .loader-spinner{
+    width:48px;height:48px;border:3px solid var(--border-dark);
+    border-top-color:var(--orange);border-radius:50%;
+    animation:loaderSpin .8s linear infinite;margin-bottom:20px;
+  }
+  .loader-text{
+    font-family:var(--font-h);font-size:16px;color:var(--text-light);
+    font-weight:500;margin-bottom:6px;
+  }
+  .loader-sub{font-size:13px;color:var(--text-muted);}
+  .loader-progress{
+    width:200px;height:3px;background:var(--border-dark);border-radius:3px;
+    margin-top:16px;overflow:hidden;
+  }
+  .loader-progress-bar{
+    height:100%;width:0%;background:var(--orange);border-radius:3px;
+    transition:width .3s ease;
+  }
+  @keyframes loaderSpin{to{transform:rotate(360deg)}}
+
   /* === FOOTER === */
   .foot{text-align:center;padding:36px 24px;background:var(--bg-dark);border-top:1px solid var(--border-dark);}
   .foot-logo{margin-bottom:10px;}
@@ -474,6 +501,14 @@
 <!-- SCROLL PROGRESS BAR -->
 <div class="scroll-progress" id="scrollProgress"></div>
 
+<!-- FULLSCREEN LOADER (after form submit) -->
+<div class="loader-overlay" id="loader">
+  <div class="loader-spinner"></div>
+  <div class="loader-text">Inscription en cours...</div>
+  <div class="loader-sub">Préparation de ton accès à la communauté</div>
+  <div class="loader-progress"><div class="loader-progress-bar" id="loaderBar"></div></div>
+</div>
+
 <!-- POPUP MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal-box">
@@ -516,7 +551,7 @@
 
 <!-- 1. PROOF BAR -->
 <div class="proof-bar">
-  <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+  <img src="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83931ba1821d12edf408e_Avatar%20group.avif" alt="Membres" style="height:28px;width:auto;margin-right:4px;">
   Rejoins <strong>+1 338</strong> entrepreneurs accompagnés depuis 2021
 </div>
 
@@ -596,6 +631,7 @@
     </div>
     <div class="counter-item">
       <div class="counter-num" data-target="5.0" data-prefix="" data-suffix="">0</div>
+      <img src="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83f48766c39849a60f111_Rating.avif" alt="5 étoiles" style="height:18px;width:auto;margin:6px auto 4px;display:block;">
       <div class="counter-label">Note Trustpilot</div>
     </div>
   </div>
@@ -747,17 +783,34 @@ function playVSL(){
 function handleSubmit(e,form){
   e.preventDefault();
   const btn=form.querySelector('.fb');
-  btn.textContent='REDIRECTION EN COURS...';
+  btn.textContent='ENVOI EN COURS...';
   btn.style.opacity='0.7';btn.style.pointerEvents='none';
   btn.style.animation='none';
+
+  // Close modal, show fullscreen loader
+  closeModal();
+  const loader=document.getElementById('loader');
+  const bar=document.getElementById('loaderBar');
+  loader.classList.add('active');
+
+  // Animate progress bar
+  setTimeout(()=>{bar.style.width='30%';},200);
+  setTimeout(()=>{bar.style.width='60%';},800);
+  setTimeout(()=>{bar.style.width='85%';},1400);
+
   // En prod: POST vers webhook GHL
   // const fd=new FormData(form);
-  // fetch('WEBHOOK_GHL',{method:'POST',body:fd}).then(()=>{window.location.href='URL_SKOOL';})
+  // fetch('WEBHOOK_GHL',{method:'POST',body:fd}).then(()=>{...})
+
   setTimeout(()=>{
-    btn.textContent='✓ INSCRIT — REDIRECTION VERS LE GROUPE';
-    btn.style.background='#22C55E';btn.style.opacity='1';
-    // window.location.href='URL_SKOOL';
-  },1500);
+    bar.style.width='100%';
+    document.querySelector('.loader-text').textContent='✓ Inscription confirmée !';
+    document.querySelector('.loader-sub').textContent='Redirection vers la communauté...';
+  },1800);
+
+  setTimeout(()=>{
+    window.location.href='https://www.skool.com/lecosysteme-7916/about';
+  },2800);
 }
 
 // === FAQ TOGGLE ===
