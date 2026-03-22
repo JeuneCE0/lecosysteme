@@ -111,16 +111,6 @@
   }
   .hero-badge .badge-count{color:var(--orange);font-weight:700;}
 
-  /* Hero highlight underline on accent text */
-  .hero h1 .a{
-    color:var(--orange);position:relative;
-  }
-  .hero h1 .a::after{
-    content:'';position:absolute;bottom:-2px;left:0;width:100%;height:3px;
-    background:var(--orange);border-radius:2px;opacity:.25;
-    transform:scaleX(0);transform-origin:left;
-    animation:underlineGrow .8s cubic-bezier(.525,0,0,1) .6s forwards;
-  }
 
   /* === SCROLL PROGRESS BAR === */
   .scroll-progress{
@@ -358,7 +348,7 @@
     background:radial-gradient(circle,rgba(255,157,0,.03) 0%,transparent 55%);
     pointer-events:none;z-index:0;
   }
-  .dw{max-width:680px;margin:0 auto;position:relative;z-index:1;}
+  .dw{max-width:960px;margin:0 auto;position:relative;z-index:1;}
 
   .st{
     font-family:var(--font-h);font-size:clamp(22px,4.5vw,34px);font-weight:600;
@@ -388,18 +378,13 @@
   /* === BENTO GRID === */
   .bento{
     display:grid;grid-template-columns:repeat(3,1fr);
-    grid-template-rows:auto auto;gap:14px;margin-bottom:64px;
+    gap:16px;margin-bottom:64px;position:relative;
   }
-  /* First item spans 2 cols */
-  .bento-item:nth-child(1){grid-column:span 2;}
-  /* Last item spans full width */
-  .bento-item:nth-child(6){grid-column:1/-1;}
-
   .bento-item{
-    padding:28px 24px;background:var(--bg-card);border:1px solid var(--border-dark);
+    padding:30px 24px;background:var(--bg-card);border:1px solid var(--border-dark);
     border-radius:16px;position:relative;overflow:hidden;
     transition:border-color .4s,box-shadow .4s,transform .4s cubic-bezier(.25,.46,.45,.94);
-    cursor:default;
+    cursor:default;z-index:1;
   }
   /* Hover glow line on top */
   .bento-item::before{
@@ -421,9 +406,9 @@
     box-shadow:0 8px 30px rgba(0,0,0,.25),0 0 0 1px rgba(255,157,0,.08);
   }
 
-  .bento-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .bento-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
   .bento-num{
-    width:32px;height:32px;border-radius:8px;
+    width:34px;height:34px;border-radius:8px;
     background:rgba(255,157,0,.1);border:1px solid rgba(255,157,0,.15);
     display:flex;align-items:center;justify-content:center;
     font-family:var(--font-m);font-size:13px;font-weight:600;color:var(--orange);
@@ -434,30 +419,31 @@
     box-shadow:0 0 12px rgba(255,157,0,.3);
   }
   .bento-icon{
-    font-size:22px;display:inline-block;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);
+    font-size:24px;display:inline-block;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);
   }
   .bento-item:hover .bento-icon{transform:scale(1.25) rotate(-8deg);}
 
   .bento-item h3{
-    font-family:var(--font-h);font-size:16px;font-weight:600;color:var(--text-light);
-    margin-bottom:6px;position:relative;z-index:1;
+    font-family:var(--font-h);font-size:17px;font-weight:600;color:var(--text-light);
+    margin-bottom:8px;position:relative;z-index:1;
   }
-  .bento-item p{font-size:13px;color:var(--text-muted);line-height:1.7;position:relative;z-index:1;}
+  .bento-item p{font-size:13.5px;color:var(--text-muted);line-height:1.7;position:relative;z-index:1;}
 
-  /* === BENTO CONNECTOR LINE === */
-  .bento{position:relative;}
-  .bento-svg{
-    position:absolute;inset:0;width:100%;height:100%;
-    pointer-events:none;z-index:2;overflow:visible;
+  /* === BENTO CONNECTOR LINES (horizontal, between rows) === */
+  .bento-connector{
+    position:absolute;pointer-events:none;z-index:0;
+    height:2px;
+    background:linear-gradient(90deg,transparent,var(--orange),#FFD700,var(--orange),transparent);
+    filter:drop-shadow(0 0 6px rgba(255,157,0,.35));
+    opacity:.4;
   }
-  .bento-svg path{
-    fill:none;stroke:url(#flameLine);stroke-width:2;
-    stroke-dasharray:8 4;
-    stroke-linecap:round;
-    animation:dashFlow 1.5s linear infinite;
-    filter:drop-shadow(0 0 4px rgba(255,157,0,.3));
+  .bento-connector::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
+    background-size:60px 100%;
+    animation:connectorFlow 2s linear infinite;
   }
-  @keyframes dashFlow{from{stroke-dashoffset:24}to{stroke-dashoffset:0}}
+  @keyframes connectorFlow{from{background-position:-60px 0}to{background-position:60px 0}}
 
   /* === DARK ZONE CTA === */
   .dark-cta{
@@ -577,7 +563,6 @@
   @keyframes shimmer{0%{left:-100%}50%{left:120%}100%{left:120%}}
   @keyframes floatDot{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
   @keyframes flamePulse{0%,100%{opacity:1;box-shadow:0 0 8px rgba(255,157,0,.4),0 0 20px rgba(255,157,0,.15)}50%{opacity:.7;box-shadow:0 0 12px rgba(255,157,0,.6),0 0 30px rgba(255,157,0,.25)}}
-  @keyframes underlineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
   .reveal{opacity:0;transform:translateY(24px);filter:blur(4px);transition:opacity .6s cubic-bezier(.525,0,0,1),transform .6s cubic-bezier(.525,0,0,1),filter .6s cubic-bezier(.525,0,0,1);}
   .reveal.v{opacity:1;transform:translateY(0);filter:blur(0);}
@@ -638,8 +623,7 @@
     .vsl-cta .fb{border-radius:0 0 12px 12px;padding:14px;font-size:15px;}
     .dark-zone{padding:48px 20px;}
     .bento{grid-template-columns:1fr;}
-    .bento-item:nth-child(1),.bento-item:nth-child(6){grid-column:span 1;}
-    .bento-svg{display:none;}
+    .bento-connector{display:none;}
     .counter{grid-template-columns:1fr;gap:10px;}
     .counter-item{padding:20px 16px;}
     .reassure{flex-direction:column;gap:6px;}
@@ -1056,54 +1040,44 @@ function animateCounter(el){
   requestAnimationFrame(update);
 }
 
-// === BENTO CONNECTORS ===
-function drawBentoConnectors(){
+// === BENTO CONNECTORS (horizontal lines between rows) ===
+function placeBentoConnectors(){
   const bento=document.querySelector('.bento');
-  if(!bento)return;
-  // Remove old svg
-  const old=bento.querySelector('.bento-svg');
-  if(old)old.remove();
+  if(!bento||window.innerWidth<=640)return;
+  // Remove old
+  bento.querySelectorAll('.bento-connector').forEach(c=>c.remove());
 
-  const nums=bento.querySelectorAll('.bento-num');
-  if(nums.length<2)return;
-
+  const items=bento.querySelectorAll('.bento-item');
   const br=bento.getBoundingClientRect();
-  const pts=[];
-  nums.forEach(n=>{
-    const r=n.getBoundingClientRect();
-    pts.push({x:r.left-br.left+r.width/2, y:r.top-br.top+r.height/2});
+  const gap=16;
+
+  // Find row breaks (items where top changes)
+  let lastTop=null;const rows=[];let row=[];
+  items.forEach(it=>{
+    const t=Math.round(it.getBoundingClientRect().top-br.top);
+    if(lastTop!==null&&Math.abs(t-lastTop)>10){rows.push(row);row=[];}
+    row.push(it);lastTop=t;
   });
+  rows.push(row);
 
-  const ns='http://www.w3.org/2000/svg';
-  const svg=document.createElementNS(ns,'svg');
-  svg.setAttribute('class','bento-svg');
-  svg.setAttribute('viewBox','0 0 '+br.width+' '+br.height);
-  svg.setAttribute('preserveAspectRatio','none');
+  // Place a horizontal connector between each row
+  for(let i=0;i<rows.length-1;i++){
+    const botItem=rows[i][0];
+    const topItem=rows[i+1][0];
+    const botY=botItem.getBoundingClientRect().bottom-br.top;
+    const topY=topItem.getBoundingClientRect().top-br.top;
+    const midY=(botY+topY)/2;
 
-  // Gradient def
-  const defs=document.createElementNS(ns,'defs');
-  const grad=document.createElementNS(ns,'linearGradient');
-  grad.id='flameLine';
-  grad.innerHTML='<stop offset="0%" stop-color="#FF9D00"/><stop offset="50%" stop-color="#FFD700"/><stop offset="100%" stop-color="#FF9D00"/>';
-  defs.appendChild(grad);
-  svg.appendChild(defs);
-
-  // Draw paths between consecutive nums
-  for(let i=0;i<pts.length-1;i++){
-    const a=pts[i],b=pts[i+1];
-    const mx=(a.x+b.x)/2;
-    const path=document.createElementNS(ns,'path');
-    // Curved line
-    path.setAttribute('d','M'+a.x+','+a.y+' C'+mx+','+a.y+' '+mx+','+b.y+' '+b.x+','+b.y);
-    svg.appendChild(path);
+    const line=document.createElement('div');
+    line.className='bento-connector';
+    line.style.top=midY+'px';
+    line.style.left='10%';
+    line.style.right='10%';
+    bento.appendChild(line);
   }
-
-  bento.appendChild(svg);
 }
-
-// Draw on load + resize
-setTimeout(drawBentoConnectors,800);
-window.addEventListener('resize',drawBentoConnectors);
+setTimeout(placeBentoConnectors,800);
+window.addEventListener('resize',placeBentoConnectors);
 
 // === BENTO MOUSE GLOW ===
 document.querySelectorAll('.bento-item').forEach(card=>{
