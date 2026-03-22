@@ -142,7 +142,7 @@
   .proof-bar strong{color:var(--text-light);font-weight:600;}
 
   /* === HERO === */
-  .hero{padding:48px 24px 0;text-align:center;max-width:760px;margin:0 auto;}
+  .hero{padding:48px 24px 0;text-align:center;max-width:900px;margin:0 auto;}
   .hero h1{
     font-family:var(--font-h);font-size:clamp(30px,7vw,64px);font-weight:600;
     line-height:1.1;letter-spacing:-1.5px;margin-bottom:16px;color:var(--text-dark);
@@ -385,17 +385,64 @@
   }
   .counter-label{font-size:13px;color:var(--text-muted);line-height:1.4;}
 
-  /* === STACK VALUE === */
-  .stack{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:64px;}
-  .stack-item{
-    padding:24px 20px;background:var(--bg-card);border:1px solid var(--border-dark);
-    border-radius:14px;transition:all .3s cubic-bezier(.25,.46,.45,.94);
+  /* === BENTO GRID === */
+  .bento{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    grid-template-rows:auto auto;gap:14px;margin-bottom:64px;
   }
-  .stack-item:hover{border-color:var(--border-hover);transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.3);}
-  .stack-icon{font-size:24px;margin-bottom:12px;display:inline-block;transition:transform .3s;}
-  .stack-item:hover .stack-icon{transform:scale(1.2) rotate(-5deg);}
-  .stack-item h3{font-family:var(--font-h);font-size:15px;font-weight:600;color:var(--text-light);margin-bottom:6px;}
-  .stack-item p{font-size:13px;color:var(--text-muted);line-height:1.6;}
+  /* First item spans 2 cols */
+  .bento-item:nth-child(1){grid-column:span 2;}
+  /* Last item spans 2 cols */
+  .bento-item:nth-child(6){grid-column:span 2;}
+
+  .bento-item{
+    padding:28px 24px;background:var(--bg-card);border:1px solid var(--border-dark);
+    border-radius:16px;position:relative;overflow:hidden;
+    transition:border-color .4s,box-shadow .4s,transform .4s cubic-bezier(.25,.46,.45,.94);
+    cursor:default;
+  }
+  /* Hover glow line on top */
+  .bento-item::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--orange),transparent);
+    opacity:0;transition:opacity .4s;
+  }
+  .bento-item:hover::before{opacity:1;}
+  /* Hover ambient glow */
+  .bento-item::after{
+    content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+    background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(255,157,0,.06) 0%,transparent 50%);
+    pointer-events:none;opacity:0;transition:opacity .4s;
+  }
+  .bento-item:hover::after{opacity:1;}
+  .bento-item:hover{
+    border-color:rgba(255,157,0,.2);
+    transform:translateY(-3px);
+    box-shadow:0 8px 30px rgba(0,0,0,.25),0 0 0 1px rgba(255,157,0,.08);
+  }
+
+  .bento-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .bento-num{
+    width:32px;height:32px;border-radius:8px;
+    background:rgba(255,157,0,.1);border:1px solid rgba(255,157,0,.15);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-m);font-size:13px;font-weight:600;color:var(--orange);
+    flex-shrink:0;transition:all .3s;
+  }
+  .bento-item:hover .bento-num{
+    background:var(--orange);color:#fff;border-color:var(--orange);
+    box-shadow:0 0 12px rgba(255,157,0,.3);
+  }
+  .bento-icon{
+    font-size:22px;display:inline-block;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);
+  }
+  .bento-item:hover .bento-icon{transform:scale(1.25) rotate(-8deg);}
+
+  .bento-item h3{
+    font-family:var(--font-h);font-size:16px;font-weight:600;color:var(--text-light);
+    margin-bottom:6px;position:relative;z-index:1;
+  }
+  .bento-item p{font-size:13px;color:var(--text-muted);line-height:1.7;position:relative;z-index:1;}
 
   /* === DARK ZONE CTA === */
   .dark-cta{
@@ -521,12 +568,12 @@
   .reveal.v{opacity:1;transform:translateY(0);filter:blur(0);}
 
   /* === STAGGER DELAYS === */
-  .stack-item.reveal:nth-child(1){transition-delay:.05s;}
-  .stack-item.reveal:nth-child(2){transition-delay:.12s;}
-  .stack-item.reveal:nth-child(3){transition-delay:.19s;}
-  .stack-item.reveal:nth-child(4){transition-delay:.26s;}
-  .stack-item.reveal:nth-child(5){transition-delay:.33s;}
-  .stack-item.reveal:nth-child(6){transition-delay:.40s;}
+  .bento-item.reveal:nth-child(1){transition-delay:.05s;}
+  .bento-item.reveal:nth-child(2){transition-delay:.12s;}
+  .bento-item.reveal:nth-child(3){transition-delay:.19s;}
+  .bento-item.reveal:nth-child(4){transition-delay:.26s;}
+  .bento-item.reveal:nth-child(5){transition-delay:.33s;}
+  .bento-item.reveal:nth-child(6){transition-delay:.40s;}
   .faq-item.reveal:nth-child(2){transition-delay:.08s;}
   .faq-item.reveal:nth-child(3){transition-delay:.16s;}
   .faq-item.reveal:nth-child(4){transition-delay:.24s;}
@@ -575,7 +622,8 @@
     .vsl-cta{padding:0 16px;}
     .vsl-cta .fb{border-radius:0 0 12px 12px;padding:14px;font-size:15px;}
     .dark-zone{padding:48px 20px;}
-    .stack{grid-template-columns:1fr;}
+    .bento{grid-template-columns:1fr;}
+    .bento-item:nth-child(1),.bento-item:nth-child(6){grid-column:span 1;}
     .counter{grid-template-columns:1fr;gap:10px;}
     .counter-item{padding:20px 16px;}
     .reassure{flex-direction:column;gap:6px;}
@@ -691,7 +739,7 @@
     <span class="badge-dot"></span>
     <span><span class="badge-count">47</span> inscrits cette semaine</span>
   </div>
-  <h1>T'es compétent. T'as zéro client.<br><span class="a">C'est pas toi le problème. C'est ton système.</span></h1>
+  <h1>T'es compétent. T'as zéro client.<br><span class="a">C'est pas toi le problème.<br>C'est ton système.</span></h1>
   <p class="hero-sub">On accompagne les coachs et freelances de 0 à 2-3K€/mois récurrents. Pas avec de la motivation. <strong>Avec de la structure.</strong> Regarde la vidéo ci-dessous.</p>
 
   <!-- BULLETS -->
@@ -769,34 +817,52 @@
 
   <!-- STACK VALUE -->
   <h2 class="st reveal">T'as pas besoin d'une formation de plus.<br><span class="a">T'as besoin de ça.</span></h2>
-  <div class="stack">
-    <div class="stack-item reveal">
-      <div class="stack-icon">🎯</div>
+  <div class="bento">
+    <div class="bento-item reveal">
+      <div class="bento-head">
+        <div class="bento-num">01</div>
+        <span class="bento-icon">🎯</span>
+      </div>
       <h3>Création d'offre</h3>
       <p>Pas "je fais du coaching". Une vraie offre, avec une promesse, un prix, un résultat. Que quelqu'un veut acheter.</p>
     </div>
-    <div class="stack-item reveal">
-      <div class="stack-icon">📡</div>
+    <div class="bento-item reveal">
+      <div class="bento-head">
+        <div class="bento-num">02</div>
+        <span class="bento-icon">📡</span>
+      </div>
       <h3>Système d'acquisition</h3>
       <p>Un canal qui ramène des prospects même quand tu dors. Fini de poster et prier pour un DM.</p>
     </div>
-    <div class="stack-item reveal">
-      <div class="stack-icon">🤝</div>
+    <div class="bento-item reveal">
+      <div class="bento-head">
+        <div class="bento-num">03</div>
+        <span class="bento-icon">🤝</span>
+      </div>
       <h3>Process de vente</h3>
       <p>Quand quelqu'un est intéressé, tu sais exactement quoi faire. Pas d'improvisation, un process qui close.</p>
     </div>
-    <div class="stack-item reveal">
-      <div class="stack-icon">💬</div>
+    <div class="bento-item reveal">
+      <div class="bento-head">
+        <div class="bento-num">04</div>
+        <span class="bento-icon">💬</span>
+      </div>
       <h3>Communauté active</h3>
       <p>Des entrepreneurs qui avancent, pas un groupe mort. Accountability et échanges concrets.</p>
     </div>
-    <div class="stack-item reveal">
-      <div class="stack-icon">🎓</div>
+    <div class="bento-item reveal">
+      <div class="bento-head">
+        <div class="bento-num">05</div>
+        <span class="bento-icon">🎓</span>
+      </div>
       <h3>Formations actionnables</h3>
       <p>Modules courts sur le positionnement, l'acquisition et la vente. Pas de théorie — du concret que tu appliques cette semaine.</p>
     </div>
-    <div class="stack-item reveal">
-      <div class="stack-icon">🛡️</div>
+    <div class="bento-item reveal">
+      <div class="bento-head">
+        <div class="bento-num">06</div>
+        <span class="bento-icon">🛡️</span>
+      </div>
       <h3>Accompagné jusqu'au 1er client</h3>
       <p>On lâche pas tant que t'as pas signé. C'est pas une formation, c'est un engagement.</p>
     </div>
@@ -973,6 +1039,17 @@ function animateCounter(el){
   }
   requestAnimationFrame(update);
 }
+
+// === BENTO MOUSE GLOW ===
+document.querySelectorAll('.bento-item').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width*100).toFixed(1);
+    const y=((e.clientY-r.top)/r.height*100).toFixed(1);
+    card.style.setProperty('--mx',x+'%');
+    card.style.setProperty('--my',y+'%');
+  });
+});
 
 // === INTERSECTION OBSERVER ===
 const revealObs=new IntersectionObserver(entries=>{
