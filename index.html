@@ -8,9 +8,21 @@
 <meta name="theme-color" content="#0C0C0C">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.json">
+<link rel="shortcut icon" type="image/x-icon" href="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a77523663d66e43e36a872_favicon.png">
+<link rel="apple-touch-icon" href="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a77525e515298389742071_6945681208110433b6df0924_webclip.png">
 <title>L'ÉCOSYSTÈME — Passe de 0 à 2-3K€/mois</title>
+<meta name="description" content="Rejoins +1338 entrepreneurs accompagnés depuis 2021. On structure ton offre, ton acquisition et ta vente pour atteindre 2-3K€/mois récurrents.">
+<meta property="og:title" content="L'ÉCOSYSTÈME — Passe de 0 à 2-3K€/mois">
+<meta property="og:description" content="Rejoins +1338 entrepreneurs accompagnés depuis 2021. On structure ton offre, ton acquisition et ta vente pour atteindre 2-3K€/mois récurrents.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83931ba1821d12edf408e_Avatar%20group.avif">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="L'ÉCOSYSTÈME — Passe de 0 à 2-3K€/mois">
+<meta name="twitter:description" content="Rejoins +1338 entrepreneurs accompagnés depuis 2021. Structure ton business pour atteindre 2-3K€/mois.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" as="style">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-light: #FAFAF8;
@@ -668,6 +680,33 @@
   .big-cta .reassure span:hover{color:#fff;}
   .big-cta .reassure svg{fill:#fff;}
 
+  /* === EXIT INTENT POPUP === */
+  .exit-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    z-index:10001;display:flex;align-items:center;justify-content:center;
+    opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+    padding:20px;
+  }
+  .exit-overlay.open{opacity:1;visibility:visible;}
+  .exit-box{
+    background:#fff;border-radius:20px;padding:40px 36px;text-align:center;
+    max-width:440px;width:100%;position:relative;
+    transform:translateY(20px) scale(.95);transition:transform .4s cubic-bezier(.525,0,0,1);
+    box-shadow:0 25px 80px rgba(0,0,0,.3);
+  }
+  .exit-overlay.open .exit-box{transform:translateY(0) scale(1);}
+  .exit-close{
+    position:absolute;top:12px;right:14px;width:32px;height:32px;
+    background:rgba(0,0,0,.05);border:none;border-radius:50%;
+    color:#999;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:background .2s;
+  }
+  .exit-close:hover{background:rgba(0,0,0,.1);}
+  .exit-emoji{font-size:40px;margin-bottom:12px;}
+  .exit-box h2{font-family:var(--font-h);font-size:22px;font-weight:700;color:var(--text-dark);margin-bottom:8px;letter-spacing:-.3px;}
+  .exit-box p{font-size:14px;color:var(--text-body);line-height:1.6;margin-bottom:24px;}
+  .exit-box .fb{max-width:340px;margin:0 auto;font-size:16px;padding:16px;}
+
   /* === FOOTER === */
   .foot{text-align:center;padding:36px 24px;background:#fff;border-top:1px solid var(--border-light);}
   .foot-logo{margin-bottom:10px;}
@@ -872,6 +911,7 @@
       </div>
       <h2>Rejoins la communauté gratuite</h2>
       <p class="sub">Accès immédiat aux formations, à la méthode et à l'accompagnement.</p>
+      <div id="modalProof" style="font-size:11px;color:var(--orange);margin-top:6px;font-weight:500;opacity:0;transition:opacity .4s;"></div>
     </div>
     <div class="modal-body">
       <form id="formModal" onsubmit="return handleSubmit(event,this)">
@@ -894,6 +934,7 @@
           <label for="fmTel">Téléphone (+262...)</label>
         </div>
         <button type="submit" class="fb">OBTENIR MON ACCÈS GRATUIT →</button>
+        <div style="text-align:center;margin-top:8px;font-size:11px;color:#999;">Tu recevras ton accès en moins de 30 secondes</div>
       </form>
       <div class="reassure" style="margin-top:14px;">
         <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
@@ -1159,6 +1200,17 @@
     </div>
   </div>
 </section>
+
+<!-- EXIT INTENT POPUP (desktop) -->
+<div class="exit-overlay" id="exitPopup">
+  <div class="exit-box">
+    <button class="exit-close" onclick="closeExit()">&times;</button>
+    <div class="exit-emoji">🔥</div>
+    <h2>Attends — tu pars sans ton accès gratuit ?</h2>
+    <p>+1 338 entrepreneurs ont déjà structuré leur business avec notre méthode. Tu es à un clic de les rejoindre.</p>
+    <button class="fb" onclick="closeExit();openModal();">OBTENIR MON ACCÈS GRATUIT →</button>
+  </div>
+</div>
 
 <!-- STICKY CTA MOBILE -->
 <div class="sticky-cta" id="stickyCta">
@@ -1494,6 +1546,54 @@ if(stickyCta&&vslCta){
     setInterval(showNotif,12000);
   },5000);
 })();
+
+// === EXIT INTENT (desktop only) ===
+let exitShown=false;
+function closeExit(){document.getElementById('exitPopup').classList.remove('open');}
+document.getElementById('exitPopup').addEventListener('click',function(e){if(e.target===this)closeExit();});
+
+if(window.innerWidth>640){
+  document.addEventListener('mouseout',function(e){
+    if(!exitShown&&e.clientY<5&&!e.relatedTarget){
+      exitShown=true;
+      document.getElementById('exitPopup').classList.add('open');
+    }
+  });
+}
+
+// === MODAL SOCIAL PROOF (dynamic line in modal header) ===
+(function(){
+  const proofEl=document.getElementById('modalProof');
+  if(!proofEl)return;
+  const lines=[
+    'Thomas vient de s\'inscrire il y a 2 min',
+    'Sarah a obtenu son accès il y a 5 min',
+    'Mehdi a rejoint la communauté il y a 1 min',
+    'Julie vient de s\'inscrire',
+    'Alexandre a obtenu son accès il y a 3 min'
+  ];
+  let idx=0;
+  // Show when modal opens
+  const obs=new MutationObserver(()=>{
+    if(document.getElementById('modal').classList.contains('open')){
+      proofEl.textContent=lines[idx%lines.length];
+      proofEl.style.opacity='1';
+      idx++;
+    } else {
+      proofEl.style.opacity='0';
+    }
+  });
+  obs.observe(document.getElementById('modal'),{attributes:true,attributeFilter:['class']});
+})();
+
+// === FOCUS TRAP MODAL ===
+document.getElementById('modal').addEventListener('keydown',function(e){
+  if(e.key!=='Tab')return;
+  const focusable=this.querySelectorAll('input,button,[tabindex]');
+  const first=focusable[0],last=focusable[focusable.length-1];
+  if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus();}}
+  else{if(document.activeElement===last){e.preventDefault();first.focus();}}
+});
 </script>
 
 </body>
