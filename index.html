@@ -154,6 +154,27 @@
     opacity:0;animation:fadeIn .4s ease forwards;
   }
   .proof-bar strong{color:var(--text-light);font-weight:600;}
+  .proof-roller{
+    display:inline-flex;height:1.4em;overflow:hidden;vertical-align:bottom;
+  }
+  .proof-roller-inner{
+    display:flex;flex-direction:column;
+    animation:rollerSlide 10s cubic-bezier(.4,0,.2,1) infinite;
+  }
+  .proof-roller-inner span{
+    height:1.4em;line-height:1.4em;display:block;
+    color:var(--orange);font-weight:700;white-space:nowrap;
+  }
+  @keyframes rollerSlide{
+    0%,12%{transform:translateY(0);}
+    14.28%,26.28%{transform:translateY(-1.4em);}
+    28.56%,40.56%{transform:translateY(-2.8em);}
+    42.84%,54.84%{transform:translateY(-4.2em);}
+    57.12%,69.12%{transform:translateY(-5.6em);}
+    71.4%,83.4%{transform:translateY(-7em);}
+    85.68%,97.68%{transform:translateY(-8.4em);}
+    100%{transform:translateY(0);}
+  }
 
   /* === HERO === */
   .hero{padding:48px 24px 0;text-align:center;max-width:900px;margin:0 auto;}
@@ -733,7 +754,7 @@
 <!-- 1. PROOF BAR -->
 <div class="proof-bar">
   <img src="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83931ba1821d12edf408e_Avatar%20group.avif" alt="Membres" style="height:28px;width:auto;margin-right:4px;">
-  Rejoins <strong>+1 338</strong> entrepreneurs accompagnés depuis 2021
+  Rejoins <strong>+1 338</strong> <span class="proof-roller"><span class="proof-roller-inner"><span>entrepreneurs</span><span>coachs</span><span>freelances</span><span>monteurs</span><span>développeurs</span><span>graphistes</span><span>consultants</span></span></span> accompagnés depuis 2021
 </div>
 
 <!-- HERO BACKGROUND WRAPPER -->
@@ -769,7 +790,7 @@
     <span><span class="badge-count">47</span> inscrits cette semaine</span>
   </div>
   <h1>T'es compétent. T'as zéro client.<br><span class="a">C'est pas toi le problème.<br>C'est ton système.</span></h1>
-  <p class="hero-sub">On accompagne les coachs et freelances de 0 à 2-3K€/mois récurrents. Pas avec de la motivation. <strong>Avec de la structure.</strong> Regarde la vidéo ci-dessous.</p>
+  <p class="hero-sub">On structure ton offre, ton acquisition et ta vente pour atteindre 2-3K€/mois récurrents. Pas besoin de motivation. <strong>Besoin d'un système.</strong> Regarde la vidéo ci-dessous.</p>
 
   <!-- BULLETS -->
   <div class="bullets">
