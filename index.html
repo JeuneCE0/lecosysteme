@@ -392,8 +392,8 @@
   }
   /* First item spans 2 cols */
   .bento-item:nth-child(1){grid-column:span 2;}
-  /* Last item spans 2 cols */
-  .bento-item:nth-child(6){grid-column:span 2;}
+  /* Last item spans full width */
+  .bento-item:nth-child(6){grid-column:1/-1;}
 
   .bento-item{
     padding:28px 24px;background:var(--bg-card);border:1px solid var(--border-dark);
@@ -443,6 +443,21 @@
     margin-bottom:6px;position:relative;z-index:1;
   }
   .bento-item p{font-size:13px;color:var(--text-muted);line-height:1.7;position:relative;z-index:1;}
+
+  /* === BENTO CONNECTOR LINE === */
+  .bento{position:relative;}
+  .bento-svg{
+    position:absolute;inset:0;width:100%;height:100%;
+    pointer-events:none;z-index:2;overflow:visible;
+  }
+  .bento-svg path{
+    fill:none;stroke:url(#flameLine);stroke-width:2;
+    stroke-dasharray:8 4;
+    stroke-linecap:round;
+    animation:dashFlow 1.5s linear infinite;
+    filter:drop-shadow(0 0 4px rgba(255,157,0,.3));
+  }
+  @keyframes dashFlow{from{stroke-dashoffset:24}to{stroke-dashoffset:0}}
 
   /* === DARK ZONE CTA === */
   .dark-cta{
@@ -624,6 +639,7 @@
     .dark-zone{padding:48px 20px;}
     .bento{grid-template-columns:1fr;}
     .bento-item:nth-child(1),.bento-item:nth-child(6){grid-column:span 1;}
+    .bento-svg{display:none;}
     .counter{grid-template-columns:1fr;gap:10px;}
     .counter-item{padding:20px 16px;}
     .reassure{flex-direction:column;gap:6px;}
@@ -1039,6 +1055,55 @@ function animateCounter(el){
   }
   requestAnimationFrame(update);
 }
+
+// === BENTO CONNECTORS ===
+function drawBentoConnectors(){
+  const bento=document.querySelector('.bento');
+  if(!bento)return;
+  // Remove old svg
+  const old=bento.querySelector('.bento-svg');
+  if(old)old.remove();
+
+  const nums=bento.querySelectorAll('.bento-num');
+  if(nums.length<2)return;
+
+  const br=bento.getBoundingClientRect();
+  const pts=[];
+  nums.forEach(n=>{
+    const r=n.getBoundingClientRect();
+    pts.push({x:r.left-br.left+r.width/2, y:r.top-br.top+r.height/2});
+  });
+
+  const ns='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('class','bento-svg');
+  svg.setAttribute('viewBox','0 0 '+br.width+' '+br.height);
+  svg.setAttribute('preserveAspectRatio','none');
+
+  // Gradient def
+  const defs=document.createElementNS(ns,'defs');
+  const grad=document.createElementNS(ns,'linearGradient');
+  grad.id='flameLine';
+  grad.innerHTML='<stop offset="0%" stop-color="#FF9D00"/><stop offset="50%" stop-color="#FFD700"/><stop offset="100%" stop-color="#FF9D00"/>';
+  defs.appendChild(grad);
+  svg.appendChild(defs);
+
+  // Draw paths between consecutive nums
+  for(let i=0;i<pts.length-1;i++){
+    const a=pts[i],b=pts[i+1];
+    const mx=(a.x+b.x)/2;
+    const path=document.createElementNS(ns,'path');
+    // Curved line
+    path.setAttribute('d','M'+a.x+','+a.y+' C'+mx+','+a.y+' '+mx+','+b.y+' '+b.x+','+b.y);
+    svg.appendChild(path);
+  }
+
+  bento.appendChild(svg);
+}
+
+// Draw on load + resize
+setTimeout(drawBentoConnectors,800);
+window.addEventListener('resize',drawBentoConnectors);
 
 // === BENTO MOUSE GLOW ===
 document.querySelectorAll('.bento-item').forEach(card=>{
