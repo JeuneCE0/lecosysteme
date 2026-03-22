@@ -56,6 +56,30 @@
   }
   .hero-bg .hero,.hero-bg .vsl-wrap,.hero-bg .senja-section{position:relative;z-index:1;}
 
+  /* === FALLING LIGHT BEAMS === */
+  .light-beam{
+    position:absolute;top:0;width:2px;pointer-events:none;z-index:0;
+    height:120px;
+    background:linear-gradient(180deg,rgba(247,247,247,.8) 0%,#FF9D00 75%,rgba(255,157,0,0) 100%);
+    opacity:0;
+    animation:beamFall linear infinite;
+    filter:drop-shadow(0 0 4px rgba(255,157,0,.4));
+  }
+  .beam-1{left:8%;animation-duration:9s;animation-delay:0s;}
+  .beam-2{left:18%;animation-duration:11s;animation-delay:2.5s;}
+  .beam-3{left:32%;animation-duration:8.5s;animation-delay:5s;}
+  .beam-4{left:50%;animation-duration:10s;animation-delay:1.2s;}
+  .beam-5{left:68%;animation-duration:9.5s;animation-delay:3.8s;}
+  .beam-6{left:82%;animation-duration:12s;animation-delay:6.5s;}
+  .beam-7{left:92%;animation-duration:8s;animation-delay:8s;}
+  @keyframes beamFall{
+    0%{transform:translateY(-150px);opacity:0;}
+    5%{opacity:.6;}
+    50%{opacity:.4;}
+    95%{opacity:0;}
+    100%{transform:translateY(calc(100vh + 200px));opacity:0;}
+  }
+
   /* === HERO VISUAL ELEMENTS === */
 
   /* Floating dots decorative — BIGGER and more visible */
@@ -714,6 +738,13 @@
 
 <!-- HERO BACKGROUND WRAPPER -->
 <div class="hero-bg">
+<div class="light-beam beam-1"></div>
+<div class="light-beam beam-2"></div>
+<div class="light-beam beam-3"></div>
+<div class="light-beam beam-4"></div>
+<div class="light-beam beam-5"></div>
+<div class="light-beam beam-6"></div>
+<div class="light-beam beam-7"></div>
 <div class="hero-dot hero-dot-1"></div>
 <div class="hero-dot hero-dot-2"></div>
 <div class="hero-dot hero-dot-3"></div>
