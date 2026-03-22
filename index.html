@@ -123,19 +123,11 @@
   /* === VSL === */
   .vsl-wrap{max-width:800px;margin:0 auto;padding:0 24px;opacity:0;animation:fadeUp .5s ease .3s forwards;}
 
-  /* Glowing border wrapper */
-  .vsl-glow{
-    position:relative;padding:3px;border-radius:18px 18px 0 0;
-    background:linear-gradient(135deg,rgba(255,157,0,.4),rgba(255,157,0,.1),rgba(255,157,0,.3));
-    background-size:300% 300%;
-    animation:glowShift 5s ease infinite;
-    box-shadow:0 0 30px rgba(255,157,0,.08),0 0 60px rgba(255,157,0,.04);
-  }
-
   .vsl-player{
     position:relative;width:100%;padding-top:56.25%;background:#000;
-    border-radius:16px 16px 0 0;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.08),0 20px 60px rgba(0,0,0,.12),0 70px 100px rgba(0,0,0,.06);
-    transition:box-shadow .3s;z-index:1;
+    border-radius:16px 16px 0 0;overflow:hidden;
+    box-shadow:0 4px 10px rgba(0,0,0,.08),0 20px 60px rgba(0,0,0,.12),0 70px 100px rgba(0,0,0,.06);
+    transition:box-shadow .3s;
   }
   .vsl-player:hover{box-shadow:0 4px 10px rgba(0,0,0,.1),0 28px 70px rgba(0,0,0,.18),0 80px 120px rgba(0,0,0,.08);}
   .vsl-player iframe,.vsl-player video{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
@@ -205,31 +197,57 @@
 
   /* === POPUP MODAL === */
   .modal-overlay{
-    position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
     z-index:10000;display:flex;align-items:center;justify-content:center;
     opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
     padding:20px;
   }
   .modal-overlay.open{opacity:1;visibility:visible;}
   .modal-box{
-    background:var(--bg-dark);border-radius:20px;padding:40px 32px;
-    position:relative;overflow:hidden;max-width:460px;width:100%;
+    background:#fff;border-radius:20px;padding:0;
+    position:relative;overflow:hidden;max-width:480px;width:100%;
     transform:translateY(24px) scale(.96);
     transition:transform .4s cubic-bezier(.525,0,0,1);
-    box-shadow:0 25px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.05);
+    box-shadow:0 25px 80px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.06);
   }
   .modal-overlay.open .modal-box{transform:translateY(0) scale(1);}
-  .modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange-hover),var(--orange));}
+  .modal-header{
+    background:var(--bg-dark);padding:28px 32px 24px;text-align:center;
+    position:relative;
+  }
+  .modal-header::after{
+    content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);
+    width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;
+    border-top:12px solid var(--bg-dark);
+  }
+  .modal-header .modal-avatar-row{
+    display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:12px;
+  }
+  .modal-header .modal-avatar-row img{height:28px;width:auto;}
+  .modal-header .modal-avatar-row span{font-size:12px;color:var(--text-muted);font-weight:500;}
+  .modal-header .modal-avatar-row strong{color:var(--orange);font-weight:700;}
   .modal-close{
-    position:absolute;top:14px;right:16px;width:32px;height:32px;
-    background:rgba(255,255,255,.06);border:none;border-radius:50%;
+    position:absolute;top:12px;right:14px;width:32px;height:32px;
+    background:rgba(255,255,255,.08);border:none;border-radius:50%;
     color:var(--text-muted);font-size:18px;cursor:pointer;
     display:flex;align-items:center;justify-content:center;
-    transition:background .2s,color .2s;
+    transition:background .2s,color .2s;z-index:2;
   }
-  .modal-close:hover{background:rgba(255,255,255,.12);color:var(--text-light);}
-  .modal-box h2{text-align:center;font-family:var(--font-h);font-size:22px;font-weight:600;color:var(--text-light);margin-bottom:4px;letter-spacing:-.3px;}
-  .modal-box .sub{text-align:center;font-size:13px;color:var(--text-muted);margin-bottom:24px;}
+  .modal-close:hover{background:rgba(255,255,255,.15);color:var(--text-light);}
+  .modal-box h2{font-family:var(--font-h);font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;letter-spacing:-.3px;}
+  .modal-box .sub{font-size:13px;color:var(--text-muted);margin:0;}
+  .modal-body{padding:28px 32px 32px;}
+  .modal-body .fi{
+    background:#f5f5f3;border:1px solid #e5e5e0;color:var(--text-dark);
+  }
+  .modal-body .fi::placeholder{color:transparent;}
+  .modal-body .fg label{color:#999;}
+  .modal-body .fi:focus+label,.modal-body .fi:not(:placeholder-shown)+label{
+    color:var(--orange);
+  }
+  .modal-body .fi:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-dim);background:#fff;}
+  .modal-body .reassure span{color:var(--text-body);}
+  .modal-body .reassure span:hover{color:var(--text-dark);}
 
   /* === FLOATING LABEL INPUTS === */
   .fg{margin-bottom:12px;position:relative;}
@@ -440,7 +458,6 @@
   @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.3}}
   @keyframes dotPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
   @keyframes shimmer{0%{left:-100%}50%{left:120%}100%{left:120%}}
-  @keyframes glowShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
   .reveal{opacity:0;transform:translateY(24px);filter:blur(4px);transition:opacity .6s cubic-bezier(.525,0,0,1),transform .6s cubic-bezier(.525,0,0,1),filter .6s cubic-bezier(.525,0,0,1);}
   .reveal.v{opacity:1;transform:translateY(0);filter:blur(0);}
@@ -485,7 +502,6 @@
     .hero{padding:36px 20px 0;}
     .hero h1{letter-spacing:-1px;}
     .vsl-wrap{padding:0 16px;}
-    .vsl-glow{border-radius:14px 14px 0 0;}
     .vsl-player{border-radius:12px 12px 0 0;}
     .vsl-cta{padding:0 16px;}
     .vsl-cta .fb{border-radius:0 0 12px 12px;padding:14px;font-size:15px;}
@@ -504,7 +520,9 @@
     .notif-avatar{width:30px;height:30px;}
     .notif-text{font-size:12px;}
     .notif-time{font-size:10px;}
-    .modal-box{padding:28px 20px;border-radius:16px;}
+    .modal-box{border-radius:16px;}
+    .modal-header{padding:22px 20px 20px;}
+    .modal-body{padding:22px 20px 24px;}
     .modal-box h2{font-size:19px;}
     .f-row{grid-template-columns:1fr;}
     .cta-final-card{padding:24px 20px;}
@@ -529,33 +547,41 @@
 <div class="modal-overlay" id="modal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">&times;</button>
-    <h2>Rejoins la communauté gratuitement</h2>
-    <p class="sub">Accès immédiat — Formations, méthode et accompagnement à l'intérieur.</p>
-    <form id="formModal" onsubmit="return handleSubmit(event,this)">
-      <div class="f-row">
-        <div class="fg">
-          <input class="fi" type="text" name="prenom" placeholder="Prénom" required id="fmPrenom">
-          <label for="fmPrenom">Prénom</label>
+    <div class="modal-header">
+      <div class="modal-avatar-row">
+        <img src="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83931ba1821d12edf408e_Avatar%20group.avif" alt="Membres">
+        <span><strong>+1 338</strong> membres</span>
+      </div>
+      <h2>Rejoins la communauté gratuite</h2>
+      <p class="sub">Accès immédiat aux formations, à la méthode et à l'accompagnement.</p>
+    </div>
+    <div class="modal-body">
+      <form id="formModal" onsubmit="return handleSubmit(event,this)">
+        <div class="f-row">
+          <div class="fg">
+            <input class="fi" type="text" name="prenom" placeholder="Prénom" required id="fmPrenom">
+            <label for="fmPrenom">Prénom</label>
+          </div>
+          <div class="fg">
+            <input class="fi" type="text" name="nom" placeholder="Nom" required id="fmNom">
+            <label for="fmNom">Nom</label>
+          </div>
         </div>
         <div class="fg">
-          <input class="fi" type="text" name="nom" placeholder="Nom" required id="fmNom">
-          <label for="fmNom">Nom</label>
+          <input class="fi" type="email" name="email" placeholder="Email" required id="fmEmail">
+          <label for="fmEmail">Email</label>
         </div>
+        <div class="fg">
+          <input class="fi" type="tel" name="tel" placeholder="Téléphone (+262...)" required id="fmTel">
+          <label for="fmTel">Téléphone (+262...)</label>
+        </div>
+        <button type="submit" class="fb">REJOINDRE LA COMMUNAUTÉ GRATUITE →</button>
+      </form>
+      <div class="reassure" style="margin-top:14px;">
+        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
+        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
+        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
       </div>
-      <div class="fg">
-        <input class="fi" type="email" name="email" placeholder="Email" required id="fmEmail">
-        <label for="fmEmail">Email</label>
-      </div>
-      <div class="fg">
-        <input class="fi" type="tel" name="tel" placeholder="Téléphone (+262...)" required id="fmTel">
-        <label for="fmTel">Téléphone (+262...)</label>
-      </div>
-      <button type="submit" class="fb">REJOINDRE LA COMMUNAUTÉ GRATUITE →</button>
-    </form>
-    <div class="reassure" style="margin-top:14px;">
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
     </div>
   </div>
 </div>
@@ -599,15 +625,13 @@
 
 <!-- 3. VSL -->
 <div class="vsl-wrap">
-  <div class="vsl-glow">
-    <div class="vsl-player" id="vslPlayer">
-      <div class="vsl-thumb" id="vslThumb" onclick="playVSL()">
-        <div class="vsl-thumb-hook">Pourquoi tu gagnes <span class="a">0€</span> alors que t'es compétent<br><span style="font-size:.7em;color:rgba(255,255,255,.5);">(et comment changer ça)</span></div>
-        <div class="play-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
-        <span class="vsl-thumb-sub">▶ Regarde la vidéo — 4 min</span>
-      </div>
-      <iframe id="vslIframe" src="" allow="autoplay; fullscreen" allowfullscreen style="display:none;"></iframe>
+  <div class="vsl-player" id="vslPlayer">
+    <div class="vsl-thumb" id="vslThumb" onclick="playVSL()">
+      <div class="vsl-thumb-hook">Pourquoi tu gagnes <span class="a">0€</span> alors que t'es compétent<br><span style="font-size:.7em;color:rgba(255,255,255,.5);">(et comment changer ça)</span></div>
+      <div class="play-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
+      <span class="vsl-thumb-sub">▶ Regarde la vidéo — 4 min</span>
     </div>
+    <iframe id="vslIframe" src="" allow="autoplay; fullscreen" allowfullscreen style="display:none;"></iframe>
   </div>
 </div>
 
