@@ -272,6 +272,9 @@
   .senja-section-2{
     max-width:1100px;margin:0 auto;padding:0 24px;
   }
+  .senja-bottom{
+    background:var(--bg-dark);padding:0 24px 64px;
+  }
 
   /* === CTA BUTTON WITH SHIMMER === */
   .fb{
@@ -733,7 +736,8 @@
     .reassure{flex-direction:column;gap:5px;font-size:11px;}
 
     /* Senja */
-    .senja-section,.senja-section-2{padding:0 12px;overflow:hidden;}
+    .senja-section,.senja-section-2{padding:0 12px;}
+    .senja-bottom{padding:0 12px 48px;}
 
     /* Urgency */
     .urgency{padding:18px 16px;}
@@ -1052,11 +1056,12 @@
 
 </section>
 
-<!-- SENJA TESTIMONIALS #2 (after dark zone, own section) -->
-<section style="background:var(--bg-dark);padding:0 24px 64px;overflow:visible;">
-  <div class="senja-section-2 reveal">
+<!-- SENJA TESTIMONIALS #2 -->
+<section class="senja-bottom">
+  <h2 class="st reveal" style="color:var(--text-light);">Ce qu'ils en <span class="a">disent.</span></h2>
+  <div class="senja-section-2">
     <script src="https://widget.senja.io/widget/57e2dfb0-93f0-41d6-9f9a-b746e3cd5cd4/platform.js" type="text/javascript" async></script>
-    <div class="senja-embed" data-id="57e2dfb0-93f0-41d6-9f9a-b746e3cd5cd4" data-mode="shadow" data-lazyload="false" style="display:block;width:100%;min-height:200px;"></div>
+    <div class="senja-embed" data-id="57e2dfb0-93f0-41d6-9f9a-b746e3cd5cd4" data-mode="shadow" data-lazyload="false" style="display:block;width:100%;min-height:300px;"></div>
   </div>
 </section>
 
