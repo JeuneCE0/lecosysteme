@@ -119,10 +119,38 @@
 
   /* === VSL === */
   .vsl-wrap{max-width:800px;margin:0 auto;padding:0 24px;opacity:0;animation:fadeUp .5s ease .3s forwards;}
+
+  /* Flame border wrapper */
+  .vsl-flame{
+    position:relative;padding:2px;border-radius:18px 18px 0 0;
+    overflow:hidden;
+  }
+  .vsl-flame::before{
+    content:'';position:absolute;inset:-40%;
+    background:conic-gradient(
+      from 0deg,
+      transparent 0%,
+      transparent 30%,
+      var(--orange) 36%,
+      #FFD700 42%,
+      var(--orange) 48%,
+      transparent 54%,
+      transparent 100%
+    );
+    animation:flameSpin 4s linear infinite;
+    z-index:0;
+  }
+  .vsl-flame::after{
+    content:'';position:absolute;inset:0;
+    border-radius:18px 18px 0 0;
+    box-shadow:0 0 30px rgba(255,157,0,.15),0 0 60px rgba(255,157,0,.06);
+    pointer-events:none;z-index:3;
+  }
+
   .vsl-player{
     position:relative;width:100%;padding-top:56.25%;background:#000;
     border-radius:16px 16px 0 0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15);
-    transition:box-shadow .3s;
+    transition:box-shadow .3s;z-index:1;
   }
   .vsl-player:hover{box-shadow:0 28px 70px rgba(0,0,0,.22);}
   .vsl-player iframe,.vsl-player video{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
@@ -426,6 +454,7 @@
   @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.3}}
   @keyframes dotPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
   @keyframes shimmer{0%{left:-100%}50%{left:120%}100%{left:120%}}
+  @keyframes flameSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94);}
   .reveal.v{opacity:1;transform:translateY(0);}
@@ -470,6 +499,7 @@
     .hero{padding:36px 20px 0;}
     .hero h1{letter-spacing:-1px;}
     .vsl-wrap{padding:0 16px;}
+    .vsl-flame{border-radius:14px 14px 0 0;}
     .vsl-player{border-radius:12px 12px 0 0;}
     .vsl-cta{padding:0 16px;}
     .vsl-cta .fb{border-radius:0 0 12px 12px;padding:14px;font-size:15px;}
@@ -583,13 +613,15 @@
 
 <!-- 3. VSL -->
 <div class="vsl-wrap">
-  <div class="vsl-player" id="vslPlayer">
-    <div class="vsl-thumb" id="vslThumb" onclick="playVSL()">
-      <div class="vsl-thumb-hook">Pourquoi tu gagnes <span class="a">0€</span> alors que t'es compétent<br><span style="font-size:.7em;color:rgba(255,255,255,.5);">(et comment changer ça)</span></div>
-      <div class="play-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
-      <span class="vsl-thumb-sub">▶ Regarde la vidéo — 4 min</span>
+  <div class="vsl-flame">
+    <div class="vsl-player" id="vslPlayer">
+      <div class="vsl-thumb" id="vslThumb" onclick="playVSL()">
+        <div class="vsl-thumb-hook">Pourquoi tu gagnes <span class="a">0€</span> alors que t'es compétent<br><span style="font-size:.7em;color:rgba(255,255,255,.5);">(et comment changer ça)</span></div>
+        <div class="play-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
+        <span class="vsl-thumb-sub">▶ Regarde la vidéo — 4 min</span>
+      </div>
+      <iframe id="vslIframe" src="" allow="autoplay; fullscreen" allowfullscreen style="display:none;"></iframe>
     </div>
-    <iframe id="vslIframe" src="" allow="autoplay; fullscreen" allowfullscreen style="display:none;"></iframe>
   </div>
 </div>
 
