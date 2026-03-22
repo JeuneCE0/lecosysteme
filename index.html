@@ -601,6 +601,46 @@
   }
   @keyframes loaderSpin{to{transform:rotate(360deg)}}
 
+  /* === BIG CTA SECTION === */
+  .big-cta{
+    background:var(--orange);padding:80px 24px;text-align:center;position:relative;overflow:hidden;
+  }
+  .big-cta::before{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.08) 1px,transparent 0);
+    background-size:24px 24px;pointer-events:none;
+  }
+  .big-cta::after{
+    content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+    width:600px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.12) 0%,transparent 60%);
+    pointer-events:none;
+  }
+  .big-cta-inner{max-width:640px;margin:0 auto;position:relative;z-index:1;}
+  .big-cta h2{
+    font-family:var(--font-h);font-size:clamp(26px,5vw,42px);font-weight:700;
+    color:#fff;letter-spacing:-1px;line-height:1.15;margin-bottom:12px;
+  }
+  .big-cta p{font-size:16px;color:rgba(255,255,255,.8);margin-bottom:28px;line-height:1.6;}
+  .big-cta .fb-white{
+    display:inline-block;padding:16px 48px;background:#fff;color:var(--orange);
+    font-family:var(--font-b);font-size:17px;font-weight:700;border:none;
+    border-radius:12px;cursor:pointer;transition:all .25s;
+    position:relative;overflow:hidden;
+    box-shadow:0 4px 20px rgba(0,0,0,.1);
+  }
+  .fb-white::after{
+    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,157,0,.15),transparent);
+    animation:shimmer 2.5s infinite;
+  }
+  .fb-white:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 30px rgba(0,0,0,.15);}
+  .fb-white:active{transform:translateY(0) scale(.98);}
+  .big-cta .reassure{margin-top:16px;}
+  .big-cta .reassure span{color:rgba(255,255,255,.7);}
+  .big-cta .reassure span:hover{color:#fff;}
+  .big-cta .reassure svg{fill:#fff;}
+
   /* === FOOTER === */
   .foot{text-align:center;padding:36px 24px;background:var(--bg-dark);border-top:1px solid var(--border-dark);}
   .foot-logo{margin-bottom:10px;}
@@ -1062,6 +1102,20 @@
   <div class="senja-section-2">
     <script src="https://widget.senja.io/widget/57e2dfb0-93f0-41d6-9f9a-b746e3cd5cd4/platform.js" type="text/javascript" async></script>
     <div class="senja-embed" data-id="57e2dfb0-93f0-41d6-9f9a-b746e3cd5cd4" data-mode="shadow" data-lazyload="false" style="display:block;width:100%;min-height:300px;"></div>
+  </div>
+</section>
+
+<!-- BIG CTA SECTION -->
+<section class="big-cta">
+  <div class="big-cta-inner reveal">
+    <h2>Prêt à passer de 0 à 2-3K€/mois ?</h2>
+    <p>Rejoins +1 338 entrepreneurs qui ont structuré leur business. Accès gratuit, immédiat, sans carte bancaire.</p>
+    <button class="fb-white" onclick="openModal()">REJOINDRE LA COMMUNAUTÉ GRATUITE →</button>
+    <div class="reassure">
+      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
+      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
+      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
+    </div>
   </div>
 </section>
 
