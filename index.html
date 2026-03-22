@@ -67,9 +67,7 @@
     line-height:1.1;letter-spacing:-1.5px;margin-bottom:16px;color:var(--text-dark);
     opacity:0;animation:fadeUp .5s ease .1s forwards;
   }
-  .hero h1 .a{
-    color:var(--orange);
-  }
+  .hero h1 .a{color:var(--orange);}
   .hero-sub{
     font-size:16px;color:var(--text-body);line-height:1.7;max-width:540px;
     margin:0 auto 24px;opacity:0;animation:fadeUp .5s ease .2s forwards;
@@ -99,10 +97,10 @@
   .vsl-wrap{max-width:800px;margin:0 auto;padding:0 24px;opacity:0;animation:fadeUp .5s ease .3s forwards;}
   .vsl-player{
     position:relative;width:100%;padding-top:56.25%;background:#000;
-    border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15);
-    transition:transform .3s,box-shadow .3s;
+    border-radius:16px 16px 0 0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15);
+    transition:box-shadow .3s;
   }
-  .vsl-player:hover{transform:translateY(-4px);box-shadow:0 28px 70px rgba(0,0,0,.22);}
+  .vsl-player:hover{box-shadow:0 28px 70px rgba(0,0,0,.22);}
   .vsl-player iframe,.vsl-player video{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
   .vsl-thumb{
     position:absolute;top:0;left:0;width:100%;height:100%;
@@ -126,42 +124,25 @@
   .vsl-thumb:hover .play-btn{transform:scale(1.08);}
   .vsl-thumb-sub{font-size:13px;color:rgba(255,255,255,.6);}
 
+  /* === VSL CTA (full width under video) === */
+  .vsl-cta{
+    max-width:800px;margin:0 auto;padding:0 24px;
+    opacity:0;animation:fadeUp .5s ease .35s forwards;
+  }
+  .vsl-cta .fb{
+    border-radius:0 0 16px 16px;margin-top:0;padding:16px;font-size:16px;
+    box-shadow:0 12px 40px rgba(255,157,0,.15);
+  }
+  .vsl-cta .reassure{margin-top:14px;}
+
   /* === SENJA === */
   .senja-section{
     max-width:800px;margin:28px auto 0;padding:0 24px;
     opacity:0;animation:fadeUp .5s ease .4s forwards;
   }
-
-  /* === CTA === */
-  .cta-section{max-width:520px;margin:0 auto;padding:36px 24px 0;}
-  .cta-card{
-    background:var(--bg-dark);border-radius:16px;padding:36px 28px;
-    position:relative;overflow:hidden;
-    transition:transform .3s,box-shadow .3s;
+  .senja-section-2{
+    max-width:800px;margin:0 auto;padding:0 24px;
   }
-  .cta-card:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.2);}
-  .cta-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange-hover),var(--orange));}
-  .cta-card h2{text-align:center;font-family:var(--font-h);font-size:20px;font-weight:600;color:var(--text-light);margin-bottom:4px;letter-spacing:-.3px;}
-  .cta-card .sub{text-align:center;font-size:13px;color:var(--text-muted);margin-bottom:24px;}
-  .f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-
-  /* === FLOATING LABEL INPUTS === */
-  .fg{margin-bottom:12px;position:relative;}
-  .fi{
-    width:100%;padding:16px 14px 8px;background:#0A0A0A;border:1px solid var(--border-dark);
-    border-radius:10px;color:var(--text-light);font-family:var(--font-b);font-size:14px;
-    outline:none;transition:all .25s;
-  }
-  .fi::placeholder{color:transparent;}
-  .fg label{
-    position:absolute;left:14px;top:50%;transform:translateY(-50%);
-    font-size:14px;color:#444;pointer-events:none;
-    transition:all .2s ease;
-  }
-  .fi:focus+label,.fi:not(:placeholder-shown)+label{
-    top:8px;transform:translateY(0);font-size:10px;color:var(--orange);
-  }
-  .fi:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-dim);background:#0E0E0E;}
 
   /* === CTA BUTTON WITH SHIMMER === */
   .fb{
@@ -182,8 +163,54 @@
     display:flex;align-items:center;justify-content:center;gap:16px;
   }
   .reassure span{display:flex;align-items:center;gap:4px;transition:color .2s;}
-  .reassure span:hover{color:var(--text-light);}
+  .reassure span:hover{color:var(--text-dark);}
   .reassure svg{width:13px;height:13px;fill:var(--green);}
+
+  /* === POPUP MODAL === */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    z-index:10000;display:flex;align-items:center;justify-content:center;
+    opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+    padding:20px;
+  }
+  .modal-overlay.open{opacity:1;visibility:visible;}
+  .modal-box{
+    background:var(--bg-dark);border-radius:20px;padding:40px 32px;
+    position:relative;overflow:hidden;max-width:460px;width:100%;
+    transform:translateY(24px) scale(.96);
+    transition:transform .35s cubic-bezier(.25,.46,.45,.94);
+  }
+  .modal-overlay.open .modal-box{transform:translateY(0) scale(1);}
+  .modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange-hover),var(--orange));}
+  .modal-close{
+    position:absolute;top:14px;right:16px;width:32px;height:32px;
+    background:rgba(255,255,255,.06);border:none;border-radius:50%;
+    color:var(--text-muted);font-size:18px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .2s,color .2s;
+  }
+  .modal-close:hover{background:rgba(255,255,255,.12);color:var(--text-light);}
+  .modal-box h2{text-align:center;font-family:var(--font-h);font-size:22px;font-weight:600;color:var(--text-light);margin-bottom:4px;letter-spacing:-.3px;}
+  .modal-box .sub{text-align:center;font-size:13px;color:var(--text-muted);margin-bottom:24px;}
+
+  /* === FLOATING LABEL INPUTS === */
+  .fg{margin-bottom:12px;position:relative;}
+  .fi{
+    width:100%;padding:16px 14px 8px;background:#0A0A0A;border:1px solid var(--border-dark);
+    border-radius:10px;color:var(--text-light);font-family:var(--font-b);font-size:14px;
+    outline:none;transition:all .25s;
+  }
+  .fi::placeholder{color:transparent;}
+  .fg label{
+    position:absolute;left:14px;top:50%;transform:translateY(-50%);
+    font-size:14px;color:#444;pointer-events:none;
+    transition:all .2s ease;
+  }
+  .fi:focus+label,.fi:not(:placeholder-shown)+label{
+    top:8px;transform:translateY(0);font-size:10px;color:var(--orange);
+  }
+  .fi:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-dim);background:#0E0E0E;}
+  .f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
   /* === DARK ZONE === */
   .dark-zone{
@@ -193,7 +220,7 @@
   .dark-zone::before{
     content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
     width:600px;height:300px;background:radial-gradient(ellipse,var(--orange-glow) 0%,transparent 65%);
-    pointer-events:none;transition:transform .3s;
+    pointer-events:none;
   }
   .dw{max-width:680px;margin:0 auto;position:relative;z-index:1;}
 
@@ -234,6 +261,15 @@
   .stack-item h3{font-family:var(--font-h);font-size:15px;font-weight:600;color:var(--text-light);margin-bottom:6px;}
   .stack-item p{font-size:13px;color:var(--text-muted);line-height:1.6;}
 
+  /* === DARK ZONE CTA === */
+  .dark-cta{
+    max-width:520px;margin:0 auto 64px;text-align:center;
+  }
+  .dark-cta .fb{font-size:16px;padding:16px;}
+  .dark-cta .reassure span{color:var(--text-muted);}
+  .dark-cta .reassure span:hover{color:var(--text-light);}
+  .dark-cta .reassure svg{fill:var(--green);}
+
   /* === FAQ === */
   .faq{margin-bottom:64px;}
   .faq-item{border-bottom:1px solid var(--border-dark);padding:20px 0;cursor:pointer;transition:background .2s;}
@@ -247,8 +283,7 @@
   }
   .faq-item.open .arrow{transform:rotate(45deg);color:var(--orange);background:var(--orange-dim);}
   .faq-a{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.25,.46,.45,.94),padding .4s cubic-bezier(.25,.46,.45,.94),opacity .4s ease;opacity:0;}
-  .faq-item.open .faq-a{opacity:1;}
-  .faq-item.open .faq-a{max-height:200px;padding-top:12px;}
+  .faq-item.open .faq-a{opacity:1;max-height:200px;padding-top:12px;}
   .faq-a p{font-size:14px;color:var(--text-muted);line-height:1.7;}
 
   /* === URGENCY === */
@@ -257,7 +292,7 @@
     background:var(--bg-card);border:1px solid var(--border-dark);border-radius:14px;
     transition:border-color .3s;
   }
-  .urgency:hover{border-color:var(--orange);border-color:rgba(255,157,0,.3);}
+  .urgency:hover{border-color:rgba(255,157,0,.3);}
   .urgency-live{
     display:inline-flex;align-items:center;gap:8px;margin-bottom:8px;
     font-family:var(--font-m);font-size:11px;letter-spacing:1.5px;
@@ -270,8 +305,19 @@
   .urgency p{font-size:14px;color:var(--text-muted);line-height:1.6;}
   .urgency strong{color:var(--text-light);}
 
-  /* === CTA FINAL === */
+  /* === CTA FINAL (button only, no form) === */
   .cta-final{max-width:520px;margin:0 auto;}
+  .cta-final-card{
+    background:var(--bg-card);border:1px solid var(--border-dark);border-radius:16px;
+    padding:32px 28px;text-align:center;
+    transition:border-color .3s,box-shadow .3s;
+  }
+  .cta-final-card:hover{border-color:var(--border-hover);box-shadow:0 8px 30px rgba(0,0,0,.3);}
+  .cta-final-card h2{font-family:var(--font-h);font-size:20px;font-weight:600;color:var(--text-light);margin-bottom:4px;letter-spacing:-.3px;}
+  .cta-final-card .sub{font-size:13px;color:var(--text-muted);margin-bottom:20px;}
+  .cta-final-card .fb{font-size:16px;padding:16px;}
+  .cta-final-card .reassure span{color:var(--text-muted);}
+  .cta-final-card .reassure span:hover{color:var(--text-light);}
 
   /* === STICKY CTA MOBILE === */
   .sticky-cta{
@@ -304,12 +350,11 @@
   @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.3}}
   @keyframes dotPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
   @keyframes shimmer{0%{left:-100%}50%{left:120%}100%{left:120%}}
-  @keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94);}
   .reveal.v{opacity:1;transform:translateY(0);}
 
-  /* === STAGGER DELAYS (stack, FAQ) === */
+  /* === STAGGER DELAYS === */
   .stack-item.reveal:nth-child(1){transition-delay:.05s;}
   .stack-item.reveal:nth-child(2){transition-delay:.12s;}
   .stack-item.reveal:nth-child(3){transition-delay:.19s;}
@@ -349,10 +394,9 @@
     .hero{padding:36px 20px 0;}
     .hero h1{letter-spacing:-1px;}
     .vsl-wrap{padding:0 16px;}
-    .vsl-player{border-radius:12px;}
-    .cta-section{padding:28px 16px 0;}
-    .cta-card{padding:28px 20px;}
-    .f-row{grid-template-columns:1fr;}
+    .vsl-player{border-radius:12px 12px 0 0;}
+    .vsl-cta{padding:0 16px;}
+    .vsl-cta .fb{border-radius:0 0 12px 12px;padding:14px;font-size:15px;}
     .dark-zone{padding:48px 20px;}
     .stack{grid-template-columns:1fr;}
     .counter{grid-template-columns:1fr;gap:10px;}
@@ -361,13 +405,18 @@
     .proof-bar{font-size:12px;}
     .bullets{gap:12px;}
     .bullet{font-size:13px;}
-    .senja-section{padding:0 16px;}
+    .senja-section,.senja-section-2{padding:0 16px;}
     .sticky-cta{display:block;}
     body{padding-bottom:70px;}
     .notif-bubble{bottom:80px;left:12px;right:12px;max-width:none;padding:10px 12px;gap:10px;}
     .notif-avatar{width:30px;height:30px;font-size:13px;}
     .notif-text{font-size:12px;}
     .notif-time{font-size:10px;}
+    .modal-box{padding:28px 20px;border-radius:16px;}
+    .modal-box h2{font-size:19px;}
+    .f-row{grid-template-columns:1fr;}
+    .cta-final-card{padding:24px 20px;}
+    .dark-cta .fb{font-size:15px;padding:14px;}
   }
 </style>
 </head>
@@ -375,6 +424,41 @@
 
 <!-- SCROLL PROGRESS BAR -->
 <div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- POPUP MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>Rejoins la communauté gratuitement</h2>
+    <p class="sub">Accès immédiat — Formations, méthode et accompagnement à l'intérieur.</p>
+    <form id="formModal" onsubmit="return handleSubmit(event,this)">
+      <div class="f-row">
+        <div class="fg">
+          <input class="fi" type="text" name="prenom" placeholder="Prénom" required id="fmPrenom">
+          <label for="fmPrenom">Prénom</label>
+        </div>
+        <div class="fg">
+          <input class="fi" type="text" name="nom" placeholder="Nom" required id="fmNom">
+          <label for="fmNom">Nom</label>
+        </div>
+      </div>
+      <div class="fg">
+        <input class="fi" type="email" name="email" placeholder="Email" required id="fmEmail">
+        <label for="fmEmail">Email</label>
+      </div>
+      <div class="fg">
+        <input class="fi" type="tel" name="tel" placeholder="Téléphone (+262...)" required id="fmTel">
+        <label for="fmTel">Téléphone (+262...)</label>
+      </div>
+      <button type="submit" class="fb">REJOINDRE LE GROUPE GRATUIT →</button>
+    </form>
+    <div class="reassure" style="margin-top:14px;">
+      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
+      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
+      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
+    </div>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav class="nav">
@@ -421,45 +505,21 @@
   </div>
 </div>
 
-<!-- SENJA TESTIMONIALS -->
+<!-- CTA UNDER VSL (full width) -->
+<div class="vsl-cta">
+  <button class="fb" onclick="openModal()">REJOINDRE LE GROUPE GRATUIT →</button>
+  <div class="reassure">
+    <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
+    <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
+    <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
+  </div>
+</div>
+
+<!-- SENJA TESTIMONIALS #1 -->
 <div class="senja-section">
   <script src="https://widget.senja.io/widget/ea21f05a-6c54-46a1-ab0b-4dfaca2426ed/platform.js" type="text/javascript" async></script>
   <div class="senja-embed" data-id="ea21f05a-6c54-46a1-ab0b-4dfaca2426ed" data-mode="shadow" data-lazyload="false" style="display:block;width:100%;"></div>
 </div>
-
-<!-- 4. CTA #1 -->
-<section class="cta-section" id="ctaSection">
-  <div class="cta-card reveal">
-    <h2>Rejoins la communauté gratuitement</h2>
-    <p class="sub">Accès immédiat — Formations, méthode et accompagnement à l'intérieur.</p>
-    <form id="form1" onsubmit="return handleSubmit(event,this)">
-      <div class="f-row">
-        <div class="fg">
-          <input class="fi" type="text" name="prenom" placeholder="Prénom" required id="f1prenom">
-          <label for="f1prenom">Prénom</label>
-        </div>
-        <div class="fg">
-          <input class="fi" type="text" name="nom" placeholder="Nom" required id="f1nom">
-          <label for="f1nom">Nom</label>
-        </div>
-      </div>
-      <div class="fg">
-        <input class="fi" type="email" name="email" placeholder="Email" required id="f1email">
-        <label for="f1email">Email</label>
-      </div>
-      <div class="fg">
-        <input class="fi" type="tel" name="tel" placeholder="Téléphone (+262...)" required id="f1tel">
-        <label for="f1tel">Téléphone (+262...)</label>
-      </div>
-      <button type="submit" class="fb">REJOINDRE LE GROUPE GRATUIT →</button>
-    </form>
-    <div class="reassure">
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
-    </div>
-  </div>
-</section>
 
 <!-- DARK ZONE -->
 <section class="dark-zone">
@@ -517,8 +577,24 @@
     </div>
   </div>
 
+  <!-- CTA MID-FUNNEL -->
+  <div class="dark-cta reveal">
+    <button class="fb" onclick="openModal()">REJOINDRE LE GROUPE GRATUIT →</button>
+    <div class="reassure">
+      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
+      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
+      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
+    </div>
+  </div>
+
+  <!-- SENJA TESTIMONIALS #2 -->
+  <div class="senja-section-2 reveal">
+    <script src="https://widget.senja.io/widget/57e2dfb0-93f0-41d6-9f9a-b746e3cd5cd4/platform.js" type="text/javascript" async></script>
+    <div class="senja-embed" data-id="57e2dfb0-93f0-41d6-9f9a-b746e3cd5cd4" data-mode="shadow" data-lazyload="false" style="display:block;width:100%;"></div>
+  </div>
+
   <!-- FAQ -->
-  <div class="faq">
+  <div class="faq" style="margin-top:64px;">
     <h2 class="st reveal">Questions <span class="a">fréquentes</span></h2>
     <div class="faq-item reveal" onclick="toggleFaq(this)">
       <div class="faq-q">C'est vraiment gratuit ?<span class="arrow">+</span></div>
@@ -542,30 +618,10 @@
 
   <!-- CTA FINAL -->
   <div class="cta-final">
-    <div class="cta-card reveal">
+    <div class="cta-final-card reveal">
       <h2>Arrête de te former. Commence à structurer.</h2>
       <p class="sub">Rejoins la communauté — c'est gratuit, c'est maintenant.</p>
-      <form id="form2" onsubmit="return handleSubmit(event,this)">
-        <div class="f-row">
-          <div class="fg">
-            <input class="fi" type="text" name="prenom" placeholder="Prénom" required id="f2prenom">
-            <label for="f2prenom">Prénom</label>
-          </div>
-          <div class="fg">
-            <input class="fi" type="text" name="nom" placeholder="Nom" required id="f2nom">
-            <label for="f2nom">Nom</label>
-          </div>
-        </div>
-        <div class="fg">
-          <input class="fi" type="email" name="email" placeholder="Email" required id="f2email">
-          <label for="f2email">Email</label>
-        </div>
-        <div class="fg">
-          <input class="fi" type="tel" name="tel" placeholder="Téléphone (+262...)" required id="f2tel">
-          <label for="f2tel">Téléphone (+262...)</label>
-        </div>
-        <button type="submit" class="fb">REJOINDRE LE GROUPE GRATUIT →</button>
-      </form>
+      <button class="fb" onclick="openModal()">REJOINDRE LE GROUPE GRATUIT →</button>
       <div class="reassure">
         <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
         <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
@@ -579,7 +635,7 @@
 
 <!-- STICKY CTA MOBILE -->
 <div class="sticky-cta" id="stickyCta">
-  <button class="fb" onclick="document.getElementById('ctaSection').scrollIntoView({behavior:'smooth',block:'center'})">REJOINDRE LE GROUPE GRATUIT →</button>
+  <button class="fb" onclick="openModal()">REJOINDRE LE GROUPE GRATUIT →</button>
   <div class="sticky-cta-sub">
     <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Gratuit · Accès immédiat · Sans carte bancaire
   </div>
@@ -602,10 +658,27 @@ window.addEventListener('scroll',()=>{
   document.getElementById('scrollProgress').style.width=pct+'%';
 },{ passive:true });
 
+// === MODAL ===
+function openModal(){
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+// Close on overlay click
+document.getElementById('modal').addEventListener('click',function(e){
+  if(e.target===this) closeModal();
+});
+// Close on Escape
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeModal();
+});
+
 // === VSL PLAYER ===
 function playVSL(){
   const t=document.getElementById('vslThumb'),f=document.getElementById('vslIframe');
-  // ← REMPLACER par URL VSL (Bunny/Wistia/YouTube unlisted)
   f.src='about:blank';
   f.style.display='block';
   t.classList.add('hidden');
@@ -631,7 +704,7 @@ function handleSubmit(e,form){
 // === FAQ TOGGLE ===
 function toggleFaq(el){el.classList.toggle('open');}
 
-// === ANIMATED COUNTER (count-up on scroll) ===
+// === ANIMATED COUNTER ===
 function animateCounter(el){
   const target=parseFloat(el.dataset.target);
   const prefix=el.dataset.prefix||'';
@@ -643,15 +716,12 @@ function animateCounter(el){
   function update(now){
     const elapsed=now-start;
     const progress=Math.min(elapsed/duration,1);
-    // easeOutExpo
     const eased=progress===1?1:1-Math.pow(2,-10*progress);
     const current=eased*target;
 
     if(isDecimal){
-      // Format with comma as decimal separator for French
       el.textContent=prefix+current.toFixed(1).replace('.',',')+suffix;
     } else {
-      // Format large numbers with space separator
       const num=Math.round(current);
       el.textContent=prefix+(num>999?num.toLocaleString('fr-FR'):num)+suffix;
     }
@@ -661,7 +731,7 @@ function animateCounter(el){
   requestAnimationFrame(update);
 }
 
-// === INTERSECTION OBSERVER (reveals + counters) ===
+// === INTERSECTION OBSERVER ===
 const revealObs=new IntersectionObserver(entries=>{
   entries.forEach(x=>{
     if(x.isIntersecting){
@@ -670,10 +740,9 @@ const revealObs=new IntersectionObserver(entries=>{
     }
   });
 },{threshold:.1});
-
 document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
 
-// Counter observer (separate, triggers count-up)
+// Counter observer
 let countersAnimated=false;
 const counterObs=new IntersectionObserver(entries=>{
   entries.forEach(x=>{
@@ -684,29 +753,27 @@ const counterObs=new IntersectionObserver(entries=>{
     }
   });
 },{threshold:.3});
-
 const counterEl=document.querySelector('.counter');
 if(counterEl) counterObs.observe(counterEl);
 
 // === STICKY CTA (mobile) ===
 const stickyCta=document.getElementById('stickyCta');
-const ctaSection=document.getElementById('ctaSection');
+const vslCta=document.querySelector('.vsl-cta');
 
-if(stickyCta&&ctaSection){
+if(stickyCta&&vslCta){
   const stickyObs=new IntersectionObserver(entries=>{
     entries.forEach(x=>{
-      // Show sticky when CTA section is NOT visible
-      if(!x.isIntersecting&&window.scrollY>400){
+      if(!x.isIntersecting&&window.scrollY>300){
         stickyCta.classList.add('visible');
       } else {
         stickyCta.classList.remove('visible');
       }
     });
   },{threshold:0});
-  stickyObs.observe(ctaSection);
+  stickyObs.observe(vslCta);
 }
 
-// === NOTIFICATION BUBBLE (social proof) ===
+// === NOTIFICATION BUBBLE ===
 (function(){
   const names=['Thomas','Sarah','Mehdi','Julie','Alexandre','Fatima','Lucas','Camille','Youssef','Marie','Hugo','Léa','Karim','Emma','Antoine'];
   const actions=[
