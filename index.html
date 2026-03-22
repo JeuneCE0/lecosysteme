@@ -163,14 +163,6 @@
   .nav{padding:20px 24px;text-align:center;opacity:0;animation:fadeIn .4s ease forwards;}
   .nav img{height:20px;width:auto;}
 
-  /* === PROOF BAR === */
-  .proof-bar{
-    background:var(--bg-dark);padding:10px 20px;text-align:center;
-    font-size:13px;font-weight:500;color:var(--text-muted);
-    display:flex;align-items:center;justify-content:center;gap:10px;
-    opacity:0;animation:fadeIn .4s ease forwards;
-  }
-  .proof-bar strong{color:var(--text-light);font-weight:600;}
   .proof-roller{
     display:inline-flex;height:1.4em;overflow:hidden;vertical-align:bottom;
   }
@@ -274,6 +266,12 @@
     box-shadow:0 12px 40px rgba(255,157,0,.15);
   }
   .vsl-cta .reassure{margin-top:14px;}
+  .vsl-proof{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin-top:16px;font-size:13px;font-weight:500;color:var(--text-body);
+  }
+  .vsl-proof img{height:28px;width:auto;}
+  .vsl-proof strong{color:var(--text-dark);font-weight:700;}
 
 
   /* === SENJA === */
@@ -789,7 +787,8 @@
     /* Nav & Proof */
     .nav{padding:14px 16px;}
     .nav img{height:18px;}
-    .proof-bar{display:none;}
+    .vsl-proof{font-size:11px;gap:8px;}
+    .vsl-proof img{height:22px;}
 
     /* Scroll progress hidden on mobile */
     .scroll-progress{display:none;}
@@ -950,11 +949,6 @@
   <img src="https://assets.cdn.filesafe.space/NsV7HI2MbE6qHtRp410y/media/68dfdf4dc70a6de3cdc87350.png" alt="L'Écosystème">
 </nav>
 
-<!-- 1. PROOF BAR -->
-<div class="proof-bar">
-  <img src="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83931ba1821d12edf408e_Avatar%20group.avif" alt="Membres" style="height:28px;width:auto;margin-right:4px;">
-  Rejoins <strong>+1 338</strong> <span class="proof-roller"><span class="proof-roller-inner"><span>entrepreneurs</span><span>coachs</span><span>freelances</span><span>monteurs</span><span>développeurs</span><span>graphistes</span><span>consultants</span><span>agences</span><span>media buyers</span><span>community managers</span><span>formateurs</span><span>copywriters</span></span></span> accompagnés depuis 2021
-</div>
 
 <!-- HERO BACKGROUND WRAPPER -->
 <div class="hero-bg">
@@ -1028,6 +1022,10 @@
     <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
     <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
     <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
+  </div>
+  <div class="vsl-proof">
+    <img src="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83931ba1821d12edf408e_Avatar%20group.avif" alt="Membres">
+    Rejoins <strong>+1 338</strong> <span class="proof-roller"><span class="proof-roller-inner"><span>entrepreneurs</span><span>coachs</span><span>freelances</span><span>monteurs</span><span>développeurs</span><span>graphistes</span><span>consultants</span><span>agences</span><span>media buyers</span><span>community managers</span><span>formateurs</span><span>copywriters</span></span></span> accompagnés depuis 2021
   </div>
 </div>
 
