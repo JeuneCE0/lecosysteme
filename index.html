@@ -292,6 +292,7 @@
   .vsl-cta{
     max-width:960px;margin:0 auto;padding:0 24px;
     opacity:0;animation:fadeUp .5s ease .35s forwards;
+    position:relative;z-index:10;
   }
   .vsl-cta .fb{
     border-radius:0 0 16px 16px;margin-top:0;padding:24px;font-size:20px;
@@ -903,8 +904,11 @@
     .modal-header{padding:20px 20px 18px;}
     .modal-body{padding:20px;}
     .modal-box h2{font-size:19px;}
-    .f-row{grid-template-columns:1fr;}
+    .f-row{grid-template-columns:1fr;gap:10px;}
     .f-row .fg{margin-bottom:0;}
+    .modal-body .fg{margin-bottom:10px;}
+    .modal-body .f-row .fg{margin-bottom:0;}
+    .modal-body .reassure{flex-direction:row;gap:12px;font-size:11px;}
 
     /* Exit popup */
     .exit-overlay{padding:16px;}
