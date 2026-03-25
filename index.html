@@ -967,36 +967,25 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">&times;</button>
     <div class="modal-header">
-      <h2>Rejoins la communauté gratuite</h2>
-      <p class="sub">Accès immédiat aux formations, à la méthode et à l'accompagnement.</p>
+      <h2>Accède à la méthode complète</h2>
+      <p class="sub">Offre, acquisition, vente — tout ce qu'il te faut pour signer tes premiers clients.</p>
     </div>
     <div class="modal-body">
       <form id="formModal" onsubmit="return handleSubmit(event,this)">
-        <div class="f-row">
-          <div class="fg">
-            <input class="fi" type="text" name="prenom" placeholder="Prénom" required id="fmPrenom">
-            <label for="fmPrenom">Prénom</label>
-          </div>
-          <div class="fg">
-            <input class="fi" type="text" name="nom" placeholder="Nom" required id="fmNom">
-            <label for="fmNom">Nom</label>
-          </div>
+        <div class="fg">
+          <input class="fi" type="text" name="prenom" placeholder="Prénom" required id="fmPrenom">
+          <label for="fmPrenom">Prénom</label>
         </div>
         <div class="fg">
           <input class="fi" type="email" name="email" placeholder="Email" required id="fmEmail">
           <label for="fmEmail">Email</label>
         </div>
-        <div class="fg">
-          <input class="fi" type="tel" name="tel" placeholder="Téléphone" required id="fmTel">
-          <label for="fmTel">Téléphone</label>
-        </div>
         <button type="submit" class="fb">J'ACCÈDE À LA MÉTHODE →</button>
-        <div style="text-align:center;margin-top:8px;font-size:11px;color:#999;">Tu vas être redirigé vers notre Skool</div>
       </form>
       <div class="reassure" style="margin-top:14px;">
-        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> 100% Offert</span>
-        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès Immédiat</span>
-        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de fausse promesse</span>
+        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
+        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> 100% gratuit</span>
+        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Aucune carte requise</span>
       </div>
     </div>
   </div>
@@ -1153,9 +1142,7 @@ async function handleSubmit(e,form){
 
   // Get form data
   const prenom=form.querySelector('[name="prenom"]').value.trim();
-  const nom=form.querySelector('[name="nom"]').value.trim();
   const email=form.querySelector('[name="email"]').value.trim();
-  const tel=form.querySelector('[name="tel"]').value.trim();
 
   // Close modal, show fullscreen loader
   closeModal();
@@ -1170,9 +1157,7 @@ async function handleSubmit(e,form){
     const contactRes=await ghlRequest('/contacts/upsert',{
       locationId:GHL.locationId,
       firstName:prenom,
-      lastName:nom,
       email:email,
-      phone:tel,
       source:GHL.source,
       tags:[GHL.tag]
     });
@@ -1188,7 +1173,7 @@ async function handleSubmit(e,form){
         pipelineId:GHL.pipelineId,
         pipelineStageId:GHL.stageId,
         contactId:contactId,
-        name:prenom+' '+nom,
+        name:prenom,
         source:GHL.source,
         status:'open'
       });
