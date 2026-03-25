@@ -163,7 +163,7 @@
   }
 
   /* === NAV === */
-  .nav{padding:20px 24px;text-align:center;opacity:0;animation:fadeIn .4s ease forwards;}
+  .nav{padding:20px 24px 8px;text-align:center;opacity:0;animation:fadeIn .4s ease forwards;}
   .nav img{height:20px;width:auto;}
 
   .proof-roller{
@@ -194,7 +194,7 @@
   }
 
   /* === HERO === */
-  .hero{padding:48px 24px 0;text-align:center;max-width:900px;margin:0 auto;}
+  .hero{padding:16px 24px 0;text-align:center;max-width:900px;margin:0 auto;}
   .hero h1{
     font-family:var(--font-h);font-size:clamp(28px,5.5vw,52px);font-weight:600;
     line-height:1.1;letter-spacing:-1.5px;margin-bottom:16px;color:var(--text-dark);
@@ -265,8 +265,11 @@
     opacity:0;animation:fadeUp .5s ease .35s forwards;
   }
   .vsl-cta .fb{
-    border-radius:0 0 16px 16px;margin-top:0;padding:16px;font-size:16px;
-    box-shadow:0 12px 40px rgba(255,157,0,.15);
+    border-radius:0 0 16px 16px;margin-top:0;padding:24px;font-size:20px;
+    font-family:var(--font-h);letter-spacing:.5px;
+    text-shadow:0 2px 4px rgba(0,0,0,.25);
+    border:2px solid rgba(255,255,255,.2);
+    box-shadow:0 16px 48px rgba(255,157,0,.3);
   }
   .vsl-cta .reassure{margin-top:14px;}
   .vsl-proof{
@@ -964,13 +967,8 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">&times;</button>
     <div class="modal-header">
-      <div class="modal-avatar-row">
-        <img src="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83931ba1821d12edf408e_Avatar%20group.avif" alt="Membres">
-        <span><strong>+1 338</strong> membres</span>
-      </div>
       <h2>Rejoins la communauté gratuite</h2>
       <p class="sub">Accès immédiat aux formations, à la méthode et à l'accompagnement.</p>
-      <div id="modalProof" style="font-size:11px;color:var(--orange);margin-top:6px;font-weight:500;opacity:0;transition:opacity .4s;"></div>
     </div>
     <div class="modal-body">
       <form id="formModal" onsubmit="return handleSubmit(event,this)">
@@ -992,13 +990,13 @@
           <input class="fi" type="tel" name="tel" placeholder="Téléphone" required id="fmTel">
           <label for="fmTel">Téléphone</label>
         </div>
-        <button type="submit" class="fb">OBTENIR MON ACCÈS GRATUIT →</button>
-        <div style="text-align:center;margin-top:8px;font-size:11px;color:#999;">Tu recevras ton accès en moins de 30 secondes</div>
+        <button type="submit" class="fb">J'ACCÈDE À LA MÉTHODE →</button>
+        <div style="text-align:center;margin-top:8px;font-size:11px;color:#999;">Tu vas être redirigé vers notre Skool</div>
       </form>
       <div class="reassure" style="margin-top:14px;">
-        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
-        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
-        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
+        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> 100% Offert</span>
+        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès Immédiat</span>
+        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de fausse promesse</span>
       </div>
     </div>
   </div>
@@ -1040,26 +1038,11 @@
 <section class="hero">
   <div class="hero-badge">
     <span class="badge-dot"></span>
-    <span><span class="badge-count">47</span> inscrits cette semaine</span>
+    <span>Tu es freelance, coach, consultant ou prestataire de service ?</span>
   </div>
-  <h1>T'es compétent. T'as zéro client.<br><span class="a">C'est pas toi le problème.<br>C'est ton système.</span></h1>
-  <p class="hero-sub">On structure ton offre, ton acquisition et ta vente pour atteindre 2-3K€/mois récurrents. Pas besoin de motivation. <strong>Besoin d'un système.</strong> Regarde la vidéo ci-dessous.</p>
+  <h1>Crée une offre que tes clients veulent vraiment acheter<br><span class="a">— et passe de 0 à 3K€/mois</span></h1>
+  <p class="hero-sub">Même si t'as zéro client aujourd'hui et que t'as déjà tout essayé.</p>
 
-  <!-- BULLETS -->
-  <div class="bullets">
-    <div class="bullet">
-      <div class="bullet-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
-      Offre claire
-    </div>
-    <div class="bullet">
-      <div class="bullet-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
-      Acquisition clients
-    </div>
-    <div class="bullet">
-      <div class="bullet-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
-      Process de vente
-    </div>
-  </div>
 
 </section>
 
@@ -1077,15 +1060,9 @@
 
 <!-- CTA UNDER VSL -->
 <div class="vsl-cta">
-  <button class="fb" onclick="openModal()">OBTENIR MON ACCÈS GRATUIT →</button>
+  <button class="fb" onclick="openModal()">J'ACCÈDE À LA MÉTHODE →</button>
   <div class="reassure">
-    <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
-    <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
-    <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
-  </div>
-  <div class="vsl-proof">
-    <img src="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83931ba1821d12edf408e_Avatar%20group.avif" alt="Membres">
-    Rejoins <strong>+1 338</strong> <span class="proof-roller"><span class="proof-roller-inner"><span>entrepreneurs</span><span>coachs</span><span>freelances</span><span>monteurs</span><span>développeurs</span><span>graphistes</span><span>consultants</span><span>agences</span><span>media buyers</span><span>formateurs</span><span>copywriters</span></span></span> accompagnés depuis 2021
+    <span>100% Offert · Accès immédiat · Pas de fausse promesse</span>
   </div>
 </div>
 
@@ -1094,208 +1071,9 @@
   <script src="https://widget.senja.io/widget/ea21f05a-6c54-46a1-ab0b-4dfaca2426ed/platform.js" type="text/javascript" async></script>
   <div class="senja-embed" data-id="ea21f05a-6c54-46a1-ab0b-4dfaca2426ed" data-mode="shadow" data-lazyload="false" style="display:block;width:100%;"></div>
 </div>
+<div style="height:80px;"></div>
 
 <!-- close hero-bg wrapper -->
-</div>
-
-<!-- DARK ZONE -->
-<section class="dark-zone">
-<div class="dark-orb"></div>
-<div class="dark-orb-left"></div>
-<div class="dw">
-
-  <!-- RESULTS COUNTER -->
-  <h2 class="st reveal">Les résultats <span class="a">parlent.</span></h2>
-  <div class="counter reveal">
-    <div class="counter-item">
-      <div class="counter-num" data-target="2.7" data-prefix="+" data-suffix="M€">+0M€</div>
-      <div class="counter-label">Générés par nos clients en 2025</div>
-    </div>
-    <div class="counter-item">
-      <div class="counter-num" data-target="1338" data-prefix="" data-suffix="">0</div>
-      <div class="counter-label">Business accompagnés</div>
-    </div>
-    <div class="counter-item">
-      <div class="counter-num" data-target="5.0" data-prefix="" data-suffix="">0</div>
-      <img src="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a83f48766c39849a60f111_Rating.avif" alt="5 étoiles" style="height:18px;width:auto;margin:6px auto 4px;display:block;">
-      <div class="counter-label">Note Trustpilot</div>
-    </div>
-  </div>
-
-  <!-- STACK VALUE -->
-  <h2 class="st reveal">T'as pas besoin d'une formation de plus.<br><span class="a">T'as besoin de ça.</span></h2>
-  <div class="bento">
-    <div class="bento-item reveal">
-      <div class="bento-head">
-        <div class="bento-num">01</div>
-        <span class="bento-icon">🎯</span>
-      </div>
-      <h3>Création d'offre</h3>
-      <p>Pas "je fais du coaching". Une vraie offre, avec une promesse, un prix, un résultat. Que quelqu'un veut acheter.</p>
-    </div>
-    <div class="bento-item reveal">
-      <div class="bento-head">
-        <div class="bento-num">02</div>
-        <span class="bento-icon">📡</span>
-      </div>
-      <h3>Système d'acquisition</h3>
-      <p>Un canal qui ramène des prospects même quand tu dors. Fini de poster et prier pour un DM.</p>
-    </div>
-    <div class="bento-item reveal">
-      <div class="bento-head">
-        <div class="bento-num">03</div>
-        <span class="bento-icon">🤝</span>
-      </div>
-      <h3>Process de vente</h3>
-      <p>Quand quelqu'un est intéressé, tu sais exactement quoi faire. Pas d'improvisation, un process qui close.</p>
-    </div>
-    <div class="bento-item reveal">
-      <div class="bento-head">
-        <div class="bento-num">04</div>
-        <span class="bento-icon">💬</span>
-      </div>
-      <h3>Communauté active</h3>
-      <p>Des entrepreneurs qui avancent, pas un groupe mort. Accountability et échanges concrets.</p>
-    </div>
-    <div class="bento-item reveal">
-      <div class="bento-head">
-        <div class="bento-num">05</div>
-        <span class="bento-icon">🎓</span>
-      </div>
-      <h3>Formations actionnables</h3>
-      <p>Modules courts sur le positionnement, l'acquisition et la vente. Pas de théorie — du concret que tu appliques cette semaine.</p>
-    </div>
-    <div class="bento-item reveal">
-      <div class="bento-head">
-        <div class="bento-num">06</div>
-        <span class="bento-icon">🛡️</span>
-      </div>
-      <h3>Accompagné jusqu'au 1er client</h3>
-      <p>On lâche pas tant que t'as pas signé. C'est pas une formation, c'est un engagement.</p>
-    </div>
-  </div>
-
-  <!-- CTA MID-FUNNEL -->
-  <div class="dark-cta reveal">
-    <button class="fb" onclick="openModal()">OBTENIR MON ACCÈS GRATUIT →</button>
-    <div class="reassure">
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
-    </div>
-  </div>
-
-  <!-- FAQ -->
-  <div class="faq" style="margin-top:64px;">
-    <h2 class="st reveal">Questions <span class="a">fréquentes</span></h2>
-    <div class="faq-item reveal" onclick="toggleFaq(this)">
-      <div class="faq-q">C'est vraiment gratuit ?<span class="arrow">+</span></div>
-      <div class="faq-a"><p>L'accès à la communauté est 100% gratuit. Tu accèdes aux formations, aux échanges et à la méthode sans sortir ta carte. Si tu veux un accompagnement individuel pour aller plus vite, on en parle en call.</p></div>
-    </div>
-    <div class="faq-item reveal" onclick="toggleFaq(this)">
-      <div class="faq-q">C'est quoi Skool ?<span class="arrow">+</span></div>
-      <div class="faq-a"><p>Une plateforme de communauté en ligne. Formations, échanges entre membres, accès à notre méthode complète. Tu te prends en main en 2 minutes, c'est simple.</p></div>
-    </div>
-    <div class="faq-item reveal" onclick="toggleFaq(this)">
-      <div class="faq-q">Ça prend combien de temps ?<span class="arrow">+</span></div>
-      <div class="faq-a"><p>2-3h par semaine pour avancer concrètement. Les modules sont courts et actionnables. Nos meilleurs membres signent leur premier client en 3 à 6 semaines.</p></div>
-    </div>
-  </div>
-
-  <!-- URGENCY -->
-  <div class="urgency reveal">
-    <div class="urgency-live">En ce moment</div>
-    <div class="urgency-title">Prochain live de groupe dans :</div>
-    <div class="countdown" id="countdown">
-      <div class="cd-block"><span class="cd-num" id="cdDays">0</span><span class="cd-label">Jours</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-block"><span class="cd-num" id="cdHours">0</span><span class="cd-label">Heures</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-block"><span class="cd-num" id="cdMins">0</span><span class="cd-label">Min</span></div>
-      <span class="cd-sep">:</span>
-      <div class="cd-block"><span class="cd-num" id="cdSecs">0</span><span class="cd-label">Sec</span></div>
-    </div>
-    <p class="urgency-sub"><strong>47 membres</strong> ont rejoint cette semaine — places limitées sur le live.</p>
-  </div>
-
-  <!-- CTA FINAL -->
-  <div class="cta-final">
-    <div class="cta-final-card reveal">
-      <h2>Arrête de te former. Commence à structurer.</h2>
-      <p class="sub">Rejoins la communauté — c'est gratuit, c'est maintenant.</p>
-      <button class="fb" onclick="openModal()">OBTENIR MON ACCÈS GRATUIT →</button>
-      <div class="reassure">
-        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
-        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
-        <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-</section>
-
-<!-- SENJA TESTIMONIALS #2 -->
-<section class="senja-bottom">
-  <h2 class="st reveal" style="color:var(--text-light);">Ce qu'ils en <span class="a">disent.</span></h2>
-  <div class="senja-section-2">
-    <script src="https://widget.senja.io/widget/57e2dfb0-93f0-41d6-9f9a-b746e3cd5cd4/platform.js" type="text/javascript" async></script>
-    <div class="senja-embed" data-id="57e2dfb0-93f0-41d6-9f9a-b746e3cd5cd4" data-mode="shadow" data-lazyload="false" style="display:block;width:100%;min-height:300px;"></div>
-  </div>
-</section>
-
-<!-- BIG CTA SECTION -->
-<section class="big-cta">
-  <div class="big-cta-glow"></div>
-  <div class="big-cta-inner reveal">
-    <h2>Prêt à structurer ton activité ?</h2>
-    <p>Rejoins +1 338 entrepreneurs qui ont structuré leur business.<br>Accès gratuit, immédiat, sans carte bancaire.</p>
-    <button class="fb-white" onclick="openModal()">OBTENIR MON ACCÈS GRATUIT →</button>
-    <div class="reassure">
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Gratuit</span>
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Pas de carte bancaire</span>
-      <span><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> Accès immédiat</span>
-    </div>
-  </div>
-</section>
-
-<!-- EXIT INTENT POPUP (desktop) -->
-<div class="exit-overlay" id="exitPopup">
-  <div class="exit-box">
-    <button class="exit-close" onclick="closeExit()">&times;</button>
-    <div class="exit-header">
-      <div class="exit-emoji">🫵</div>
-      <h2>Attends — tu pars sans ton accès ?</h2>
-      <p>Rejoins la communauté gratuitement et accède à la méthode complète.</p>
-    </div>
-    <div class="exit-body">
-      <div class="exit-stats">
-        <div class="exit-stat">
-          <span class="exit-stat-num">1 338</span>
-          <span class="exit-stat-label">Membres</span>
-        </div>
-        <div class="exit-stat">
-          <span class="exit-stat-num">+2,7M€</span>
-          <span class="exit-stat-label">Générés</span>
-        </div>
-        <div class="exit-stat">
-          <span class="exit-stat-num">5.0</span>
-          <span class="exit-stat-label">Trustpilot</span>
-        </div>
-      </div>
-      <button class="fb" onclick="closeExit();openModal();">OBTENIR MON ACCÈS GRATUIT →</button>
-      <div class="exit-sub">Gratuit · Sans carte bancaire · Accès immédiat</div>
-    </div>
-  </div>
-</div>
-
-<!-- STICKY CTA MOBILE -->
-<div class="sticky-cta" id="stickyCta">
-  <button class="fb" onclick="openModal()">OBTENIR MON ACCÈS GRATUIT →</button>
-  <div class="sticky-cta-sub">
-    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Gratuit · Accès immédiat · Sans carte bancaire
-  </div>
 </div>
 
 <!-- FOOTER -->
@@ -1564,66 +1342,6 @@ if(stickyCta&&vslCta){
   stickyObs.observe(vslCta);
 }
 
-// === NOTIFICATION BUBBLE ===
-(function(){
-  const people=[
-    {name:'Thomas',gender:'male',idx:32},
-    {name:'Sarah',gender:'female',idx:44},
-    {name:'Mehdi',gender:'male',idx:55},
-    {name:'Julie',gender:'female',idx:29},
-    {name:'Alexandre',gender:'male',idx:61},
-    {name:'Fatima',gender:'female',idx:90},
-    {name:'Lucas',gender:'male',idx:15},
-    {name:'Camille',gender:'female',idx:68},
-    {name:'Youssef',gender:'male',idx:78},
-    {name:'Marie',gender:'female',idx:12},
-    {name:'Hugo',gender:'male',idx:43},
-    {name:'Léa',gender:'female',idx:35},
-    {name:'Karim',gender:'male',idx:87},
-    {name:'Emma',gender:'female',idx:22},
-    {name:'Antoine',gender:'male',idx:51}
-  ];
-  const actions=[
-    '{name} vient de rejoindre la communauté',
-    '{name} a rejoint il y a {t} min',
-    '{name} vient de s\'inscrire',
-    '{name} a rejoint le groupe',
-    '{name} vient d\'accéder à la formation'
-  ];
-  let bubble=document.createElement('div');
-  bubble.className='notif-bubble';
-  bubble.innerHTML='<div class="notif-flame"></div><div class="notif-avatar"><img src="" alt=""></div><div class="notif-content"><div class="notif-text"></div><div class="notif-time"><span class="notif-fire">🔥</span> À l\'instant</div></div>';
-  document.body.appendChild(bubble);
-
-  let usedIdx=[];
-  function pickPerson(){
-    if(usedIdx.length>=people.length) usedIdx=[];
-    let i;
-    do{ i=Math.floor(Math.random()*people.length); }while(usedIdx.includes(i));
-    usedIdx.push(i);
-    return people[i];
-  }
-
-  function showNotif(){
-    const p=pickPerson();
-    const mins=Math.floor(Math.random()*12)+1;
-    const action=actions[Math.floor(Math.random()*actions.length)]
-      .replace('{name}',p.name)
-      .replace('{t}',mins);
-    const img=bubble.querySelector('.notif-avatar img');
-    img.src='https://i.pravatar.cc/80?img='+p.idx;
-    img.alt=p.name;
-    bubble.querySelector('.notif-text').textContent=action;
-    bubble.querySelector('.notif-time').innerHTML='<span class="notif-fire">🔥</span> il y a '+mins+' min';
-    bubble.classList.add('show');
-    setTimeout(()=>{ bubble.classList.remove('show'); },8000);
-  }
-
-  setTimeout(()=>{
-    showNotif();
-    setInterval(showNotif,12000);
-  },5000);
-})();
 
 // === CTA PARTICLES (hover flames + click confetti) ===
 (function(){
@@ -1696,44 +1414,6 @@ if(stickyCta&&vslCta){
   });
 })();
 
-// === EXIT INTENT (desktop only) ===
-let exitShown=false;
-function closeExit(){document.getElementById('exitPopup').classList.remove('open');}
-document.getElementById('exitPopup').addEventListener('click',function(e){if(e.target===this)closeExit();});
-
-if(window.innerWidth>640){
-  document.addEventListener('mouseout',function(e){
-    if(!exitShown&&e.clientY<5&&!e.relatedTarget){
-      exitShown=true;
-      document.getElementById('exitPopup').classList.add('open');
-    }
-  });
-}
-
-// === MODAL SOCIAL PROOF (dynamic line in modal header) ===
-(function(){
-  const proofEl=document.getElementById('modalProof');
-  if(!proofEl)return;
-  const lines=[
-    'Thomas vient de s\'inscrire il y a 2 min',
-    'Sarah a obtenu son accès il y a 5 min',
-    'Mehdi a rejoint la communauté il y a 1 min',
-    'Julie vient de s\'inscrire',
-    'Alexandre a obtenu son accès il y a 3 min'
-  ];
-  let idx=0;
-  // Show when modal opens
-  const obs=new MutationObserver(()=>{
-    if(document.getElementById('modal').classList.contains('open')){
-      proofEl.textContent=lines[idx%lines.length];
-      proofEl.style.opacity='1';
-      idx++;
-    } else {
-      proofEl.style.opacity='0';
-    }
-  });
-  obs.observe(document.getElementById('modal'),{attributes:true,attributeFilter:['class']});
-})();
 
 // === FOCUS TRAP MODAL ===
 document.getElementById('modal').addEventListener('keydown',function(e){
