@@ -967,18 +967,29 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">&times;</button>
     <div class="modal-header">
+      <img src="https://assets.cdn.filesafe.space/NsV7HI2MbE6qHtRp410y/media/68dfdf4dc70a6de3cdc87350.png" alt="L'Écosystème" style="height:18px;width:auto;margin-bottom:14px;filter:brightness(10);">
       <h2>Accède à la méthode complète</h2>
       <p class="sub">Offre, acquisition, vente — tout ce qu'il te faut pour signer tes premiers clients.</p>
     </div>
     <div class="modal-body">
       <form id="formModal" onsubmit="return handleSubmit(event,this)">
-        <div class="fg">
-          <input class="fi" type="text" name="prenom" placeholder="Prénom" required id="fmPrenom">
-          <label for="fmPrenom">Prénom</label>
+        <div class="f-row">
+          <div class="fg">
+            <input class="fi" type="text" name="prenom" placeholder="Prénom" required id="fmPrenom">
+            <label for="fmPrenom">Prénom</label>
+          </div>
+          <div class="fg">
+            <input class="fi" type="text" name="nom" placeholder="Nom" required id="fmNom">
+            <label for="fmNom">Nom</label>
+          </div>
         </div>
         <div class="fg">
           <input class="fi" type="email" name="email" placeholder="Email" required id="fmEmail">
           <label for="fmEmail">Email</label>
+        </div>
+        <div class="fg">
+          <input class="fi" type="tel" name="tel" placeholder="Téléphone" required id="fmTel">
+          <label for="fmTel">Téléphone</label>
         </div>
         <button type="submit" class="fb">J'ACCÈDE À LA MÉTHODE →</button>
       </form>
@@ -1142,7 +1153,9 @@ async function handleSubmit(e,form){
 
   // Get form data
   const prenom=form.querySelector('[name="prenom"]').value.trim();
+  const nom=form.querySelector('[name="nom"]').value.trim();
   const email=form.querySelector('[name="email"]').value.trim();
+  const tel=form.querySelector('[name="tel"]').value.trim();
 
   // Close modal, show fullscreen loader
   closeModal();
@@ -1157,7 +1170,9 @@ async function handleSubmit(e,form){
     const contactRes=await ghlRequest('/contacts/upsert',{
       locationId:GHL.locationId,
       firstName:prenom,
+      lastName:nom,
       email:email,
+      phone:tel,
       source:GHL.source,
       tags:[GHL.tag]
     });
@@ -1173,7 +1188,7 @@ async function handleSubmit(e,form){
         pipelineId:GHL.pipelineId,
         pipelineStageId:GHL.stageId,
         contactId:contactId,
-        name:prenom,
+        name:prenom+' '+nom,
         source:GHL.source,
         status:'open'
       });
