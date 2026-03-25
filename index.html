@@ -835,23 +835,20 @@
 
   /* === RESPONSIVE === */
   @media(max-width:640px){
-    /* Immersive mobile feel */
-    body{padding-bottom:calc(72px + env(safe-area-inset-bottom));-webkit-text-size-adjust:100%;}
+    body{-webkit-text-size-adjust:100%;}
     html{scroll-padding-top:20px;}
 
     /* Hero */
-    .hero{padding:28px 16px 0;max-width:100%;}
+    .hero{padding:12px 16px 0;max-width:100%;}
     .hero h1{font-size:clamp(22px,6.5vw,30px);letter-spacing:-.6px;line-height:1.2;}
     .hero h1 br{display:none;}
     .hero-sub{font-size:15px;line-height:1.65;margin-bottom:20px;}
     .hero-badge{font-size:12px;padding:5px 12px 5px 7px;margin-bottom:12px;}
     .hero-cross,.hero-ring,.hero-dot,.light-beam{display:none;}
 
-    /* Nav & Proof */
-    .nav{padding:14px 16px;}
+    /* Nav */
+    .nav{padding:14px 16px 4px;}
     .nav img{height:18px;}
-    .vsl-proof{font-size:11px;gap:8px;}
-    .vsl-proof img{height:22px;}
 
     /* Scroll progress hidden on mobile */
     .scroll-progress{display:none;}
@@ -860,79 +857,15 @@
     .vsl-wrap{padding:0 12px;}
     .vsl-player{border-radius:12px 12px 0 0;}
     .vsl-cta{padding:0 12px;}
-    .vsl-cta .fb{border-radius:0 0 12px 12px;padding:14px;font-size:14px;}
+    .vsl-cta .fb{border-radius:0 0 12px 12px;padding:18px;font-size:17px;}
     .vsl-thumb-hook{font-size:15px;margin-bottom:16px;}
     .play-btn{width:60px;height:60px;}
-
-    /* Dark zone */
-    .dark-zone{padding:40px 16px;margin-top:48px;}
-    .st{font-size:clamp(20px,5.5vw,28px);margin-bottom:28px;}
-
-    /* Bento — active state replaces hover on mobile */
-    .bento{grid-template-columns:1fr;gap:12px;}
-    .bento-item{padding:22px 18px;}
-    .bento-item h3{font-size:15px;}
-    .bento-item.bento-active{
-      border-color:rgba(255,157,0,.2);
-      transform:translateY(-3px);
-      box-shadow:0 8px 30px rgba(0,0,0,.25),0 0 0 1px rgba(255,157,0,.08);
-    }
-    .bento-item.bento-active::before{opacity:1;}
-    .bento-item.bento-active .bento-num{
-      background:var(--orange);color:#fff;border-color:var(--orange);
-      box-shadow:0 0 12px rgba(255,157,0,.3);
-    }
-    .bento-item.bento-active .bento-icon{transform:scale(1.25) rotate(-8deg);}
-
-    /* Counter */
-    .counter{grid-template-columns:repeat(3,1fr);gap:8px;}
-    .counter-item{padding:16px 8px;border-radius:10px;}
-    .counter-num{font-size:clamp(22px,6vw,30px);}
-    .counter-label{font-size:11px;}
-
-    /* Bullets */
-    .bullets{gap:10px;margin-bottom:24px;}
-    .bullet{font-size:13px;}
-
-    /* FAQ */
-    .faq-q{font-size:14px;padding:16px 18px;}
-    .faq-item.open .faq-a{padding:0 18px 16px;}
-    .faq-a p{font-size:13px;}
 
     /* Reassure */
     .reassure{flex-direction:column;gap:5px;font-size:11px;}
 
     /* Senja */
-    .senja-section,.senja-section-2{padding:0 12px;}
-    .senja-bottom{padding:0 12px 48px;}
-
-    /* Urgency */
-    .urgency{padding:20px 16px;}
-    .countdown{gap:8px;}
-    .cd-block{padding:10px 12px;min-width:52px;}
-    .cd-num{font-size:22px;}
-    .cd-sep{font-size:18px;}
-    .urgency-title{font-size:15px;}
-
-    /* CTA Final */
-    .cta-final-card{padding:22px 18px;}
-    .cta-final-card h2{font-size:18px;}
-    .cta-final-card .fb{font-size:15px;padding:14px;}
-    .dark-cta .fb{font-size:15px;padding:14px;}
-
-    /* Sticky CTA — always visible on mobile */
-    .sticky-cta{display:block;}
-
-    /* Notification at top on mobile */
-    .notif-bubble{
-      bottom:auto;top:calc(12px + env(safe-area-inset-top));
-      left:10px;right:10px;max-width:none;padding:10px 12px;gap:10px;border-radius:12px;
-      transform:translateY(-120%);
-    }
-    .notif-bubble.show{transform:translateY(0);}
-    .notif-avatar{width:32px;height:32px;}
-    .notif-text{font-size:12px;}
-    .notif-time{font-size:10px;}
+    .senja-section{padding:0 12px;}
 
     /* Modal fullscreen on mobile */
     .modal-overlay{padding:0;align-items:flex-end;}
@@ -944,8 +877,12 @@
     .modal-box h2{font-size:19px;}
     .f-row{grid-template-columns:1fr;}
 
+    /* Exit popup */
+    .exit-overlay{padding:16px;}
+    .exit-header h2{font-size:19px;}
+
     /* Footer */
-    .foot{padding:28px 16px calc(16px + env(safe-area-inset-bottom));}
+    .foot{padding:28px 16px;}
   }
 </style>
 </head>
@@ -967,7 +904,6 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">&times;</button>
     <div class="modal-header">
-      <img src="https://assets.cdn.filesafe.space/NsV7HI2MbE6qHtRp410y/media/68dfdf4dc70a6de3cdc87350.png" alt="L'Écosystème" style="height:18px;width:auto;margin-bottom:14px;filter:brightness(10);">
       <h2>Accède à la méthode complète</h2>
       <p class="sub">Offre, acquisition, vente — tout ce qu'il te faut pour signer tes premiers clients.</p>
     </div>
@@ -1074,6 +1010,21 @@
 <div style="height:80px;"></div>
 
 <!-- close hero-bg wrapper -->
+</div>
+
+<!-- EXIT INTENT POPUP (desktop) -->
+<div class="exit-overlay" id="exitPopup">
+  <div class="exit-box">
+    <button class="exit-close" onclick="closeExit()">&times;</button>
+    <div class="exit-header">
+      <h2>T'es sûr de vouloir rester bloqué à 0 client ?</h2>
+      <p>La méthode est gratuite. Ça prend 30 secondes.</p>
+    </div>
+    <div class="exit-body">
+      <button class="fb" onclick="closeExit();openModal();">J'ACCÈDE À LA MÉTHODE →</button>
+      <div class="exit-sub">100% gratuit · Accès immédiat</div>
+    </div>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -1414,6 +1365,20 @@ if(stickyCta&&vslCta){
   });
 })();
 
+
+// === EXIT INTENT (desktop only) ===
+let exitShown=false;
+function closeExit(){document.getElementById('exitPopup').classList.remove('open');}
+document.getElementById('exitPopup').addEventListener('click',function(e){if(e.target===this)closeExit();});
+
+if(window.innerWidth>640){
+  document.addEventListener('mouseout',function(e){
+    if(!exitShown&&e.clientY<5&&!e.relatedTarget){
+      exitShown=true;
+      document.getElementById('exitPopup').classList.add('open');
+    }
+  });
+}
 
 // === FOCUS TRAP MODAL ===
 document.getElementById('modal').addEventListener('keydown',function(e){
