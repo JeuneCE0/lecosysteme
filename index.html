@@ -222,6 +222,7 @@
   }
 
   /* === HERO === */
+  br.mob{display:none;}
   .hero{padding:16px 24px 0;text-align:center;max-width:900px;margin:0 auto;}
   .hero h1{
     font-family:var(--font-h);font-size:clamp(28px,5.5vw,52px);font-weight:600;
@@ -869,7 +870,8 @@
     /* Hero */
     .hero{padding:12px 16px 0;max-width:100%;}
     .hero h1{font-size:clamp(22px,6.5vw,30px);letter-spacing:-.6px;line-height:1.2;}
-    .hero h1 br{display:none;}
+    .hero h1 br:not(.mob){display:none;}
+    .hero h1 br.mob{display:inline;}
     .hero-sub{font-size:15px;line-height:1.65;margin-bottom:20px;}
     .hero-badge{font-size:12px;padding:5px 12px 5px 7px;margin-bottom:12px;}
     .hero-cross,.hero-ring,.hero-dot,.light-beam{display:none;}
@@ -1004,8 +1006,8 @@
     <span class="badge-dot"></span>
     <span>Tu es freelance, coach, consultant ou prestataire de service ?</span>
   </div>
-  <h1>Crée une offre que tes clients veulent vraiment acheter<br><span class="a">— et passe de 0 à 3K€/mois</span></h1>
-  <p class="hero-sub">Même si t'as zéro client aujourd'hui et que t'as déjà tout essayé.</p>
+  <h1>Crée une offre que tes clients<br class="mob"> veulent vraiment acheter<br><span class="a">et passe de 0 à 3K€/mois</span></h1>
+  <p class="hero-sub">Même si t'as aucun client et que t'as déjà tout essayé.</p>
 
 
 </section>
