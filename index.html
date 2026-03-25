@@ -918,8 +918,6 @@
 </head>
 <body>
 
-<!-- SCROLL PROGRESS BAR -->
-<div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- FULLSCREEN LOADER (after form submit) -->
 <div class="loader-overlay" id="loader">
@@ -1064,12 +1062,6 @@
 </footer>
 
 <script>
-// === SCROLL PROGRESS BAR ===
-window.addEventListener('scroll',()=>{
-  const h=document.documentElement;
-  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
-  document.getElementById('scrollProgress').style.width=pct+'%';
-},{ passive:true });
 
 // === MODAL ===
 function openModal(){
