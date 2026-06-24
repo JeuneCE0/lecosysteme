@@ -42,11 +42,11 @@ body{
 .vlines i:last-child{left:86%}
 
 /* ===== APP BAR ===== */
-.appbar{position:sticky; top:0; z-index:50; background:var(--paper); border-bottom:1px solid var(--line); transition:box-shadow .25s ease;}
+.appbar{position:sticky; top:0; z-index:50; background:var(--paper); transition:box-shadow .25s ease;}
 .appbar.scrolled{box-shadow:0 8px 28px rgba(10,10,10,.07);}
-.appbar-row{max-width:760px; margin:0 auto; padding:13px 20px; display:flex; align-items:center; justify-content:space-between; gap:14px;}
+.appbar-row{position:relative; max-width:760px; margin:0 auto; padding:13px 20px; display:flex; align-items:center; justify-content:center; gap:14px;}
 .brand-logo{height:30px; width:auto; max-width:60vw; display:block; user-select:none; -webkit-user-drag:none; pointer-events:none;}
-.step-counter{font-family:'Bebas Neue'; font-size:19px; letter-spacing:.06em; color:var(--mute); white-space:nowrap;}
+.step-counter{position:absolute; right:20px; top:50%; transform:translateY(-50%); font-family:'Bebas Neue'; font-size:19px; letter-spacing:.06em; color:var(--mute); white-space:nowrap;}
 .step-counter b{color:var(--ink)}
 .progress-track{height:3px; background:var(--line); width:100%;}
 .progress-fill{height:100%; width:0%; background:var(--gradient); transition:width .45s cubic-bezier(.4,0,.2,1);}
@@ -163,7 +163,7 @@ textarea{min-height:120px; resize:vertical; line-height:1.6;}
 @media (max-width:640px){
   .appbar-row{padding:11px 16px}
   .brand-logo{height:24px}
-  .step-counter{font-size:17px}
+  .step-counter{font-size:17px; right:16px}
   .wizard{padding:26px 16px 34px}
   .step-head h2{font-size:clamp(28px,9vw,36px)}
   .intro h1{font-size:clamp(34px,11vw,48px)}
