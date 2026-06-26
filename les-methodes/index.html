@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>La Méthode ECS — Ton parcours de 0 à 500K€/mois</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAqCAYAAAADBl3iAAAEQ0lEQVR42tWZS4gcVRSGv1M1Vd2TGJ/EMMHXxo0BJbgwMCJG3DjGEVHGKIJCJARBXYiouFDRYEBcBCVIyECiEE0rosH4WOlCQQWRBHQlghIdRjFqnJ7urtdx0V1ld09XP6aqeq5307fr3u66/3/Ovec/5wr/g6YnmMaR3SjbUaaACQCkNUHaJvfq9xmfMBr4J6xH2YvIbiwmCdMmtgHTLpADxsVY8MdZx4QcY5Id1LsWnsHi3c8sY81vsZcyO1huge+2aK/+6OO+kR6gH3MNkXwNuCtcOqPFk74NRPxopgf43I/bAp+vxf/r24DqR8YRoM9gIXI9YUHA443vcxaHA+Z5wBbWoWwiKgB4vAVcQPVFuYHvzSPgHCzAyh14bHkXWNbX+IOXwEQdMInHEg4OJF6Q9fCzErdfoK77uJlXRJoUZSZA32MzPpuwcYb+Ub+ZVcpEnMTjfMKUQC1D9K3k00c4ja2fYfO+3MRC2l8ND7qCjcXdILtQtgLnAdbQlkmzog2EnCXQLXInp8fhcCN7gB5lMyIHsbkVYIU8zSNOuz138NoToBU2ghzH5VrqfYD10+r9xrX1zRufRB8tCkS8nIAvIkTF8J3kDeYQoG+xDUvupVEY8Hg1P1PnT/M8QLkHB7vAxKS5IVU/lLnUxHdtCFBFQK7rWFbeMtUGapwhYH68Secw7TAl4EKigvR5LFRUn5C7+Mk8AtYjaNvJnOcZIIDFP/j6qNzBoXELz1HC4CRuW9yXjPl40JK6QojPKUSu1Hc51GGSQSqw1zwHCPiNJX1W5vDyIiBEeB2PiwlSXjxosVYLcHNeDdiKzTZCbCymcZnOpdw1AQT8Ajw/DLA1qQjp2zyCKy8QsmFVkrnfeJOAH6jq1TJHLXcpnBl8hQdxZX9yoPaq1o5Y2e3xTKkOJ6fHWg/Qd7gcS/YRtaW6eUeVJglneICGcQQQsYsyFxVa7rIB9Ks43zeGAK1gIzLTcYgWUe7yCBHeLCYZytJ8LgAuW2H9PJVlGQj0qMzwpXkERJRbFblicokyUOMbbB4rLh3O0kptR5SkiCnpEdr6jcdFThfwOEGgszLD74VWhFbdGgillsU0J5+K+JuAbxGdp8qx1WSRKwjQN5hCuB2VG1Euob2EOagAmTaveQ31F5behkWdIBEs/U3Q7f5Ox2nv47Eos/yahUXpSHkP8zCOPMkEU8lLs97KxgR4LLJRr5Dt46v2DO0BWsHmCK9Slj2EkEiIvC4im6rPp4YLZhHQdN4qj1OSPXgtt2QEtxx2XIlY6rjqMIMAnecqkKfw2hasA8GMLlCERb5j2TgCEB7C4dxU2+QRp5tX0Z/LcwZ6AMgtSfAYBIZVjAvQwAOOYGCzgEtTi515eEEJCPWA7OSkqQQ4uQOPQ2cZaPABG3gaQ1v+9/AxpUKNhu7H050ya97h11sJZq/KBCgLhHxKqAflPr7A8PYvt5ywDGICLmUAAAAASUVORK5CYII=">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Teachers:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0A0E;
+    --ink-2:#101019;
+    --ink-3:#15151F;
+    --ink-4:#1C1C28;
+    --gold:#FFA600;
+    --gold-bright:#FFC53D;
+    --gold-deep:#C57400;
+    --gold-line:rgba(255,166,0,.22);
+    --gold-line-soft:rgba(255,166,0,.12);
+    --parchment:#ECE5D6;
+    --parchment-dim:#C9C2B3;
+    --muted:#857E70;
+    --muted-2:#6A6457;
+    --danger:#B6705C;
+    --danger-dim:rgba(182,112,92,.5);
+    --radius:18px;
+    --radius-sm:12px;
+    --maxw:1080px;
+    --serif:"Eurostile","Saira","Michroma",system-ui,sans-serif;
+    --sans:"Teachers",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background:
+      radial-gradient(900px 600px at 80% -5%, rgba(255,166,0,.10), transparent 60%),
+      radial-gradient(700px 500px at 5% 8%, rgba(255,166,0,.05), transparent 55%);
+    pointer-events:none;z-index:0;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+  ::selection{background:rgba(255,197,61,.25);color:#fff}
+
+  /* ---------- Eyebrow / labels ---------- */
+  .eyebrow{
+    font-size:11.5px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--gold);display:inline-block;
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:84px 0 40px;text-align:center}
+  .hero .mark{
+    font-family:var(--serif);font-weight:600;letter-spacing:.04em;
+    font-size:13px;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.42em;
+    opacity:.85;margin-bottom:34px;
+  }
+  .hero h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(38px,7vw,76px);
+    line-height:1.04;letter-spacing:-.015em;
+    color:#fff;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold-bright)}
+  .hero .thesis{
+    max-width:620px;margin:26px auto 0;
+    font-size:clamp(16px,2.4vw,19px);color:var(--parchment-dim);
+    font-weight:400;
+  }
+  .hero .scale-note{
+    margin-top:30px;font-size:13px;color:var(--muted);letter-spacing:.04em;
+  }
+  .hero .scale-note b{color:var(--gold);font-weight:600}
+
+  /* ---------- "Comment lire" — 4 couches ---------- */
+  .layers{
+    margin:56px 0 0;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .layer{
+    background:linear-gradient(180deg,var(--ink-3),var(--ink-2));
+    border:1px solid var(--gold-line-soft);
+    border-radius:var(--radius-sm);
+    padding:20px 18px;
+    position:relative;
+  }
+  .layer .lvl{
+    font-family:var(--serif);font-size:13px;color:var(--gold);font-weight:600;
+    letter-spacing:.02em;
+  }
+  .layer h3{
+    font-family:var(--serif);font-weight:600;font-size:18px;margin:6px 0 6px;color:#fff;
+    line-height:1.15;
+  }
+  .layer p{font-size:13px;color:var(--muted);line-height:1.5}
+
+  /* ---------- Section frame ---------- */
+  .section{padding:72px 0}
+  .section-head{margin-bottom:30px}
+  .section-head h2{
+    font-family:var(--serif);font-weight:500;font-size:clamp(26px,4vw,38px);
+    color:#fff;line-height:1.1;letter-spacing:-.01em;margin-top:10px;
+  }
+  .section-head p{color:var(--parchment-dim);max-width:600px;margin-top:12px;font-size:15px}
+  .hairline{height:1px;background:linear-gradient(90deg,var(--gold-line),transparent);border:0;margin:0}
+
+  /* ---------- LOCATOR ---------- */
+  .locator{
+    background:linear-gradient(180deg,rgba(28,28,40,.7),rgba(16,16,25,.7));
+    border:1px solid var(--gold-line);
+    border-radius:var(--radius);
+    padding:34px 30px;
+    box-shadow:0 30px 80px -40px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.03);
+  }
+  .q-label{
+    font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--parchment-dim);display:flex;align-items:center;gap:9px;margin-bottom:14px;
+  }
+  .q-label .dot{
+    width:7px;height:7px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 0 4px rgba(255,166,0,.14);
+  }
+  .q-block + .q-block{margin-top:28px}
+  .pills{display:flex;flex-wrap:wrap;gap:9px}
+  .pill{
+    font-family:var(--sans);font-size:13.5px;font-weight:500;
+    color:var(--parchment-dim);
+    background:var(--ink-3);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:999px;
+    padding:10px 16px;cursor:pointer;
+    transition:all .2s ease;
+    display:flex;flex-direction:column;gap:1px;line-height:1.25;text-align:left;
+    white-space:nowrap;
+  }
+  .pill .pname{font-weight:600;color:var(--parchment)}
+  .pill .prange{font-size:11px;color:var(--muted);letter-spacing:.01em}
+  .pill:hover{border-color:var(--gold-line);transform:translateY(-1px)}
+  .pill:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+  .pill.current{
+    background:linear-gradient(180deg,var(--gold),#D98C00);
+    border-color:var(--gold-bright);
+  }
+  .pill.current .pname,.pill.current .prange{color:#0A0A0E}
+  .pill.current .prange{opacity:.7}
+  .pill.target{
+    border-color:var(--gold-bright);
+    background:rgba(255,166,0,.10);
+  }
+  .pill.target .pname{color:var(--gold-bright)}
+  .pill.disabled{opacity:.28;pointer-events:none}
+
+  .locator-foot{
+    margin-top:26px;padding-top:22px;border-top:1px solid var(--gold-line-soft);
+    display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;
+  }
+  .summary{font-size:14px;color:var(--parchment-dim)}
+  .summary b{color:var(--gold-bright);font-weight:600}
+  .btn-ghost{
+    font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.04em;
+    color:var(--gold);background:transparent;border:1px solid var(--gold-line);
+    border-radius:999px;padding:10px 20px;cursor:pointer;transition:all .2s;
+  }
+  .btn-ghost:hover{background:rgba(255,166,0,.08);border-color:var(--gold)}
+
+  /* ---------- PATH / TIMELINE ---------- */
+  #path{margin-top:40px}
+  .path-empty{
+    text-align:center;color:var(--muted);padding:50px 20px;font-size:15px;
+    border:1px dashed var(--gold-line-soft);border-radius:var(--radius);
+  }
+  .timeline{position:relative}
+  .timeline::before{
+    content:"";position:absolute;left:21px;top:18px;bottom:18px;width:1px;
+    background:linear-gradient(180deg,var(--gold-line),var(--gold-line-soft) 70%,transparent);
+  }
+  @media(max-width:640px){.timeline::before{left:17px}}
+
+  .phase{
+    position:relative;padding-left:62px;margin-bottom:18px;
+    animation:rise .55s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @media(max-width:640px){.phase{padding-left:50px}}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  .node{
+    position:absolute;left:0;top:6px;width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:600;font-size:16px;
+    background:var(--ink-3);border:1px solid var(--gold-line);color:var(--gold);
+    z-index:2;
+  }
+  @media(max-width:640px){.node{width:36px;height:36px;font-size:14px}}
+  .phase.is-current .node{
+    background:linear-gradient(180deg,var(--gold-bright),var(--gold));
+    color:#0A0A0E;border-color:var(--gold-bright);
+    box-shadow:0 0 0 5px rgba(255,166,0,.16),0 0 30px -2px rgba(255,197,61,.5);
+  }
+  .phase.is-done .node{opacity:.62}
+
+  .card{
+    background:linear-gradient(180deg,var(--ink-3),var(--ink-2));
+    border:1px solid var(--gold-line-soft);
+    border-radius:var(--radius);
+    overflow:hidden;
+    transition:border-color .25s;
+  }
+  .phase.is-current .card{
+    border-color:var(--gold-line);
+    box-shadow:0 24px 60px -36px rgba(0,0,0,.85);
+  }
+  .card-head{
+    padding:22px 26px;cursor:pointer;display:flex;align-items:flex-start;
+    gap:16px;justify-content:space-between;
+  }
+  @media(max-width:640px){.card-head{padding:18px}}
+  .card-head .meta{flex:1;min-width:0}
+  .badge-now{
+    display:inline-block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:#0A0A0E;background:linear-gradient(90deg,var(--gold-bright),var(--gold));
+    padding:4px 10px;border-radius:999px;margin-bottom:10px;
+  }
+  .badge-done{
+    display:inline-block;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);border:1px solid var(--gold-line-soft);
+    padding:3px 10px;border-radius:999px;margin-bottom:10px;
+  }
+  .phase-name{
+    font-family:var(--serif);font-weight:500;font-size:clamp(22px,3.4vw,30px);
+    color:#fff;line-height:1.08;letter-spacing:-.01em;
+  }
+  .phase-palier{
+    font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--gold);margin-top:8px;
+  }
+  .phase-mission{
+    margin-top:14px;font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:clamp(16px,2.3vw,19px);color:var(--parchment);line-height:1.4;
+    max-width:62ch;
+  }
+  .phase-mission .mlabel{
+    display:block;font-family:var(--sans);font-style:normal;font-size:11px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;
+  }
+  .chev{
+    flex-shrink:0;width:34px;height:34px;border-radius:50%;border:1px solid var(--gold-line);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);
+    transition:transform .3s,background .2s;
+  }
+  .card-head:hover .chev{background:rgba(255,166,0,.08)}
+  .card.open .chev{transform:rotate(180deg)}
+  .chev svg{width:14px;height:14px}
+
+  .card-body{
+    max-height:0;overflow:hidden;
+    transition:max-height .5s cubic-bezier(.2,.7,.2,1);
+  }
+  .card-body-inner{padding:6px 26px 30px}
+  @media(max-width:640px){.card-body-inner{padding:6px 18px 24px}}
+
+  /* dimension groups */
+  .dim{padding-top:24px;margin-top:24px;border-top:1px solid var(--gold-line-soft)}
+  .dim:first-child{border-top:0;margin-top:6px;padding-top:14px}
+  .dim-label{
+    font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px;
+  }
+  .dim-label::before{
+    content:"";width:18px;height:1px;background:var(--gold);opacity:.6;
+  }
+
+  /* identity bascule */
+  .bascule{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    background:rgba(255,166,0,.05);border:1px solid var(--gold-line-soft);
+    border-radius:var(--radius-sm);padding:18px 20px;
+  }
+  .bascule .from,.bascule .to{flex:1;min-width:140px}
+  .bascule .tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+  .bascule .from .val{color:var(--parchment-dim);font-size:15px;line-height:1.3}
+  .bascule .to .val{color:var(--gold-bright);font-family:var(--serif);font-size:17px;line-height:1.25;font-weight:500}
+  .bascule .arrow{color:var(--gold);font-size:22px;flex-shrink:0}
+  @media(max-width:520px){.bascule .arrow{transform:rotate(90deg)}}
+
+  /* sub blocks */
+  .sub{margin-bottom:22px}
+  .sub:last-child{margin-bottom:0}
+  .sub-title{
+    font-family:var(--serif);font-size:16px;font-weight:600;color:var(--parchment);
+    margin-bottom:12px;display:flex;align-items:center;gap:8px;
+  }
+  .sub-title .ic{font-size:13px}
+
+  ul.lst{list-style:none}
+  ul.lst li{
+    position:relative;padding-left:22px;margin-bottom:10px;font-size:14.5px;
+    color:var(--parchment-dim);line-height:1.5;
+  }
+  ul.lst li::before{
+    content:"◆";position:absolute;left:0;top:1px;color:var(--gold);font-size:9px;
+  }
+
+  /* croyances vs mantras grid */
+  .mind-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:680px){.mind-grid{grid-template-columns:1fr;gap:24px}}
+  .mind-col .mind-h{
+    font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  .croy .mind-h{color:var(--danger)}
+  .mant .mind-h{color:var(--gold-bright)}
+  ul.croylist{list-style:none}
+  ul.croylist li{
+    position:relative;padding-left:24px;margin-bottom:11px;font-size:14px;line-height:1.45;
+    color:var(--muted);
+  }
+  ul.croylist li::before{
+    content:"✕";position:absolute;left:0;top:0;color:var(--danger-dim);font-size:12px;font-weight:700;
+  }
+  ul.mantlist{list-style:none}
+  ul.mantlist li{
+    position:relative;padding-left:24px;margin-bottom:13px;font-size:14.5px;line-height:1.5;
+    color:var(--parchment);
+  }
+  ul.mantlist li::before{
+    content:"✦";position:absolute;left:0;top:1px;color:var(--gold-bright);font-size:12px;
+  }
+
+  /* questions */
+  ul.qlist{list-style:none}
+  ul.qlist li{
+    position:relative;padding-left:26px;margin-bottom:11px;font-size:14.5px;line-height:1.5;
+    color:var(--parchment-dim);font-style:italic;font-family:var(--serif);font-size:16px;
+  }
+  ul.qlist li::before{
+    content:"?";position:absolute;left:0;top:0;color:var(--gold);font-weight:700;
+    font-family:var(--sans);font-style:normal;font-size:14px;
+  }
+
+  /* erreurs */
+  .erreurs ul.lst li::before{content:"⚠";color:var(--danger);font-size:12px;top:0}
+  .erreurs ul.lst li{color:var(--muted)}
+
+  /* checklist */
+  ul.check{list-style:none}
+  ul.check li{
+    position:relative;padding-left:30px;margin-bottom:11px;font-size:14.5px;line-height:1.5;
+    color:var(--parchment-dim);
+  }
+  ul.check li::before{
+    content:"";position:absolute;left:0;top:2px;width:17px;height:17px;border-radius:5px;
+    border:1.5px solid var(--gold);
+  }
+  ul.check li::after{
+    content:"✓";position:absolute;left:3.5px;top:1px;color:var(--gold-bright);font-size:12px;font-weight:700;
+    opacity:.55;
+  }
+  .check-wrap{
+    background:rgba(255,166,0,.05);border:1px solid var(--gold-line-soft);
+    border-radius:var(--radius-sm);padding:18px 20px;
+  }
+  .check-wrap .ch-head{
+    font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:14px;
+  }
+
+  /* skills as tags */
+  .skills{display:flex;flex-wrap:wrap;gap:9px}
+  .skill{
+    font-size:13px;font-weight:600;color:var(--gold-bright);
+    background:rgba(255,166,0,.08);border:1px solid var(--gold-line);
+    border-radius:8px;padding:8px 13px;line-height:1.3;
+  }
+
+  /* ---------- FULL METHOD toggle area ---------- */
+  #full{display:none}
+  #full.show{display:block}
+
+  /* ---------- LEXIQUE ---------- */
+  .lex-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.lex-grid{grid-template-columns:1fr}}
+  .lex{
+    background:linear-gradient(180deg,var(--ink-3),var(--ink-2));
+    border:1px solid var(--gold-line-soft);border-radius:var(--radius-sm);
+    padding:18px 20px;
+  }
+  .lex dt{
+    font-family:var(--serif);font-weight:600;font-size:17px;color:var(--gold-bright);
+    margin-bottom:6px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+  }
+  .lex dt .fr{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.04em}
+  .lex dd{font-size:14px;color:var(--parchment-dim);line-height:1.55}
+  .lex dd .note{display:block;margin-top:7px;font-size:12.5px;color:var(--muted);font-style:italic}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;padding:70px 0 60px;border-top:1px solid var(--gold-line-soft);
+    margin-top:40px;
+  }
+  footer .fmark{font-family:var(--serif);font-size:13px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.7}
+  footer p{font-size:12.5px;color:var(--muted-2);margin-top:14px}
+
+  @media(max-width:860px){
+    .layers{grid-template-columns:1fr 1fr;gap:12px}
+  }
+  @media(max-width:520px){
+    .layers{grid-template-columns:1fr}
+    .pill{white-space:normal}
+  }
+  /* ---- cross-nav + detail toggle ---- */
+  .topnav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0 0;font-size:12.5px}
+  .topnav .brand{font-family:var(--serif);letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-size:12px;opacity:.85}
+  .topnav a.fwd{color:var(--parchment-dim);text-decoration:none;border:1px solid var(--gold-line-soft);border-radius:999px;padding:8px 15px;transition:all .2s;display:inline-flex;align-items:center;gap:8px;font-weight:600;letter-spacing:.02em}
+  .topnav a.fwd:hover{border-color:var(--gold);color:var(--gold-bright)}
+
+  .detail-ctl{display:flex;align-items:center;gap:11px}
+  .detail-ctl .dl{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .seg{display:inline-flex;border:1px solid var(--gold-line);border-radius:999px;overflow:hidden;background:var(--ink-3)}
+  .seg button{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--parchment-dim);background:transparent;border:0;padding:9px 15px;cursor:pointer;transition:background .2s,color .2s}
+  .seg button.on{background:linear-gradient(180deg,var(--gold),#D98C00);color:#0A0A0E}
+  .seg button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:-2px}
+
+  body.simple .dim-depth{display:none}
+
+  footer .flink{margin-top:20px}
+  footer .flink a{color:var(--parchment-dim);text-decoration:none;border:1px solid var(--gold-line-soft);border-radius:999px;padding:10px 20px;font-size:13px;font-weight:600;transition:all .2s;display:inline-flex;gap:8px;align-items:center}
+  footer .flink a:hover{border-color:var(--gold);color:var(--gold-bright)}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+    html{scroll-behavior:auto}
+  }
+
+  /* ---- ECS brand assets ---- */
+  @font-face{font-family:"Eurostile";src:url("fonts/Eurostile.woff2") format("woff2"),url("fonts/Eurostile.woff") format("woff");font-weight:400 700;font-display:swap}
+  .brand-logo{height:22px;width:auto;display:block}
+  header.hero{position:relative;overflow:hidden}
+  .hero .wrap{position:relative;z-index:1}
+  .hero-mark{position:absolute;right:-26px;top:8px;width:320px;opacity:.05;transform:rotate(-8deg);pointer-events:none;z-index:0}
+  @media(max-width:768px){.hero-mark{width:186px;opacity:.045;right:-18px}}
+</style>
+</head>
+<body class="simple">
+
+<div class="wrap">
+  <nav class="topnav">
+    <img class="brand-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAApYAAAB4CAYAAABII7LRAAAkUElEQVR42u2deZgcVdX/P6e7ZyYb2QhhSSAQkCWIsoPsooEfhCXKKzGyh9eXRUQRFH1RJLwIoqAoIsoiKoIxEAQMAiICEvawKvsSwpINyEaWWfv8/qiaOBlm6e6qnq7q/n6ep55kpqZu3z73VN1v3eUcQ9QEfhdbk2EvsD3J83FgY2AI0ADYWn9sPRRkvXxQlPNxlp0B3Pex/XiwV9u47w/cIy8RvXjXJWb2rap6LrhngeHABsAwYDQwFhgFrAsMBOqADYF1gFz4zGgA6sOfLaFfLxP+mw+PNqAFaAZWA6uA5cBS4H1gETAfeBeYFx6LgCVm1qZbIDafGxH616ahr40Jf14/9MXBod+1+1i2U1vWIu3f3zv4cVMHH14S+uq7wFxgTni8DbxnZn1qt5zcvIpv4LsZCXwObBLOThiDsbAbyIcu2uWFPXQV3ks3EuV81LLjuXGFKPXVJukd+uCwM98a2BbYJuzYNwxFZUOV3geZ8GgXxQWZK+y0lwIL3f1N4GXgBeAlYI6ZfaBbolefGwRsBewUHtuGQnIE0E/P6ZKeQbnw6A8MBTbq5m+bgcXA2+7+AvAkMBt40cyWSliK4m7mGYxkAF8BO5E6RpEHWsMjji6ynAIvStnlFZ5CpK1THwlsD+wB7AaMCzshPfcL68AHhscoYMdOT5qF7v5q2FE/HHbab5qZy+98DLAf8P9CvxsjQVgR6glmIjYAdgGOC3//jrvPBv4G3Gtmr0hYip5v6js5BrOp1LPZmsHyUkRYUkceKzuqKUTSO/WtgfFhp74zMFJWKYvobO+w9wbOAFYAz7v7/cDdwGwz+7CG/G44cDAwKbTJELlJYhkdHhOBle7+KDAd+IuZzZewFP+5sW9nBPX8lKwdjQONHR6BlRBp6Z0SFyJtnfpWwKHABIIRov6ySp8zKLT9bsDZwBvu/jdgBvCQma2uUt/7GDAF+BKwidwgdQwEPhMe57v7TcDVZvachKVE5dbUcyP1tgNNrL12spLiMdKXkngUoocOfX3gMOBI4FNhByGSw1jg5PB43t2nA380s1erxP82IxipPRaNTlYL6wOnASeG/vpjM3u+lIK07iHtN/hf2YF6u4uc7UAjXW/IibLqxyOc9wqWLUR1CspN3f1i4GngKuCzEpWJZ1tgKjDb3a939z1S7H8D3P1s4DHgqxKVVUl/gvWYj7j7Re4+TMKyljqZO9gSsz+TZUy3aynLLR4jf4kyXSvhKapLUI5x9x8TbBb5FsFObpEuBgNHAw+4+5/dfa+U+eCuwD+AHwLrqTmrnnWAbwOz3H28hGUtdDTTGQ42jTrG0FxmAVdJgRdNeEpeirQLysHu/r/A48BZBLElRbrJEWycuM/d/xBuuEq6Hx5HsIt4NzVfzTEO+Iu7f0PCstrpz2X0Y4e1RiorNeUdVVyWo+z8WluYhEijqJwAzAJ+gHZ3V6vAPAp42N3PcfcBCfXDi4DfomnvWqYBuNTdr3H3egnLauxw7mAS9XZM0bIprVPepZTtNBEENxYibYJyqLtfAdwObCeLVD3DgAuAe8Pp5iT54o8IpkOFADgRuMbdGyQsq6nTmckwsAvLJh4rOeoZFxnAWEyQpk2INInKHYF7gVP1fK45dg/F5VcS4otnAd9Us4hOHAP8MkwHK2FZFRgn08DYtbLo9JXA85j+prvrPOL5tb16LvuxTA4jUiQqJxHkrN9R1qhZBgG/cPfLeuq4+8AXvw5crOYQ3TCFYBOXhGXqO56ZDCNvp9JK5UYeneSOarZfmwXw2WbavCNSIyrPBG4AhssaAvgacJ2796+AL+4LXCR9IHrhTHf/goRl2skzkX6M7nG0Mi6Bl+ay24BgOlGINIjK84FL2l+JhAg5Bpjm7kP70BdHAtcA/WR+0QsGXBFmX5KwTGXnA4Yx+SNZdcoV6ietazEzQDMLaWOWvEakRFR+T5YQ3XAY8Kc+3DF+FrCFzC4KZD2C3eI5Ccs08mdGY7Zb0aOV5QwDlERhWgeY/8XG84GcRiRcVJ4lUSkK4ADg5+Vec+nu2wAnydyiSA4lSC0rYZk6suxKHYPJx/00SaF47O68AS20kudqOYxIuKicTA+L34XoxInA5WX+jHMIsgMJUSxnd1wPLGGZFjLs0m1rJXnksS9HTOuBNp9pn+VxOYxIsKjcnSDPt9ZUimI4xd1PL5NPbgN8XiYWJfIJ4BAJy/SxTdlEWlpjX3YOMdTCarKcL1cRCRaV6wHXEYSVEaJYflxs3uYCOQboL/OKCJwoYZmmzuj7ZMBG9ToNXg3BzUutdz2Q95/bfjwtjxEJ5ifA1jKDKJF64Ep3HxHjy85g4EsyrYjIHu6+iYRlWtiWBpwhkcVdpcIAlXtEtB5o5HEyXCBnEYl9QXT/PHC0LCEisjlB/vi42BsYI7OKiKwDHCRhmRbWIwvUrwkvVM4QQ2kLX1QHtLIQ9xPs06yQs4iEisr+MYsBUdtMcfc9YirrEJlTxMShEpZpYRlGsOc5hh6unL1nGT+7q2tzQJ4PafGj7LO8IEcRZSbKZpsT0RS4iI8ccK67R+rD3b0fsK/MKWJiR3cfmZMdUor3IDW9Fxka5Xwly+5IHeAspdWPtgOqMsvOa8BKOXpiMODtEjvvEcDZMqGImfGhKLwvQhkfI10B0ZuBZcByYFX4s4dC21Lenk6QN86ABmAgQfinIaQngsQGwM4SlrUoPNNatne45Vp4k7wfa+N5sEpbcArwsBw5UZQaRfZEYLTMJ2ImA5wRUVhuE76mJ5WlwOPAg8BTwBzg/fClu5n2BL7EOKtX2V67vZcLlr8FwnJk+AKwK8F62B3CXjCpL+A7SFhWs3gs58hjuerVE9nwvbTZ76CZ0+wg3qzi1m0zszY5ecpv0WDHrbKZiHJxgLt/3Mz+XeL1GyX0e71EEOv1FjObW2CvU009ex5oCQX0fOBZ4GZ3N+DjwGTgeGDDBNZ/C62xTJOrxX07JTX2pXchKPsB8C5N/hU+4PAqF5VUwdu3CDgU2ExmEGWiATglwvWbJOz7rAbOBXY3s58WKCprBjNzM/uXmf0vsAtBNqZ8wqo5TiOWIrmyqo72NI3zaPbf0sYVdgDzZByRinfBYHThuCr+ikuBBQQjKi8QTFEuJlj71hj+vJryjSZ1njrsR7AubQiwLsF6r1HAxuExkuROIUbhSHc/38wWlnBtkl56FgBHm9m9enoUJDLfBU539weAq4FhCanahhKWaWAILXxIrsflyb2Nb1mJ5/qqbCNYMWQEq2ZaWUorT5D3mzFus8+yUI4gUsYWwF5V9H3eAh4FZgFPE653M7OmFIj8waHI3IZgrdoewCepjtzYI4AJwG+KtEkmFNxJYBlwhJlpXXnxAnOGuy8DZiTEn4elXlj6ffRjOUNoYxB56mjpIGXq8LV+7u33dPE+m8NpxciFb92t4XXtv6ebvy+Gztd0/HkAzjL6Y7xOC8vIF/n2X8hiB4v4Nxb5M1owlgHzMH8ZeIp6nrJ9S9uFK0RCOIj0p8l7AngMuAN41MyWprTzXU6wk/hF4JZQWI0B9gOOAD5NutNsfqFYYUkwJ7ROQup/tkRlJP/+u7ufSbAutdLLqAalbh2X38AwGtgVY2/cdsIZSzDtMYCOW/KTMAoXR9kZoI0VtPgu5HmnSu+LNjuSim1Ucff9IXEhi/Yys4f0yEzxS6/7XcCBKa3+XwnSTz5gZq010FZbAccSbIjYKIVfYSkwzszmF/GdG4DngC0rXPeHgH21WTEWP745fFGqKKkZsfRp7E6O43CbQIaNw+DYwdFVxpikCsdiPzsIolCP0WxH0qxbR4hUPODXA3ZOYdUfBi4C7jAzr5X2MrOXgXPc/RfAaeGRpmnyocBuwK0pNP/PJSpj4yfAYVQ4hFTid4X7DHb3m+1WsvYgdXYyGTamlWBpeAvBeryO4rL96Op3hZ6Pcm0h54u9FpyMdgkLkSK2J5hJSQvvA18FPm1mM2tJVHYSmPPN7ByCeIFp20SSxgw67wH/0OMiNh4hWP9cURIrLH06w/1mfobb/eQ4HMjRBGtNmPZ1CsG4zpez3kKIJLBHiuo6i2Aq8hdmplmRQGA+R7Ah5ucpqvauYSSCNPGymb0vj4vNbx24W8KyK101jd3J2P3U2enkaViTtClugRhVwEkACiG6Ji3T4L8HDjKzF9RkH+mkm8zsa8DpQBrWmW4JrJcyMyt8XPw8IWH5UVH5RXJ2Fxm2o5Gu1092FnflGpksp/AsdNRS4lWIVOHudaQjKPqVwBQzW6FW61FgXg6cnAJxuS6wacrMm5eHxc6cSvtqooSl/4kp5Oz3BJEb4xN5lZwSr1TZQohKMZLk5wafAZyuTRMFi8trgUuSXk3SN2K5nrwrdjovGqxdYel/ZBJZ+xVOXUkmSeqaR4lHIWqNDUlOfMCueBM4rRbCCMXMecBdCa/jx1Jm0y3dfR25VuwvGBUlEcLSb2Q3cnYVTl2PA+PlFGFJFo+O0yAJKkSKhGVSN0bmgW+Z2QI1U5G9dZBh6GSSvS5w85SZdTRBJiQRr7CsaOrSisex9BsYRtauJcPgNdPf1otIsxLORT0ftWxKvDb4fTOrFcNSiJSwVYLr9kczu0lNVLK4nOvuPwCuSGgVR6VQBH2Z9IV2SjKrgQeB+poVlmQ5jwa2pTEupUr5BoLLJR57P7+cOrTAXoh0sEGCO5yL1DyRuR74Osmcdk7jmsWJ7r6HUjrG9vLzFrBPJetQ0ekan8YuZOwkmroQWb2JtCjisFzny1F2BsDncRirdcsIkQqGJ7Red5rZ82qeyB33h8DvElq9oe5e6ICRU+FNHiENwBXuPkzeVR1Udh2Q23fJdbN6MKnikT4uOwMYL5i2+QiRFgYmtF7Xq2liYxokchYpW2i/HgbDfzch9d4euEHiUsIymqa8kZ3JctBHwgpVSsDF+dlxlh3E6XxEripEaqhLYJ0WAP9U08SDmb1OkFc97SQp681BwN3uvrM8TMKy1E+eQo66qgwDFFfZRrBtJ8NDclUh9FyNwBNmtlhNEyu3VMF3eDlh9dkFuN/dL3P3beRiegAWrrumM4S8HUorlc1uU8myC/ncHIA/wWxel6vWHI0ygYiRWTJB7CTxhb9/yoUlBEtJvgY84e4z3f1kd/+Euw+Sy6WDyuwKb2VXcoxes2w4SpifQkRaEssu5LMzgPMHm6q0VzXI0e6+h8zQp8w3s5ur8Hs58ICaN3ZeB34ADE5QnRZQ3IacVwjS/+USaN+BwITwaAHecffXgbnAQmARtZcSsgVYSbC+dzWwCpgf/n8lsMLMWipdyco4k7EPuSLcvxrjU/Z2Pgs08Q7NzNDzuyb5ukzQ5zwFVKOwXBUKDhFnN2a2Gvhuyr/Gi8BbwNiE17MO2Cw8xNo0As2hsFzs7kuAJcAbBCPSLwKvAfPMrE+EeGWEpdtOH3nP8DWiM36BF1UAluva3lqm1a+wI9G6KCH67gFdjSwNDyE6i+NV7v5kCoSl6J5+4TGYIOtXd8+A19x9NsEmvkfNbE65KtTnayz9ZzRgbBb7AHZSN+M4xa/VzAGNvMJArtQ9I4SISBPQIjOIbrhbJqh6hgI7E6QkvRF41t3/6e7fcfcd3T3WLD19v3lnQwbjjOhWbPV1APK+KLsY4RqMfubBv2njWab7QQgRkeWhuBSiK/4OfCgz1BTrAHsDFwKPAY+6+1fdPZbkDn0vLBsZhNG/bLuqvULXxlV2A9Dqv7SJ3C7fF0LEISzNrE1mEF1hZnOB+2WJmiUH7AD8HHjS3S90903SJSyz5HCyJYuw3qaWowq8SoYvagAauZ/lfFu+LoSISzvIBKIXrpUJBLAp8B2CUE/nlpoJKZPYr5fGzDlRym0AmnkG/Cg7lpXybyFETGRkAtELdwPPyQwiZCQwFXjY3SfWzgOnkiOLca/V7Ac0+5M0+eE2kXnyaSGEhKXoK8ysEbhElhCd2Bq4xd2vdPchyX/gFDKlndSUjcRUdoZgpLKJmbRxsB3JW/JjIYSEpagA06mO/Oci5vcOgt3k9xSaZrPyD5xKrnksp/Dsrd7BKtMlNPu3bKIfakewSP4rhJCwFBVRD2ZNwJkEwbaF6Mwuobjcu7c/TEYap3IFGS9n0PXeyu7tMZ9nLnmfRgb8VrsaWJ88A7ACOoHe/qKQOlmJDVTKZ9cBTf5/dgj36d4Uos/JuruZmcsUohdx+ai7Xx4KTCE6Mwq41d2/YGb/SLawjCI8owi8cpfdfm3nx3kecNbH7GzqO3yWFyH+rIDPje2cRROswcaka3RPClEZvdDNk0iIrjgf2JcgoLYQnRkOTHf3g83s8WQIywyG04+6hAipuMu2Dv+2AHlWA/2wTn+ZoR/Qe9jipHyvKOeD/yuOnhCVIYNCDolC30LMlrv7ZIKd4kr1KLpiXeB6d9/bzBZVXlhmWUkrd9JMfVHCsv3xGEXsRLmu8M9uwngf/FWgjYx9Afgk3ulT4hgN7W0qv5w50MuZu10IIWEpKikuX3P3zwG3A2NkEdEFWwI/Ao6vuLC0I3kX/OBqt7jfwufJ2I8xxvY4VhdVwEngCSEkLEX84vI5d59AsFt8nCwiuuBYd/+zmd3W+YEj4hSUv6bOZ3ApWZsBjKWV5OQh7+pcufKnazWXEBKWIu3i8nngQOAeWUN05SLAJZ0z9EhYxisqBzCC39Fg36CNtVcVVjJmJxUqW+JSCAlLkXZx+Q5wGHAx0CqLiE5sAZwiYVkO/TWdekbwG/rZZJrKIKqSnONcAlOIpI8qCBFFXDaa2beBQ4HnZRHRia+4+wgJy7jJ8iMabBKNZRSPlRSHUct2yUshKkRGz3oRk8C8C9gLuABYKouIkI2ASRKWcWq2mzmenH2t15HKqGks05oCM7i2SZ4iRGX0ABq1FPGJy6Vm9j1gd+BnwHxZRQDHu3tOwjIOUTmdLTC7JAx6Hl2ERRWAlRWPXXdpwVrTJfIWISqC1liKcgjMl83s68D2wP8As1A6yFpmh9AXJCwjajzD+CH1rFtU+O+ou7GTJh57O99GE1kWymOEkLAUVScwF5nZ1cA+BPmkzwpF5kpZp6bIAhMkLKNyE/uTs891+Y5WyVHLJK1mDLq0RbimS4SoEAOB/jKDKLPAdDN7zswuNbO9CUawjgeuBZ4BlslKVc9n3D2Tkx1K1HaOcbN9kyyZbkcrk5r5Jkp+9GLrlQVaeckmsFxeIxJOvyr9XkMJFte/pyYWfSg0XwVeBX7n7llgQ2BzgowtWwKbApsBo4EBQANQL8ulmnHAhhKWpXITO5Jl/0grStKakrGYsg3I+ANymKK5BHgNTWH2JQuq9Hvlws77WTVxnIMLPgT4fiiKkjBPZMAqYKqZJWp00MzagHfC44EONswAwwhG1QcCgzv8fwjBSHu2VlwqbMNc+L2HAesDm4QCfOMUCO/hwG4SlqXfwpOpo27NXue4RviqRZi2n2+mlTx3yWGKZpqZPSkziBhHEu6QGWJlFHBGwurUDFxKSqadzSwPfBAeovuXmIGhuNwTmAjsRzJnWAz4uNZYltLIf6UB7KCCN+xE3TBTqbSLUd/B64A8TzNQIyUl0E8mEDHySZkgdvZMYJ1WAnk1TXVhZivN7N9m9mszO4gg1NN1QEsSX2IlLEu7dbcCtiwqZWM5BZwn9NoMgF9rn1YaMCEqzH6d8/mKyByewDq1oJA/tSA0nzWzKcDBwOsJq97WEpalCaqdqCdXlCgrZ4ihJArPHNDIHBqYJocRouKMAvaWGWJ6pLpvRhBeJ2k0SljWlMD8OzAeeCpB1VpXwrI0tutyfWElc3JXKvZld+eyAH6xjVeICVFzJHUqcoq7azNYPHwJWCeB9WoimdOjonzicg7weYLNnklgAwnL0tisW0GVNgFYDtFbDzTyEBl+K1cRNUhSNyIcSpDnWUR5FLoPBb6c0Oo1gpYe1aC4nAtMCdu/0uS0K7y0ZhzRq9BKY/zKKGMZ7dcHcSs/xPw0O1j5wUVNktRkABngTOBBNVEkTgLGJLRu75pZQcLS3euAiwniS1aKqWb2klwqFnH5oLtfDXy14spSzVHs2yrGTfQv+5pIq0DZUT/XwqPFv2GH8Yy8RdQo7yS4boe7+wlmdp2aqZTnvycxxFBH3i/yReMIgjiJleJXgIRlfFxGkO2ooss0NBVeuoTqXcCVcq5QcZi0so1gCrzZL7LDuEYuImqYuQmv34XuvoGaqSR+RBC0ulpeaio9darQSHEKE7M3SMCMhIRlFPWV1BiSfV12u6hs8ss4lHPkH0LCMtE7czcArnZ35Q8v5tHn/j8Em3aSzBtqqZrnIQnLdL4X/EdgJXUzTl+VnQUyOE0+lUP4hlkiUpsJUWlh+VbC63gIcIWaqmBR+QWCacZEVxN4MWWmHSrvip3lEpZV/0Sq4rIbAFhEqx9th3KeIVEphJmtJh0jRye4+1VhujjRvaj8MvB7gvzNSWYJ8GrKzDtaHlZ9uk7CUsKzeOoIRipbuI1m38cO40Y1pBBrkZY0pl8GZrr7hmqyjwjKAe5+CXAV6UixOofiNu8kgR3kabGzSaUrIGEZl4BLaj7vuMrOEIxQ5oA8j5H3I2yCT7SJvCwHEOIjPJyiuu4H3OvuB6vZ1ojKXYG/EYRnSgtPmFlbykz9aXfvJ4+LzW8zJCBWrYRlkYRrCG1NaJ1CD4r8+7iuLaXsDMGIZF0oJusA5wNauIm8H8I7vrcdwi3yBiG65RlgVYrquw3wF3e/0d0/WcMd8wbufjFwH7Bnyqp/XwpNPhb4jB4XsbEzsGOlK5Erz81JhpuqNEbmIIwVtOA0f2TEr9yB0enmbwr53N7iV7aX7eQxGjGW0MZbtPmzwIM08LAdwDzdt0IUxNsE0+GfSlGdM8BkgliXfwauBh4qNOB2ygXldsBxwCTSue5vOekaJe/oc+e6+71m1qjHRmTOIRgKSrew9BsYAWxPGzuBbYsxmusZRjDWZfS0S7g3MRT1fHduXGqZBqzAwb9FntfJAC30Xe7dhgKEZ0/nHMjhtPZQ5zyt5FhJP5bZgazUfSpE8ZhZm7v/KWXCsp0BwFHhMdvdbwXuBJ43s6rIphXmTB8L7EuQZ3l/kr85pyceM7N3Ulr3XYFvAv+nJ0cknz4ROCwJdSlJWPrvGUiGA8nbJNrYhywb0MB/1hoWsmmk4zSs9yLwrIcyehrJi0OYdq5HHnDetv9StgAhRI/MBH4ApHnX9c7hcR7wirs/BjwCPAe8CXyQhhFNdx9MsKlhO2D38BgHDKoSXytlaVILJGbwYKq7zzWz3+uxUZJ/jwd+mpDqrC5KWPovGMRgjgE7jQzjyAJtHY5SxFuU831ddvtUsSsVphCil8eL2evuPgs4sAq+Ti4UYuOAE8LfvQ/Mc/e3CTK+zAfeA5YCK4DVoXjJE8wV9cXszrrAegTTgSOAjYAtgM0IcmLXVaGrLQX+UoJ/5t39g6TcLsCV7t7PzK7S06MoUflFgtSY6ySkSosLFkh+HRPI2QXk2J58+LgoRKR5AefLuS6xXGULIUTv3FQlwrIrRoTHJ9TMFeUOM3u3xGvnJ+h7DAB+7e77AVPNTBFHehaUowjWVJ5EsjZiL+hVWIajlBdi9hUyZMqSqKy3jSWVEo8Sl6KCzw2ZoCqYCSwCRsoUogzkgV9HuP75BH6nycBB7n4jQWD6p8ysRU29RlCOI0gtegLBiHzS+HePwtKvYQx1dj117E0zPaeLL6cIk3gUtUfO3bMyQ7Ke6WaWL+YCM1vo7r8CzpX5RBl4gGi5oZOaenQocCrBaNy/3P0BgrW9LxKMsi4zs+a0Nlq4ecw6Pk/afxf+mAHqCdYAjyRYzrEzwWaznUj2RrM3cj2Iyq2os1upZ2s67gNM47S1psRF+rgOtCs/YfwOuLSE634VdpIjZEIRpz4BLi72ZacTzwOtkNh9A1lg+/D4WljXJcAH7r6EYC1vY2iLeoI1tLnw70p9fhrd77LI9PC3Hc93jgzd/m97lOgckHX3FoKFhc5/UpC0f5cBBOsmh5CetcEOPNWlM/l1bErGbqOOrWgqQmhVq3iUuBR9z1iZIHGMKqmXMpvv7tcA35YJRYz8DbgnYhmvEuS13zIl3zlHsDlrPTV/IlkEzP7Igk+/nsGY/ZE6tippPWU5UwxG1dFxlZHX+jchapAo6fIuBxbIhCImWoFzI45WYmargX/KnCImnjazBZku3PVSGti9R1FZKQFY6bzZQbihNnI0yX+EEEV04POA0yKKUyHamWZmj8dU1m0yp4iJW6HTegG/jiPI2X/TFFE8RhWASS0bwFhNluXyHyFEkeJyBtF28AoBwdT1mTGW9xDJCjsk0slK4O61hKVfx1DcLl5LYPU2wleu0cWklh2MWC5mJUvkQ0KIEvge8IrMIErEgTPMbFGMLzxLiL5WU4hHgLlrCUucU+nH5rRW0e0XN8Herjl2rHbrCiFK6sQXA6ejKXFRGheb2e1lKPenwCqZV5RIHvixmfkaYelXMxyzU7oUleVet1iusilD2RmgzZ+UDwkhIojLu4EzZAlRJHcD3y+TTz4DzJCJRYncR4dR72DEMstE6hldlnfopO/0LoY2IMN98iEhRMSO/HLgh7KEKJDHgWPKHBT8B6D9A6IkLmkfrQTIuGMYk8s68kgFyy71e3U+lwVamUcbj8iHhBAxcA5wrcwgeuFp4PNm9l6ZX3ZeJgjmL0Qx3EanNboZrmFz3HallfJNPVd6J3ccZecAfKYdpY07QohYOvI8QQiiG2UN0Q2PAYeZ2bt99HmXAq/L7KJA3gfOMrO2tYVlln3IMphCwqwmOcZkOcs2oJlW4Br5kRAiRnHZCBwLXABKvCDW4k7gEDN7pw/9cRFwCihWsyhIEZ5hZq91PpEB9ioqXWHSNtTEZZ6eqAPy/JUvMlu+JISIuTNvM7PvAccAi2URAVwJHGFm71fAH+8hWKYhRE/8xMz+0NWJDLDdWsKqN5EVJWd21LKjxKcstW4ZoJVGsn6+aURBCFG+Dv0GYDzwrKxRsywDTjKzU8N0ixUTDWiGTnTPHcB36VY2uW38kWnwtIYQogxl1wOt/ks7EoUZEkKUW1w+BexPsIlCL7K1xSxgfzO7KgF+6MCpwG/ULKILUfmlcBlPN8IShhT9+KqGzTiFispGnqGNqfIlIUQfdeqLzewUYCLwgixS9SwBvgOMD18skuKHLcBJwI/0kiNCfgNMMrMew1JlgIbECbwkhD7KAi0sps1PsGMU20sI0ecd++3AnsBUtPayGmkF/gDsYWY/7GkEqII+2GpmZwNTgBVqspqlBfimmZ1oZr1mHsxgPaxsrFQ+73KKy0KuzQKwGvfj7GiekU8JISrUsS81s/OA3Qg2dHwoq1SFoLwV2M/MjjGzl1Lgh78FPkMQ/kjUFi8AE8zskkIvyKQ6+Hk5rs0Bzipa/XibzEz5lBAiAR37a2Z2KrArcBmwSFZJHSuAPwH7mtnnzOyhlPng46G4/B4onnMNsIogruk+YaSAgslE/uikpmwsRdTWA85C8v5f9iWmy6+EEAnr3F8yszOAHQjyjWtTYfJ5CTgP2NnMvmhmD6fY/1aa2QXApwiyRq1S81YdLcB0YC8zO8vMPii2gEzJIqycAq+vy25fadrKLNr8MzaZO+VbQogEd/DzzOyysIPfB7gceFWWSQwLCUYnDwkF5dQwZWK1+N/LZvbfwO7AFWgEvRpYCvwuFJSTzOzpUgvKFSXirIRzUemt7CifbQSjlC0spdl/wnIutZP0BiaESE0H3wI8CDzo7oOAXYADCUIWbQsMkJX6hEbgFYKQQX8DHgmz2FS7//0LOM3dLwQOB44kWA/cXy6RClqAp4CbgRlmNieOQnNrCTQiiLTehCcJEaZGsDkn2PW9nGb/E3l+YkfxknxMCJHiTn4FcB9wn7tngLGh0NwT2BnYAlhXloqFRcBrYaf8KDAbeCMU+rXoe/MINpdd6e7bEKzFPADYCdhI7pIo3gOeAe4Jj+fMLB/nB+SK+utKjUxGGbU0gqnu9tWkbTSS53na/FZyTLMjeU1+JoSoso4+Hwqf14A/ursB6wObE4xkbgtsCWwCrAcMIZi/EQF5gtGcZcAC4E3gZeB54EVgjpm9JzN16Xsvhjb6hbsPB8aFAnMnYBtgNDBc/lZ2Wgmmt98JffcpgjXZ/zazheX84Fys4rGc09allO00A8vJMx/nJdwfxfgny3nWTqJFfic6eE+rzCB66i9DsZHWzt5DgbQAWLMb2d37EYxibgCMCjv9UeHPI0MBMAQYRDCt3gDUhX1HtsMre57oiXX7Qiy2hYJxFbAy/N0KghHIecBbwOvAXILQTguA92t1JDIGv1tMsDxgVuhvmdCvRgObhscmBKOa7f42uJOvZTv07rUcqD0T+mv7S09z6McfEuzSfy/04beBOeHL0FvAor723/8P5sc2KBX6xv8AAAAASUVORK5CYII=" alt="L'Écosystème" />
+    <a class="fwd" href="/checklist">Les 3 Checklists →</a>
+  </nav>
+</div>
+
+<header class="hero">
+  <img class="hero-mark" aria-hidden="true" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbgAAAEhCAYAAAANo7U4AAAn90lEQVR42u2deZTkVZXnP/cXW7JVySaL0KJidyut3Q46Trtgl4qMbBYopSjdLqAy58iArZyj3dqILaNnFFt0zggKlChuhSJHEGXsERccD0ccW2y0HVwbBFQWoaDMjMiIO39EJpWVlUtExvtF3Hjx/ZxTR6nKfPF+L373ft997777DCGECI5fzxTb+CNqHAo8Abc/xjkE5wCMvYDdgSmgBhQ9NWoJO2iB2jHAE7YVaXz6bM9kOkKIcIJ2HbtR8EScZ+D2lzh/BhyMsY7KAie++M8onG9EoUwplhGfrcf2JHBCiBii9hX2Ao4AjsXtORiPpT4XjbXn/rBAyHJ14NEiLw841hI4IUR4UdtChfU8E3gF2AupcDDFAkHzMRCTETnviY4sJXBCiLDCdg17UuUlmL0G5+nUMWYXRGly4HlGhGU81woRpgROCDE8Yfsi+9Dg1WCvp8rjcGCW0e2fRXXgEu8kbUnghBDlC9sWdmcPTsXsTOo8pu9orWxnm3KfyVH0FeT5JHBCiHLF7StsxHgHVftz2nMRW8RlvDFOphi7dhTBCSHGWtiu5XFU7DzgpRRAK7ig5L4smKKtMhSjxO+vkBkKIUoQt9dQ2Lep8lI6i8QNtu+5eYoPS9XpxG0lHdBEzt8DjdEQQixFcEKIdH748zyS3Tifip1Ch5X32bSUN95tjUGfqjJJIUQScbuGp1OzS6hxGDM9zPQ9sYPzgO3kHkZ47OfTEqUQYnA/dy2nULXrKDiMafpfxoq4NBh1uTJFfzzD55LACSFKiNzeRsUuw1i/017bqBx4bpFJ6r2viJGgp39A7cEJIdbmk66nyjbeT8POoEW6RIgo3i1VpmfuZbwi9mmurYrMVAjRt7hdRI1duJApO51mQCFQZZLxa6eEthTBCSHWErldxJS9ZodkkhwjnZxFpYdajuMuctqDE0L0Lm6O8RAfTC5uLHC2uSZ3JP0iErZhGT6bBE4I0Tdf5lym7L/sdAwghTD5BIhTtCzPqBmVidrTEqUQojef8yVeS9U+MpR72lK2FaVepZUQNeW612jxhkcIkau4Xc1fUbMv4exKZ4xEKaLznoSJwKjb6U4mOhI4IcTK4nYtB4F9iyqHrHrOLWJ1/5xFLvdbEAaLlme0ByeEWF7crqeK24XUexA32L6nk3I/LmJEmGRwE7YRaT8u5XgP1p9pCZwQYnke4iwaHMPMWDq4cgRTmZ7DHaO1C+xWLVEKIZb2UVfz51TsBozdV9x3K1vkdAB8eO1FvJF8LW1VgDY3K4ITQuwsbjdRw+wCagOIW85RjmX6bGN019vq75/fKYETQuzMHZxKg+fQzEiUUvYravFjD9aXUZ37M6DglxI4IcSOfuQa9qdib1/xstJhO7nU+14p2koZpUYV8XGeDDi3SuCEEIs5mwYHMptpZJH6mVJkjI4y2skxAp/FcX6sJBMhxHb/cTWPp7DvYewRdj8m52r60fo1jmNUAG220vbDFcEJIRY6jjfSYA865L/PFHH5NNo4RU0U8lUEzriNGrdJ4IQQXZ9xLY/D7JSdEktSikDOmZW5PlvE51opgqsA7j+0DTroLYTY7oBe/3D0Fj/SjOfATWMUop1u8s935oM5IcSka9tX2Ru3U5YsxxUxW7CMxIxUfYoiBJNylMEXvatN2lT4tgROCNFlho3UOWDJowFlOckcMytzTtsbh7vsKkCHX7IHP5LACSHwcyiAV67qdCImZVgihxn1vF7OE4kyloYrAP4NeyrbJHBCCPiPHIbZ05OeextmtOMZfzfKGO2P7grEF+f/UwInxKTTYSN16j07rkhRSuobsqMJU/bLBwmj7wJocQfb+KYETgiBb6GC2bF9ZU4a8TL0VGNyPNtJ+R7VAPMv2bHcJ4ETQsAeHAo8ua/lyZQlqiIKQcql01TiHfEIQqSJiQEtOjiXL/xrCZwQk8wsR9Bgqm9HE1GcUkcnWmYcnzGqArP8X9Z3z79J4IQQYDx3zU4q9TJlpCglZX9yvU0h0uSmAMw/Yk/d8SSnBE6ISZ2EX88U2OFrvhZH+1WjmQhk+0Ku8eGqQJNfUXDFUronhJhEHuIxOI8ei9JcoxCC3O97C9cfW1t7VaDtF9kGfi+BE0LMO5LD+joeMG6RXG6RYBkRYcQx7+f5KsC0306Li5f6ZwmcEJPLk0J5gGiXfqZsJ/JNCh6sT/20VQM6/JMdze8kcEKIhfxpWEHJvUxVJNEd1z3CGjDNj6nykeV+RAInxATijmF2SOiLTXMTlFFGOsOYUAz72RzA32YbeFACJ4TYztfZDWe/LBNMxiVyyjFCHVY02ACafhXP5QsrNSGBE2ISeZD1wCNC7ufMO8qIEUrUzMocxXs5KkCLe6hyttnKnyaBE2IS6fAIYNcd3EOk5bPIIpJzYedxiCwrQNv/3jbw09V+VAInxCRirMOolTaLz/UqnJQTAiXT9D9GU8C0f45v8dFefl0CJ8QkUrDbstaf60Hi1Hei6T674UaW3azJn1LlDDu3t91jCZwQkxnBTS27n5TCcXvY5863TzlnelaANg/R8VfbBu7qfR4nhJg82lSXdaw5V+VP2adJ2/salXjbnFK1/Sw7khv6+VUJnBCiXEcZMSLM9eaCaOI96ITCmD8S8N/s+UuX45LACSFG5ygj3kad6w3ZESc5g7TTAGa4mBt4+1p+XQInhBiOs1QyxfgJ7yjpZkx+mhl/Q69JJRI4IQQUQ3aBuWccetC2xlV0u+L2WSq8xo5mZu2vuRBi8uj0KDmqwajoctgToa64fZwKr7INTA82jxNCiHEUp5z7lKu4+SpqVANm/ANUOHVQcYPuXahCCLG6YzL1adXoI9fvL/XBdltCiZwmM/5WO5L3p3psCZwQQsKbMjqxoG1FHesG0OJOOv56O5KrUzatJUohRO8OTvtfwxOUnKPLebGcApp8nRnfYM9PK24SOCFEHgIQqfBxxLGKtmdZB4wZpv1d3ONH2wv5SRnDpyVKIYQEc3Fkkes42YjHukI3kaTFd3F/sz2fb5b5yBI4IcTanFyOQlBmIkUuIreWd2C+5FaLe2j6+5jlQ3YUD5X9uBI4IcRohSCSWKZO7rCAYzRM8TW6y5EtpmnySQp/jz139YtKJXBCiDSOMyenm2s7xngtn86faWsxQ4ur6Pj5diTfHXY3JHBCiDiCO+hZrUj9idyXMgTc5hSlAFrcS8uvZJYL7Si+N6phk8AJIWKQc3JHiueLuPdpdBNHqkATaPN92v5pYIs9j1+NunsSOCFEHlFOGUKQoi0jnzN/85ePVub+d4YOzr/R8v8FXMk93GibaEbprgROCJGnWA7aXqp9r6hLp8u1Y4vEbP6PAzM4He6gw82YfwPjegpuTlE3UgInhEhDhVnqpCn1YEHaiNYvI/2yYpkJK/OH3WcBZxpjKx1+h3Eb5j8BbqbghzS41Z7NfeMScIpcJsCfYB27sB8dDqTCATj74eyD2TrcdwWrr/0tWM5S1zqdnPu9Ah6+yjBJXZ0l+mOrPcOg0+bV/g0orPucRcLPNFvb71YxZv231PgBs5n5gHGpzVQJNWZdWWszQ42twP04v6fFfTzI/ZGWHCVwkyJmX2RXWjyeDocDTwU7DDgE2JeCXaguo0VlffNW8gw6ynKTBbTAftuoA1v9Gjue42RJIme0RDlOovZ5DsI5AngBM/YM4DHUqWJzUdDCP/3MuVIun6Q89zPuQjKMZ1t7MDorixISODHqSG0fZvjPmJ2E8yyq7IUB7bk/qRYPom2mp0w4yD3LT+swQkjgxkrYtnA4xqto2gnUeBTQ3fxtluDAPbizTHUA2Ebcj+jRoBASOFGysB2J2RkYR1GjvqyoleF4o9UXnH+uSE48YikoCZ0QErjQwnYFzwM7G+MoqkALmBmB804pdqmWPXNdYpzUOoVCSOAmJmJ7EgVvB3sxVQparG1fLfc9K93R1dvEpFc6sj0hgRNl+bVPsI4Gb8bsLKrssWZhi0y04rBRl/MUfQkhgcsoansuZudT5y9oJha2XJcFc42+JJRCSOCy8IebmWI33kZhZ1NQ36l6WyRhSimUOSdmSOSEkMApauNQzC6ixnPnrpUoz8FFct6pRU7R4MpojIWQwA3Vd13BC8AupsrBQ8mMjBY1eQltKVU/fl+EGDGFhqBkf/MZXo/ZVRQc3NN5tpROLveIJxKphDLlO+CyPyGBE2X54M/yDqp2Ic4uPVf+S13uSozfOEmchEiClijL8E/nUPBEzqduZ9HKwFlFS14pS9wG6VvKvUYtLwqhCC6wuH2Aup1Fc43iFjWK84DtpGjLEglL6j09D/b9CyGBm3C6kdsZA59tS+WYLKGjzLmaiAfum0ROCAncyH3RZziH2lzkFsXB5R4NRitPljI6jVZoWggJ3ISK26d4LVU7J+mem2be4ym6TszlXCEkcKJv3/FpnkfNLqCDZb3UlbPIeeDncr0RQkjgRiNuh1DYxzB22aFCe8R9nVRCkHukk2vUtON1SC1Zr5DAieX9xbU0MLuYOgf1fM5NUVO54pQjVsoYbZMFCwmcWJ77eSsNnrdi+a2IUZMYv6g55XfXFcwH9OUICZxY2ud8hmdSsbf0lDGZa8KBB+yXB2snZfSVNiq8R1YsJHBiZ9/3cXYDPkSFRk/OK2Uqe0SRi3btTORKKXEmAXfJkoUETuxMnTfSsKf0vE3ft1Py4URM4WYOuUa7HqeElwEdwPm1DFlI4MSOrurT/DGFvbnvHLS+HOWYne71YO0tFJMQkwFLI+CpJjgt2lS4XdYsJHBiMedSY/0ORwJ68W+pNUvJK5P7bINb/H00uVOmLCRwYruf6yaWvKTvUlxO/vUOcy8pFa026EAW77fTVpKJkMCJef/mGG5vo0J14GWmHCMLHT/ob5xSLMOu5V3qWvyPbBNtfRlCAie6fJZnU+XIJPUfokU7KQsNp0zTjyi+EW8S975/5yYZtJDAiYWcSYVKUiGI0pZukB7/iLBXMWziwHc1cEICJ7o+5FMchtnRYW/njnbVS7T+pGorWrboWqzduYuCW2TVQgIn5h32q6kx1VfmZNRZ/LCEKfeoMGJizmp9qgD4TXYs98mohQRO4FtYj9umHYopR0wSSXlsQMkrw+nTsBOOuvt118mqhQROdJnlSOocvFPOWUQnly5ijScouQr4sCJwA2aYBv5ZRi0kcGJ+hDYt6ThSnmeKuGeVcwSW6ruLuke4VFtVwLmJ73OrjFpI4AT+cR6J24Yl73pLWRw4WuX6qDUvU/bHJtHS/Qo7N+xOshASuKFS41nU2GdZlxBNCFJWrs/57Nik3Nq90MpneICCq2TUQgIn5mf5R606QikjuZROLtd9tIhRYbTJgC0a7yrg/mU7nn+XUQsJnMAvoIHzrJ4KGkW7ZBPyTYJJPUaR9j/LultvFsf4iKxaSOBEl0fyWLDHqWJf1BlIwLYi7X/O/34NmOVG1vFNvTRCAifmeQq1Hm/sLsvxRhKBXPuUMhM2WnbmfBRnfsEyqVJCSOAmlKeuaXRyTfmfhFqVUW6JSPUeVYGm/wt1viBzFhI4scBh2ZP7TqhWJf3ht5MyKcMStZXiGQd9toejN95tRzMjgxYSONH1LV9kV+CxazoxlDJ7MecbqSMJbxnHKwZ9DwYVyhrQ4lus40pZtJDAie08wL7AvmsSuNRLVSpYvLoQpNz7soTP5SPqiwFtWuBv096bkMCJHalyAMZuWYlLxGMDFui5yhhvS/Rs/T5jA2j7ZbZRmZNCAicW0+EAqgO6p9RVTnJerowSeaUen1G0VQVm/Hba/IMMWUjgxFKRxf5JRqasg7sRhCBaNBh5WdiH9t7Of97Z9mLulCELCZxYyiHtHc655RwJ5nz10DCLcjeAll9mG/mMjFgICdxyrB/qzDtaJCBxihtdLieWNWCGH+G8SeYrhARuJXZb0ZmMuzClPq+nicBoqQAdtuL+GjuRe2S+QkjgVqKW1FlGPBuXEgvWTs7R7uLJic39bdvPtI3cKNMVQgLXm6sd2RKVj19EmDKy9EyfrYzvrg60/d22kc0yWyEkcKNzlD07Nxten3KNmCxov1LSAKb9Mpo6EiDEUlQ1BD0675R1CiP1yUvoW06RV8qxTi1uM1zFIzjdNuhSJyEUweXkdCNGJyorNpy2poAZv5qm/7VtYFqGJYQEbjAHFPHW7mgO3FCB6LLb6orbVTR5uW3iQRmrEBI4MUwByDmyHNWzGXPLkn6ZxE0ICVxsRxbxgHQ0IYga7Q57jAq6Z91m/D00OdU28QcZqBCroySTlWbMKzmlHGtDDmP8RjVO4zrWNaDDg8z6G+0ELpZhCiGBix/BldXnQZx4yputU2dnRhK51JOc5dpqAC1+TNtfZydyg4xSiP7QEmUuQhq59Nag7RnxjmmUOQmqzE09m345D/kGiZsQiuDGK1oqo62oS3CpLv5M1U7E8fK56WYdaPFr2v5WO4FPyNCEkMCNNvoa1FFasP5EnQhEEdyyojbYRtMvo8k7bRN3+dU8ijYHAQcDj8Jtf2Bv3NeB7YJRwymWHeQi4YtiDm5rHOf5/vX7Miz6edupfceXa3DxZ64wRju0s/jn+unzIL+71vfSoWHQ9K/Y0XxATlkCF89ZphRKJ91+Va5iGe3ZDMf9Z3T4PJXiXmqdD/oX7M+Y5UBgPbVFYuXW/0toA760ZgmMxPrsgg3wz7b8Z/c1NtbHI9rgzsHW8AsNoMlv5IwlcHGjuBQO3INGTjlnnqboTwcw2xd4E1WvgnX/rjPXfmuAyU60pe+IN0+M+xh1v+sWQgI3UZFlykgOYmUxRsvOHGR8DMPmLtmdSRjJR4ucZSca7yGjLMrUUUqkdiLOvEOMt5czRj7g7/oS/3+U75DsZHzsxCbuml8J3Ngab859CtEfW1pYcp0MRPveZCdCAqdILtzsVGWzdhaygu5Cf53uZr8zS4f78QFHK+USrMtOhmono3gu16LmUmgPbumXpUZ9DS9Zbhv6RswlnNX6Vdb3sPDvOsAs0OF+OtyB8a+Y34SxF2YvBtZlOSGIlLhSRlSZY/axBE4simu/zwz7LZ+X1KuVLzyD0+dbb2v8bHPHzZb8zGLJz/HVZ38DfObCz9guTDs22EsfdvqZRd7NrI/fXfh3q5whczpAC+MP4A8A92DchfNrKtxGhdvtOH7tW9ifGv+A2SsxdqVNmozYaBmjqUQu9/ORk1w/NdOvVIjJDPiv5BQKezdVDqKZyDEtzoSMll6fcnUg1XhFW2UYlrduANN+iR3DabJGRXBCpBG2z/NICs6nYqfQoZvinyoCK0PcUkdzqc5s5n4+MpqAS+CEEKtEbc+i4CNU7QkPR21RxaSsKEfLcL09W7SatROEsiiF6D9yO43CvkxhT2CG4WQppsiGjJrqnyrTM3U7UTI9DR1jUAQnRMkas4UKFd5F1d4yl3oy/Jl3qqVBFcAeXp8GjXYlbhI4IUoWt12o8GEa9sq+liRTZh6mjghTOfFoS5UR67CS4bNJ4ITIQtx2p8InaNjGHRJJRhUNhBqcjB1v1GeSyEnghEgnbvYpGhy3ZnFLHelEFLpcHXfqyDLX7y4oSjIRYjl/dD1T3cgtkbgt/N9UzrL00GxMo9Oc962UdCKBE2LAyK3CvXx4oGXJsp1cKiHwAT+gDNH2BB/sZY/RCKPK3EVcAidEqZbxTur2qlKOAXiQNgj6XD0vC9rwxinysqKETgInRM/+4nO8iqq9dYdsyUm4Y02MTxS3WHx1H5wETohV/dgVPJ3CPogv4TKi3q0X8fhBJEGJ+L2lfjbv+VSmBE6IiRS3K9mbwi6lwh60h+DAIzlLJ15FkajCGzHyNrbJgiVwQixPm/fR4IlDmwtHc5Yp6yZGrJSSs8g598uAJXBCLO0ftvAyanNJJePIuN9IPU6RV7Sx6ibl3C0rlsAJsbN/+DwHUNh7e15ai5rB6InakDgNd2KS4vB/h9/IkiVwQuxMh3fS4KBl993KFIPI2Xm5RnKeUTsGtHA63ClDlsAJsaN/uYJnU50roCwhkPD2Ky4jjcB9fm/xIWoSOAmcEAvdw/VUcTuPgtqaHV6kva/55a7IGYw+YDuRDm6n7k/f353Ne/Df0eK3smgJnBDbuZsTafDsMCeIoi13Rs08zLk//Qpv14P/3I7XMQEJnBDz/uRaGsBbQ92SXYbD9EDPFvVOvHEWSwPwm2XREjghtrONjdTtL5gN5uBSLnmlEpSco69Ie41r6Uv352+SQUvghOj6hO7e25lJHVw0kYtYIDrrl2oE75IBTWZwvq8vQAInRJffcQQF/+nhvbfUF1rmKiiRhFeCCxUAfkbBzzUYEjgh5gTNXkttQTHl3J1ltCtjIta8TL00PIz+VADzb9vRY1t/RwInRFJfv4U/wnjhTpmTWqoU4xbtdoAOX9FgS+CEmJ9hb6TOejolO7dUB4mj3SSd8wWi4zShKIAWd1PjBhm1BE4I/BwKsJOWFbdcCxbnHlnmvPe53KSiCrh/3Y7SAW8JnBAAh/F44KnLHg2IGqHkfthaS7Fre96Cz8qoJXBCdKnwPBpMreoMoyVARF3OSzVOUSPnaLczbH+PocltzPDPMmoJnBBdOhzVk7OJ6HCVLDL8KM4StZH6GEoVKHyLncDv9aVL4ITAP8meuD2tpytxopffiiSWKfsU7ZydBxujecFsMo2xWVYtgROiS43DKNi/5zvfUjtKXSI6fpFzyjJnnuw9Bvdr7YXcIqOWwAkx76yeRj3kbtZ4R4TRr+fJaRJgQJs2zgV6eSVwQizk8DUVss29/FakZ4pYWSZS9F0HWv5VjuFbMmcJnBBdv7KFCm5PXPPhbp0hG66gRLuMNMKEwIAWszjnmSnlSAInxHb2Ag4utXpJP45qLITJ+/9xDzQ+KduKsAzbADr+OTtelUskcEIspMKBGHsONHvONTtv2XZGtF3ZV1KO99eWj3icB/HSTe5nlnfImCVwQuxIm4OoUgnl4KJFO9HoaVJhwx2vUS171oG2n28b+YmMWQInxGIeleRNT+ncol09k+r5UvYlooAP+4b0GjDN96nzfpmxBE6IpZzSfllGOx40kouYph9tibmXNgqgwwzmZ9hRPCRDlsAJsZQz2SfkvlfEyEs3bseJdmvArL/HjuHbMmIJnBDLsS6kqESMmqLdgpD6xoGIt5svRQOY9q9R4d0yXwmcECt5o11DikmukUkpX2FAAS9rzKtAk9vpcJodzYzsVwInxErUst+vShmhRDskHbVAdBnPWADOH2j7q+xF/EKmK4ETovd5e1RBiThiKZ6vDCGINKFI7Y0NZ9bPtOP53zJbCZwQ/XuinEo4ld2fSJVXcs6qNLpJJW0/147jo7JZCZwQeUVNk5AAE6VvkUqCGd3D3E3/gB3LuTJOCZwQQhOB0Udeg/ZnXtxm/EN8lzfphZPACZFmij0JUVyO1UmMPC6QXRC5cRNn2bkhyoFnRVVDICYjDLHynG7qslIpr4yxYH2K2JcU7fX7+8Xcnxk/145TEWUJnBBleZ+UIhdRnMZkrjHW4+N9iF2V+aMAb7TjuEj2KYETYnKcdxmON5Ko5D4JWGnMG0CL22n6aXYC18loykV7cGJClGfwH0n1USNtr8RAeCTPFfV7syX+uwE0+RqzvkHiJoETIpwOjrXTzbV+ZsT+LGyrBhhNZvw8dvNj7EX8VMY2HLREKURZztIy68/CpbdRJGaMy1gvfL460OJfmPU32Yv4mgxDEZwQJXiaPpxlxMgix3T/1Ff0RIni5pcjja00/R+5158jcVMEJ0SM8CXXm6Rzj1BHPVbz5bZm6dDyKzHeacfyQ9mfBE6I/Jx3rqn+KZ8v9RiljCx7bW+7sEHbr6PDe1UsWQInhBiF6EaNUsctaq7MedAWTWb9OowP2TF8VQMngRNCwpRDRJhCMFMuL5Z97q9Y4DVn+TUt/wLwMTuW7+lll8AJMT7CVKajVCS3dMSUKjszZd3LYi5aA2hxL7N+A3AF27jONvE7GYsETggJZkTBjBSpjnrvc17M5v8ANJmlzS9o+3eA66jyTTua2/VCS+CEiOJ8q9QHmMEPGgGkjHDK/BxLIDQp2igjsrRVBHEW6PAH2txNh18At2B+E8b3cG6149kmQ5LADddvbaHOVtZTZU+qPII263H2oKCBUaUTbJ5bAdpsX+7IhcjP1cBp8hOm/T7a83GUrRJi+SJPvZLXXMqT+xI/A9iCNt3AVjo57QN85kqK4zv/e7FU+OP9febCH3Gb+1HfeQyW7ZMtEeb2MyaLfqaw5b8HrAm+DXgA526M32LcQcEdVPiNHc0DkoY8GJtcKv8kewKPx3kSbk/G+RPgYGBfYA9gisrc0oKVNLtNua4f6Ru0oG9TiuipCvzBj7OTuEbmLoQiuBiCtpkp6jyZNhswew4dnoxzIHUMAzpzfxZWeWjP/YnuvHMV3IgC1wHaWooXQgI3alHbQp0Zno7ZicALaPOn1CnwBcLVHFXniJUJV0Zh2Egp2qnHXAghgRtRtHYIVU5ixk7GeQq1hIKWOnutjEhFIlDe2AghJHAj8T8f43AKOx3jRGrs9fAS48yCH0p1Jibi/llEQVCJKiGEBG4A//cJngb8LdgJ1GjQWiRqKZ1lWXdqpVxijFTPz4P1SWIphBgHgfOPcyjGWzB7BRWmVhS21OTuJBWhCiHE8AXO38tu7M8ZYG+myt602DnbsWznnXuR2WgRXOooTgIshIgmcP4xjqCw91Hlacyy9qSRaEteUbMqc655KHETQkQQOD+fXdiHv6Ows6nQGFl6/1JOMudsyIiFfXVsQAiRi8D5xfwJNbuQOn9Fay5qi+KYcj82EFEIci80LISYDIHzSzmOml1IhQN3SCCJtgyX2lFGFBUJrxBigimS+q/L+Ftq9jmMA8MsSY4TKY80WOZ90iFuIcQwIjg/hyqP5b9TtTcuWQ+yjBl8tPunokU5OV+yaRI4IcQQBM43M0VhF1Hjb2gNyfFEdN6p2ou4bBqtsLPETQhRtsD5ZqYwPkadlw7twHZ0kUsZVUbZs/IJ+N6EENmx5j04v4AGBZfSsP7ELeX+SRkV9SP0J3J2ZqRxkrgJIVILnJ9DwTr+B3U7ec2RW1ShiyRyntnYlDGh0HKlECJpBPcY3knDTht4WTLiDDxHUZEICCEkcD34yks5jYr9Pa1AzjtiSnxE4c5VeFd6Nom7EBK4nvzIJTyLin0g6fJZtIgp2lmtiA7aA7a10vdWYVamLoQEbnk/tJn9qdhmKuxGm3iJAjnu55URfaVoy4i3h+rL9MmBNtMydSEkcEv7jnMogA9R59AwS5PjIHK5Zvl54DYXj3kHKHhIpi6EBG5pHs1rqdlLSim/lfseScRsUQvWTlnvUzfSbDHLAzJ1ISRwO/uLj3IohZ1Hp0Qxirink0KYPKiQRzvKUObzOduo8nuZuhASuB39hGNUeC819l6yvmS0vaGyxCTFnlVEccodA4zfA/fL1IWQwO3IZk6gZhtX3XfLPb0+1TU/EdP0o1VwSdlWATi/4STtwQkhgVvoH7awO9i7+nJguR4diCi6KaOcXCPwAsB/aabTcEJI4BbyIK+jwRN6PkE0H+mkcCWp2olYO1GlvIYnut22fiwzF0ICt93nXcK+2Nzdbv06y4i3bUeJnFIuVVrAMYq219hNjPqhzFwICdzCvz2VOgf1LXBlRARREjyi7aM5yx9uHvcoLsVYG9CkifMjmbkQEriuT9nMI8BOX5O4pXSYyhYcjYCnEt1RT3AqgPEr9ucXMnMhJHDznESdRw8kcCmdW6olz1yvjYlYbDrtHtra32z379kGlekSQgIH+EXUcHsdnUAOLtcILOdLTT1Afwwo+JpMXAgJXJcKf0mF/zBw7fVxqHAR4flSZ0LmWC1lrROsJtMY35SJCyGBm/+vU6hSZBs1pUzTjxalRsw8HdXxiirg3Az8VCYuhAQO/5/sCXYMs8S+wsYD9Cdl9GWZv2GjiFC7+2/X2KYQO8lCiJFHcFMcQY0DHy6qHDV1PJIgWMLnSim6HrBfw/xOZmhS4SqZtxASuHkndPxc7b5yZt/RxDLSHlrqcbKAfRoWVQBu5BZukXkLIYHDL2JXsOcMnFwyLEeZ69JgRLEct9JiBhR+mZ07cC6wECKLCK7CEyk4pFSXkHPEFPHaoHFdYhykPwXQ5E6qWp4UQmwXuGdQp7Kk44joKHNegktVY3ISk1dqAH65ncg9Mm0hRFfgOjxj7PZbovU32rUzUUpmldGOLRu9bcW5SGYthAAofDNTmD1pxYTqaFmVKRNhUjvulA58XJYGo0Rv7pfbyfxMZi2E6M57nYOBg4e2JR9xHy1aRZGIe3opo9TU71L3aMBW2vyTTFoIsV3g4PEYu/fkBHO/HDPH/qTsU8TlUwPqAP5RewW3yqSFEAsjuCdQ6cMF5lrPMWVUEXEykGtt0AKY4Q4K3itzFkLsHMGNc2SRuiZkjpmeUROIUtQGrQAd/0fbxF0yZyHEYoE7pG8nEymKixgxpS7qnOsZu0ELRNeBpn+DrVwiUxZCLCFwdkA2twdEy/LL9Sqc1CK31qlZiwcxzrTX05IpCyF2dhPGXmtyMjkfAM8dz6CdKoC/w17GD/SFCiGWmwfvEUKYol0gGvXS1hwj3n770gCa/iX24wKZsBBiJYGbGrmjc9LuNUWKBiNeYWOkuyB12N9ZFWj5L5nldNtQWnlwIUQmAlcL4+CUeTiekduwLqQtgA7b6PBq+2tul/kKIVZzGUUYQYkqKoP2yxKPU2RswN/1Ff7NcNp+lp3M12W6QojVBS7XSCXlsqAlaCNiBBatbNpK4lYDZv1d9nI+KrMVQvQawcVzctEyNHOtAhK1T4uPRtSBGf8wJ3OOTFYI0Z/ApXJKqQ8lK7Ic3hhFvCXd6GZMzvilHMB/Ncs+r1UIEVLgUjtcI9a+XNQ9wpz39RrAtF/CA8qYFEIMInA6uD2+YhDlu0s1CZjP7Z3xD/ITTlelEiHEWqiG7Vlqpx3xLrNc++QDTFAqAHRo+T/YyZwnExVCDC5wKQ//RhVMy7RfEb+7tfSlBrS5n46/wV7O5TJPIUQagVucJJIiNT7nqMkDjZEnFLmU338/7TSAFrfQ8VPt5dwo0xRCDEqxpFPKmWhJGalKeY3rd1eZi9yafjmFb5C4CSHSR3CRI6aclxdJFDExZmNkdM+3tfgNLf87ezmXyhyFEOVFcGU5uJzvRcstOh1GRFhl/j63zzLtz5S4CSGGG8GljppStTfqLL8yxynSHloZwluluyTZ4geYv8NexlUyQSHE8AUutShFqQtZlgOPVK8yteAO+nyVuTetxS/o+AXcwyX2Bh6U+QkhRidwqZx46ugtwnmtyESIUG3u7TKgzc9o+UV02Gyv4G6ZnRAihsDNO7gIKfFeomhGiS4jLzH20qf5aK2J0+ZG3C/F+Zy9gvtkbkKImBFcJBGIdvt3SixYO718TjEnbB2gzW00/csUfJKCb9sm2jIzIURcgYuaSBHpsPXCtgZdzoW00W5KsVsoaAY06dDh53T8GxhXU+Vbtol7ZVpCiPGJ4FJHXzlWFEnVVhl7jdbn5y/+40AbcB6gzW20/V+B71Dh/9DkR/Y3PCRzEkKMp8ClwktqMyeRG93yawdo4UwDW2n7fRh3YvwS4/9h/BvGrUzz7/ZqpmU+QojI/H+tqztUmoDZswAAAABJRU5ErkJggg==" />
+    <div class="wrap">
+    <div class="mark">Méthode ECS</div>
+    <h1>De <em>0</em> à <em>500K€</em>/mois,<br>une phase à la fois.</h1>
+    <p class="thesis">On ne change pas seulement ce qu'on fait. On change <em style="font-style:italic;color:var(--gold-bright)">qui l'on devient</em> — puis ce qu'on croit, ce qu'on sait faire, et enfin ce qu'on fait vraiment.</p>
+    <p class="scale-note">7 phases · 4 niveaux de transformation · <b>Dis-nous où tu en es, on te montre le chemin.</b></p>
+
+    <div class="layers" aria-label="Les 4 niveaux de transformation">
+      <div class="layer">
+        <span class="lvl">Niveau 1</span>
+        <h3>Identité</h3>
+        <p>Qui tu deviens à chaque palier. La bascule la plus profonde.</p>
+      </div>
+      <div class="layer">
+        <span class="lvl">Niveau 2</span>
+        <h3>Croyances &amp; valeurs</h3>
+        <p>Les pensées à dépasser, les mantras à intégrer, les bonnes questions.</p>
+      </div>
+      <div class="layer">
+        <span class="lvl">Niveau 3</span>
+        <h3>Compétences</h3>
+        <p>Le savoir-faire concret à développer pour franchir le palier.</p>
+      </div>
+      <div class="layer">
+        <span class="lvl">Niveau 4</span>
+        <h3>Comportements</h3>
+        <p>Les actions à exécuter, les erreurs à éviter, la checklist pour être gradué.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- LOCATOR -->
+<section class="section" style="padding-top:40px">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Ta boussole</span>
+      <h2>Où en es-tu, et où veux-tu aller&nbsp;?</h2>
+      <p>Sélectionne ta situation actuelle puis ton prochain cap. On déroule pour toi les phases exactes à franchir — avec tout ce qu'il faut devenir, croire, apprendre et faire.</p>
+    </div>
+
+    <div class="locator">
+      <div class="q-block">
+        <div class="q-label"><span class="dot"></span> Où en es-tu aujourd'hui&nbsp;?</div>
+        <div class="pills" id="pills-current"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-label"><span class="dot"></span> Quel est ton prochain cap&nbsp;?</div>
+        <div class="pills" id="pills-target"></div>
+      </div>
+      <div class="locator-foot">
+        <div class="summary" id="summary">Choisis ta situation actuelle pour commencer.</div>
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <div class="detail-ctl">
+            <span class="dl">Détail</span>
+            <div class="seg" role="group" aria-label="Niveau de détail des phases">
+              <button id="segSimple" class="on" aria-pressed="true">Essentiel</button>
+              <button id="segFull" aria-pressed="false">Complet</button>
+            </div>
+          </div>
+          <button class="btn-ghost" id="toggleFull">Voir les 7 phases en entier</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="path">
+      <div class="path-empty">Ton parcours personnalisé apparaîtra ici.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL METHOD -->
+<section class="section" id="full" style="padding-top:0">
+  <div class="wrap">
+    <hr class="hairline" style="margin-bottom:48px">
+    <div class="section-head">
+      <span class="eyebrow">Vue d'ensemble</span>
+      <h2>La méthode complète</h2>
+      <p>Les 7 phases dans l'ordre. Clique sur une phase pour la déplier.</p>
+    </div>
+    <div class="timeline" id="full-timeline"></div>
+  </div>
+</section>
+
+<!-- LEXIQUE -->
+<section class="section">
+  <div class="wrap">
+    <hr class="hairline" style="margin-bottom:48px">
+    <div class="section-head">
+      <span class="eyebrow">Pour parler la même langue</span>
+      <h2>Le lexique</h2>
+      <p>Les termes de la méthode, expliqués simplement.</p>
+    </div>
+    <dl class="lex-grid">
+
+      <div class="lex"><dt>Power Offer</dt>
+        <dd>Une offre directe et irrésistible que tu proposes à ton réseau déjà existant (les gens qui te connaissent) pour décrocher tes tout premiers clients vite — sans avoir besoin d'une grosse audience. Promesse forte + risque inversé (garantie) + un prix qui enclenche l'action.
+        <span class="note">C'est le mécanisme de la phase Momentum pour obtenir tes 3 premiers OUI.</span></dd></div>
+
+      <div class="lex"><dt>PSP <span class="fr">stratégie de lancement</span></dt>
+        <dd>Le tunnel de conversion <b>organique et simple</b> de la méthode&nbsp;: <b>Communauté privée → Setting → Call de vente</b>. Tu rassembles une audience dans un groupe privé, tu crées du lien en messages privés (setting), puis tu décroches l'appel de vente.
+        <span class="note">L'acronyme exact n'est pas détaillé dans le doc d'origine — mais fonctionnellement, c'est ce tunnel-là. Son alternative est le tunnel Webinaire (Ads → Webinaire → VSL → Call).</span></dd></div>
+
+      <div class="lex"><dt>Communauté privée <span class="fr">≠ groupe Facebook</span></dt>
+        <dd>Un espace fermé où tu rassembles ton audience tiède (Facebook, WhatsApp, Skool, Telegram, Circle…). Le canal importe peu&nbsp;: ce qui compte, c'est d'avoir un lieu privé où nourrir la relation et préparer la vente.</dd></div>
+
+      <div class="lex"><dt>Setting</dt>
+        <dd>La démarche de <b>conversation</b> (souvent en messages privés) pour créer du lien avec un prospect, le qualifier et décrocher un rendez-vous. C'est l'étape qui prépare le terrain — à ne pas confondre avec le closing.</dd></div>
+
+      <div class="lex"><dt>Closing</dt>
+        <dd>L'appel de vente lui-même&nbsp;: tu accompagnes le prospect dans sa décision d'achat et tu conclus.</dd></div>
+
+      <div class="lex"><dt>Méthode ACE</dt>
+        <dd>La méthode de la phase Validation pour <b>développer ton réseau et démontrer ton expertise</b> sur un canal de communication. C'est le système qui te fait connaître et installe ton autorité.</dd></div>
+
+      <div class="lex"><dt>VSL <span class="fr">Video Sales Letter</span></dt>
+        <dd>Une vidéo de vente qui présente ton offre et amène le prospect à prendre rendez-vous ou à acheter. Souvent placée juste avant le call dans un tunnel.</dd></div>
+
+      <div class="lex"><dt>Webinaire</dt>
+        <dd>Un événement de conversion (souvent live) où tu éduques ton audience puis présentes ton offre. Une des deux grandes stratégies de conversion de la méthode.</dd></div>
+
+      <div class="lex"><dt>SS <span class="fr">séances stratégiques</span></dt>
+        <dd>Tes rendez-vous de vente (les appels que tu cherches à générer puis à closer). «&nbsp;Augmenter mon volume de SS&nbsp;» = avoir plus d'appels de vente qualifiés.</dd></div>
+
+      <div class="lex"><dt>Audience froide / tiède / chaude</dt>
+        <dd><b>Froide</b>&nbsp;: ne te connaît pas encore. <b>Tiède</b>&nbsp;: t'a déjà croisé, te connaît un peu. <b>Chaude</b>&nbsp;: te suit et te fait confiance. Plus tu montes en phase, plus tu apprends à vendre à du froid.</dd></div>
+
+      <div class="lex"><dt>Evergreen</dt>
+        <dd>Un système d'acquisition qui tourne en continu et de façon (semi-)automatisée, sans dépendre d'un lancement ponctuel. L'objectif des phases hautes&nbsp;: un flux de leads stable, tous les jours.</dd></div>
+
+      <div class="lex"><dt>Upsell &amp; LTV</dt>
+        <dd><b>Upsell</b>&nbsp;: une offre complémentaire vendue en plus à un client déjà existant. <b>LTV</b> (Lifetime Value)&nbsp;: la valeur à vie d'un client, soit tout ce qu'il dépense chez toi dans la durée.</dd></div>
+
+      <div class="lex"><dt>ROI · CAC <span class="fr">les 2 conditions du scaling</span></dt>
+        <dd><b>ROI</b>&nbsp;: retour sur investissement. <b>CAC</b>&nbsp;: coût d'acquisition d'un client. La règle d'or pour scaler la pub&nbsp;: <b>ROI ≥ 3</b> et <b>cash encaissé sous 30 jours &gt; CAC</b>. Tant que c'est vrai, tu peux augmenter les budgets.</dd></div>
+
+      <div class="lex"><dt>5 Days Challenge</dt>
+        <dd>Le sprint de clarification de la phase Positionnement&nbsp;: en quelques jours, tu définis ton client idéal et ton offre irrésistible.</dd></div>
+
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fmark">Méthode ECS</div>
+    <div class="flink"><a href="/checklist">Les 3 Checklists — Acquisition · Conversion · Delivery →</a></div>
+    <p>L'argent est une énergie. Le marketing et la vente sont les étapes invisibles qui préparent ton client à se transformer.</p>
+  </div>
+</footer>
+
+<script>
+const PHASES = [
+  {
+    num:"I", name:"Positionnement", palier:"Fondation · avant le 1er euro",
+    mission:"Avoir une offre signature claire et spécifique pour un client idéal précis.",
+    idFrom:"Mon ancienne identité",
+    idTo:"Le coach assumé intérieurement",
+    croyances:[
+      "Je n'ai rien à apporter. Il y a déjà des gens qui font mieux que moi.",
+      "Suis-je vraiment légitime&nbsp;?",
+      "Je vais pas me positionner, parce que je peux aider tout le monde et je me fermerais des possibilités."
+    ],
+    mantras:[
+      "Si la vie m'a donné ce désir de servir les autres, alors j'en ai l'entière légitimité et capacité.",
+      "La clarté se trouve dans l'action. J'agis avec confiance et enthousiasme. Je fais confiance au process."
+    ],
+    questions:[
+      "Quelle est mon histoire, et quels challenges ai-je déjà dépassés&nbsp;?",
+      "Qu'ai-je accompli qui pourrait être un tremplin pour mon autorité&nbsp;?",
+      "Qu'est-ce qui est facile pour moi et sur quoi on me demande naturellement conseil&nbsp;?",
+      "Quels sont les sujets sur lesquels j'adore apprendre&nbsp;?",
+      "Qui est mon client idéal&nbsp;?",
+      "Quelle est ma promesse&nbsp;?",
+      "Comment j'inverse le risque&nbsp;?"
+    ],
+    competences:["Créer une offre irrésistible"],
+    actions:["Clarifier son client idéal et son offre irrésistible grâce au 5 Days Challenge."],
+    erreurs:[
+      "Rester dans sa tête pendant des semaines sans se confronter au marché.",
+      "Se comparer et rester focalisé sur ce qui nous manque, en pensant que les autres acteurs sont meilleurs que nous."
+    ],
+    checklist:[
+      "J'ai défini mon client idéal.",
+      "J'ai défini mon offre irrésistible."
+    ]
+  },
+  {
+    num:"II", name:"Momentum", palier:"Passer de 0 à 1-5K€",
+    mission:"Avoir lancé cette offre signature auprès de mes ressources déjà existantes et effectué mes 3 premiers OUI.",
+    idFrom:"Le coach assumé intérieurement",
+    idTo:"Le coach qui accompagne maintenant des clients",
+    croyances:[
+      "Je vais être rejeté si je propose une offre.",
+      "Je ne peux pas demander d'argent à des personnes que je connais.",
+      "Vais-je vraiment être capable d'aider ces personnes&nbsp;?"
+    ],
+    mantras:[
+      "Si j'ai un service et des connaissances qui peuvent changer la vie des gens, alors j'ai l'obligation morale et spirituelle de tout faire pour le mettre entre leurs mains.",
+      "Demander à l'autre d'investir sur lui, c'est le plus beau cadeau que je puisse lui faire pour l'aider à évoluer et à croire en lui.",
+      "L'argent est une énergie. Demander de l'argent, c'est faire circuler l'énergie dans ma vie et celle de mon client."
+    ],
+    questions:[
+      "Qui me connaît&nbsp;? Qui je connais&nbsp;?",
+      "À qui pourrais-je faire une offre irrésistible&nbsp;?",
+      "Qui connaît mes clients idéaux&nbsp;?"
+    ],
+    competences:["Déployer une Power Offer","Stratégie de lancement simple","Closing"],
+    actions:[
+      "Lancer une Power Offer.",
+      "Déployer une stratégie de lancement PSP.",
+      "Closer ses premiers clients."
+    ],
+    erreurs:[
+      "Mettre plus d'importance au regard des autres qu'à sa propre vie et celle de ses clients.",
+      "Croire que la perfection se trouve en restant dans sa grotte.",
+      "Passer des semaines sur des éléments graphiques, des images, un site internet… plutôt que d'aller au contact du marché.",
+      "Croire qu'avoir peur est une raison pour ne pas avancer."
+    ],
+    checklist:[
+      "J'ai effectué une Power Offer.",
+      "J'ai exécuté une stratégie de lancement.",
+      "J'ai généré mes premières conversations.",
+      "J'ai réalisé mes premières ventes."
+    ]
+  },
+  {
+    num:"III", name:"Validation", palier:"Passer de 1-5K€ à 10-20K€",
+    mission:"Avoir déployé une stratégie de communication sur un canal spécifique pour me faire connaître, démontrer mon expertise, et générer 10 ventes sur une audience tiède et chaude.",
+    idFrom:"Le coach à temps partiel",
+    idTo:"Le coach pleinement incarné",
+    croyances:[
+      "Légitimité / comparaison.",
+      "Proposer mon service (la perspective marketing / vente me bloque).",
+      "Recevoir de l'argent.",
+      "Que vont penser les autres de mes contenus&nbsp;?",
+      "Vais-je vraiment être capable d'aider ces clients&nbsp;?"
+    ],
+    mantras:[
+      "Partager mon message, c'est réaliser ma mission. Chaque fois que je partage, j'impacte le monde.",
+      "Proposer mes services, c'est offrir la plus belle chose que j'ai — le plus beau don que je puisse faire au monde."
+    ],
+    questions:[
+      "Quelle est mon expertise, et qui en aurait besoin&nbsp;?",
+      "Comment créer un service dont les gens ont besoin&nbsp;?",
+      "Comment packager ce service&nbsp;?",
+      "Quelles sont les premières actions pour faire connaître mon offre à mon réseau&nbsp;?",
+      "Comment étendre mon réseau et démontrer mon expertise&nbsp;?"
+    ],
+    competences:["Méthode ACE","Setting","Stratégie de croissance"],
+    actions:[
+      "Développer son réseau et démontrer son expertise grâce à la méthode ACE.",
+      "Développer de la confiance et générer des calls grâce au setting.",
+      "Re-déployer une stratégie de lancement PSP."
+    ],
+    erreurs:[
+      "Changer de niche.",
+      "Avoir une audience trop petite et croire que c'est un problème de contenu.",
+      "Ne pas proposer assez son offre et rester en mode «&nbsp;contenu friendzone&nbsp;».",
+      "Croire qu'avoir peur est une raison pour ne pas avancer.",
+      "S'attarder à la forme."
+    ],
+    checklist:[
+      "Je suis à l'aise pour générer des ventes.",
+      "J'ai généré mes premiers 10K€.",
+      "Je suis capable de générer un CA à 5 chiffres en moins de 10 jours quand j'en ai besoin."
+    ]
+  },
+  {
+    num:"IV", name:"Oxygénation", palier:"Atteindre 10-20K€/mois stable",
+    mission:"Avoir mis en place un système réplicable qui génère 3 à 10 ventes chaque mois, avec stabilité, rentabilité, et sur une audience froide.",
+    idFrom:"Le coach pleinement incarné",
+    idTo:"Le coach entrepreneur",
+    croyances:[
+      "Je n'aime pas le marketing et la technique.",
+      "Mes clients ont des résultats uniquement grâce à moi.",
+      "Personne ne pourra accompagner mes clients aussi bien que moi.",
+      "Je vais le faire moi-même, ça ira plus vite."
+    ],
+    mantras:[
+      "Le marketing et la vente sont les étapes invisibles qui préparent mon client à se transformer et devenir un leader. C'est le servir.",
+      "Je suis un investisseur&nbsp;: je pense en termes de retour sur investissement, non plus en termes de dépenses."
+    ],
+    questions:[
+      "Comment augmenter la taille de mon audience&nbsp;?",
+      "Comment générer plus de SS dans les 7 prochains jours&nbsp;?",
+      "Comment closer plus de clients cette semaine en améliorant mon offre et/ou mon closing&nbsp;?",
+      "Quels projets abandonner&nbsp;? Que supprimer&nbsp;? Comment simplifier&nbsp;?",
+      "Sur quel canal d'acquisition suis-je prêt à mettre mon focus pour augmenter mon volume de SS&nbsp;?"
+    ],
+    competences:["Stratégie de croissance","FB Ads / YT Ads","Campagne de conversion (Webinaire) ou Système ACE ou Setting"],
+    actions:[
+      "Choisir une stratégie de conversion&nbsp;: PSP (Communauté privée → Setting → Call) <b>ou</b> (Ads/Communauté → Webinaire → VSL → Call).",
+      "Tester, analyser, optimiser et amener les composantes de la chaîne de valeur à 20K€/mois."
+    ],
+    erreurs:[
+      "Vouloir recruter trop tôt.",
+      "Ne pas scaler un système d'acquisition qui fonctionne.",
+      "Ne pas investir en pub et attendre la croissance organique.",
+      "S'attarder à la forme."
+    ],
+    checklist:[
+      "Je suis capable de générer 20K€/mois."
+    ]
+  },
+  {
+    num:"V", name:"Respiration", palier:"Passer de 20K€ à 50K€/mois",
+    mission:"Avoir créé un système de livraison qui ne dépend plus de moi, et augmenter les ressources investies en acquisition à efficience constante — pour me libérer progressivement de la livraison et bâtir une vraie entreprise.",
+    idFrom:"Le coach entrepreneur",
+    idTo:"Le fondateur d'une entreprise de coaching",
+    croyances:[
+      "C'est bon, ça tourne, je peux lancer un autre truc.",
+      "C'est la faute de XYZ si on n'arrive pas à scaler."
+    ],
+    mantras:[
+      "Mes compétences sont modélisables et réplicables&nbsp;: d'autres peuvent avoir le même impact que moi sur mes clients. Je me libère du besoin d'être indispensable."
+    ],
+    questions:[
+      "Comment créer un système de livraison où un client en plus ne me demande pas de ressources supplémentaires&nbsp;?",
+      "Comment augmenter le nombre de prospects présents dans mes événements de conversion&nbsp;?",
+      "Comment closer davantage (mon closer et moi)&nbsp;?",
+      "Quels projets abandonner&nbsp;? Que supprimer&nbsp;? Comment simplifier&nbsp;?"
+    ],
+    competences:["Recrutement","Système de livraison scalable","Optimisation &amp; scaling de campagne"],
+    actions:[
+      "Recruter un assistant freelance.",
+      "Recruter un closer, le développer tout en gardant une partie des calls.",
+      "Créer un système de livraison où un client supplémentaire ne demande pas plus de ressources.",
+      "Recruter un coach pour soutenir la livraison.",
+      "Augmenter les budgets pub en gardant un œil sur les chiffres, pour avoir le trafic nécessaire aux objectifs."
+    ],
+    erreurs:[
+      "Ne pas réussir à lâcher le marketing.",
+      "Continuer à ce que la résolution des problèmes dépende de moi.",
+      "Saboter la croissance par manque de confiance dans mon système de livraison.",
+      "Ne pas scaler un système d'acquisition qui fonctionne (ROI ≥ 3 &amp; cash 30 jours &gt; CAC).",
+      "Se disperser et créer d'autres offres."
+    ],
+    checklist:[
+      "Notre système de livraison permet qu'un client en plus ne me demande pas de temps en plus.",
+      "J'ai recruté un closer.",
+      "J'ai recruté un coach qui peut me soutenir dans la livraison.",
+      "J'ai recruté un assistant et délégué tout ce sur quoi je n'ai que très peu de valeur.",
+      "Je suis capable de générer 50K€/mois."
+    ]
+  },
+  {
+    num:"VI", name:"Accélération", palier:"Passer de 50K€ à 200K€/mois",
+    mission:"Me libérer totalement de l'opérationnel pour devenir un vrai CEO, avoir l'espace de prendre les décisions stratégiques, et développer des leaders plus performants, plus inspirés et plus efficients que moi.",
+    idFrom:"Le fondateur d'une entreprise de coaching",
+    idTo:"Le dirigeant d'une entreprise à croissance rapide",
+    croyances:[
+      "C'est bon, ça tourne, je peux lancer un autre truc.",
+      "Je ne trouverai jamais quelqu'un pour me remplacer dans ce rôle."
+    ],
+    mantras:[
+      "Je suis un investisseur&nbsp;: mon focus est de maximiser le retour sur investissement de mes ressources (temps, argent, énergie, pensées).",
+      "Je n'ai pas besoin de faire pour justifier ma place. Je suis un leader&nbsp;; ma plus haute valeur est dans la vision et la conception créative, pas dans le faire.",
+      "Tout n'a pas besoin d'être parfait&nbsp;: il me suffit d'identifier la contrainte n°1 et de la lever.",
+      "Si cela marche, je n'ai pas besoin de défaire&nbsp;; j'utilise mon énergie pour la croissance plutôt que pour détruire."
+    ],
+    questions:[
+      "Puis-je augmenter les budgets en gardant ROI ≥ 3 &amp; cash 30 jours &gt; CAC&nbsp;? Sinon, où dans la chaîne de valeur dois-je ajuster&nbsp;?",
+      "Comment permettre à mon équipe de vente d'atteindre ses objectifs&nbsp;? (Envie de donner le meilleur&nbsp;? Certitude dans le produit&nbsp;? Bien-être&nbsp;? Compétences de closing&nbsp;? Compréhension du prospect&nbsp;? Ressources manquantes&nbsp;?)",
+      "Quel est le nouveau problème de mes clients&nbsp;? Comment créer une offre demandant le minimum de ressources et apportant le maximum de valeur&nbsp;?",
+      "Quels projets abandonner&nbsp;? Que supprimer&nbsp;? Comment simplifier&nbsp;?"
+    ],
+    competences:["Management d'équipe de vente","Système de génération de leads evergreen","Optimisation &amp; scaling de campagne evergreen","Création d'upsell &amp; maximisation de la LTV"],
+    actions:[
+      "Se libérer totalement du closing en devenant directeur des ventes (ou en trouvant un directeur des ventes compétent).",
+      "Créer un système de génération de leads evergreen.",
+      "Augmenter les budgets pub pour avoir le trafic nécessaire aux objectifs.",
+      "Programmer des événements de conversion complémentaires à la stratégie evergreen.",
+      "Recruter un responsable du succès client.",
+      "Maximiser la LTV des premiers clients&nbsp;: upseller, récupérer des études de cas, obtenir des recommandations."
+    ],
+    erreurs:[
+      "Penser que recruter un closer suffit à partir aux Maldives.",
+      "Penser qu'une équipe de vente se manage seule.",
+      "Ne pas être focus sur les chiffres.",
+      "Arrêter ce qui marche et ce qui a amené jusque-là.",
+      "Se disperser et créer d'autres offres / business."
+    ],
+    checklist:[
+      "J'ai un système de génération de leads qui maintient un flux suffisant pour 100-150K€/mois sans événement de conversion.",
+      "Je ne close plus moi-même et l'équipe de vente est capable de générer 200K€/mois.",
+      "Je rentabilise mes leads avec des événements de conversion réguliers (un extra ≈ 50K€/mois).",
+      "J'ai créé un upsell pour maximiser la valeur à vie des clients, et un système pour récolter témoignages et recommandations systématiquement."
+    ]
+  },
+  {
+    num:"VII", name:"Structuration", palier:"Passer de 200K€ à 500K€/mois",
+    mission:"Garder l'efficience de mon système d'acquisition, augmenter les ventes en doublant les ressources sur ce qui marche, et lâcher de plus en plus de responsabilités à tous les niveaux de l'entreprise.",
+    idFrom:"Le dirigeant d'une entreprise à croissance rapide",
+    idTo:"Le leader d'un mouvement autonome, impactant, stable et puissant",
+    croyances:[
+      "Croire que je dois encore «&nbsp;faire&nbsp;» pour justifier ma place.",
+      "Penser et décider à court terme."
+    ],
+    mantras:[
+      "Je n'ai pas besoin de faire pour justifier ma place. Je suis un leader, un facilitateur&nbsp;: ma plus haute valeur est dans l'imagination, la conception créative et la vision.",
+      "Je pense long terme. Je décide long terme."
+    ],
+    questions:[
+      "Quelle est la vision qu'on veut matérialiser dans les 3 prochaines années&nbsp;?",
+      "Quels sont les OKR du prochain trimestre&nbsp;? Pour chaque département&nbsp;? Chaque personne&nbsp;?",
+      "Comment permettre à mon équipe d'atteindre ses objectifs avec assez de clarté et de focus&nbsp;?",
+      "Quelles compétences (savoir-être et savoir-faire) mes leaders doivent-ils développer&nbsp;?",
+      "De quelles ressources supplémentaires ont-ils besoin&nbsp;?",
+      "Où l'entreprise dépend-elle encore de moi&nbsp;? Que dois-je lâcher&nbsp;? Comment m'assurer que ce soit exécuté avec une excellence supérieure à la mienne&nbsp;?",
+      "Quels projets abandonner&nbsp;? Que supprimer&nbsp;? Comment simplifier&nbsp;?"
+    ],
+    competences:["Leadership &amp; coaching de leaders","Pilotage par les chiffres (KPIs)","Création &amp; amélioration de systèmes"],
+    actions:[
+      "Remplacer les parties opérationnelles que le CEO gère encore, pour se libérer totalement de l'opérationnel.",
+      "Donner une direction claire et précise aux leaders des départements et les coacher.",
+      "Piloter l'entreprise avec des chiffres précis dans tous les départements.",
+      "Créer et améliorer les systèmes."
+    ],
+    erreurs:[
+      "Se disperser et créer d'autres business.",
+      "Continuer à ce que la résolution des problèmes dépende de moi.",
+      "Ne pas réussir à lâcher le marketing.",
+      "Arrêter ce qui marche et ce qui a amené jusque-là."
+    ],
+    checklist:[
+      "J'ai un responsable par département (qui n'est pas moi), et chaque membre est un A-player à 9/10.",
+      "Les objectifs sont clairs par département, reliés à des KPIs précis et des projets suivis, ajustés et coachés chaque semaine.",
+      "Un système de tracking précis identifie les goulots d'étranglement du business.",
+      "Je peux partir en vacances 1 mois sans aucun impact sur la stabilité du business."
+    ]
+  }
+];
+
+const CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>';
+
+function esc(){return ''}
+
+function phaseInner(p){
+  const li = a => a.map(x=>`<li>${x}</li>`).join('');
+  return `
+    <div class="dim">
+      <div class="dim-label">Niveau 1 — Identité</div>
+      <div class="bascule">
+        <div class="from"><span class="tag">De</span><span class="val">${p.idFrom}</span></div>
+        <div class="arrow">→</div>
+        <div class="to"><span class="tag">À</span><span class="val">${p.idTo}</span></div>
+      </div>
+    </div>
+
+    <div class="dim dim-depth">
+      <div class="dim-label">Niveau 2 — Croyances, mantras &amp; questions</div>
+      <div class="mind-grid">
+        <div class="mind-col croy">
+          <div class="mind-h">Croyances à dépasser</div>
+          <ul class="croylist">${li(p.croyances)}</ul>
+        </div>
+        <div class="mind-col mant">
+          <div class="mind-h">Mantras à intégrer</div>
+          <ul class="mantlist">${li(p.mantras)}</ul>
+        </div>
+      </div>
+      <div class="sub" style="margin-top:22px">
+        <div class="sub-title"><span class="ic">✺</span> Questions à se poser</div>
+        <ul class="qlist">${li(p.questions)}</ul>
+      </div>
+    </div>
+
+    <div class="dim">
+      <div class="dim-label">Niveau 3 — Compétences à développer</div>
+      <div class="skills">${p.competences.map(c=>`<span class="skill">${c}</span>`).join('')}</div>
+    </div>
+
+    <div class="dim">
+      <div class="dim-label">Niveau 4 — Comportements</div>
+      <div class="sub">
+        <div class="sub-title"><span class="ic" style="color:var(--gold-bright)">▸</span> Actions concrètes</div>
+        <ul class="lst">${li(p.actions)}</ul>
+      </div>
+      <div class="sub erreurs dim-depth">
+        <div class="sub-title" style="color:var(--danger)"><span class="ic">⚠</span> Erreurs les plus communes</div>
+        <ul class="lst">${li(p.erreurs)}</ul>
+      </div>
+      <div class="sub">
+        <div class="check-wrap">
+          <div class="ch-head">✓ Checklist pour être gradué</div>
+          <ul class="check">${li(p.checklist)}</ul>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function phaseCard(p, i, opts){
+  opts = opts || {};
+  const cls = ['phase'];
+  if(opts.current) cls.push('is-current');
+  if(opts.done) cls.push('is-done');
+  const badge = opts.current
+    ? '<span class="badge-now">À travailler maintenant</span>'
+    : (opts.done ? '<span class="badge-done">Déjà franchi</span>' : '');
+  const openClass = opts.open ? ' open' : '';
+  const bodyStyle = opts.open ? ' style="max-height:6000px"' : '';
+  return `
+  <div class="${cls.join(' ')}" style="animation-delay:${(opts.delay||0)}ms">
+    <div class="node">${p.num}</div>
+    <div class="card${openClass}" data-card>
+      <div class="card-head" data-toggle role="button" tabindex="0" aria-expanded="${opts.open?'true':'false'}">
+        <div class="meta">
+          ${badge}
+          <div class="phase-name">${p.name}</div>
+          <div class="phase-palier">${p.palier}</div>
+          <div class="phase-mission"><span class="mlabel">Résultat à atteindre</span>${p.mission}</div>
+        </div>
+        <div class="chev">${CHEVRON}</div>
+      </div>
+      <div class="card-body"${bodyStyle}>
+        <div class="card-body-inner">${phaseInner(p)}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---- Selector state ---- */
+let curIdx = null, tgtIdx = null;
+
+function buildPills(){
+  const c = document.getElementById('pills-current');
+  const t = document.getElementById('pills-target');
+  c.innerHTML=''; t.innerHTML='';
+  PHASES.forEach((p,i)=>{
+    const range = p.palier.replace('Passer de ','').replace('Atteindre ','').replace('Fondation · avant le 1er euro','Offre claire · 0€').replace('Passer à ','');
+    const html = `<span class="pname">${p.name}</span><span class="prange">${range}</span>`;
+    const b1 = document.createElement('button'); b1.className='pill'; b1.innerHTML=html;
+    b1.onclick=()=>selectCurrent(i); c.appendChild(b1);
+    const b2 = document.createElement('button'); b2.className='pill'; b2.innerHTML=html;
+    b2.onclick=()=>selectTarget(i); t.appendChild(b2);
+  });
+}
+
+function selectCurrent(i){
+  curIdx=i;
+  if(tgtIdx===null || tgtIdx<curIdx) tgtIdx=Math.min(i+1,PHASES.length-1);
+  if(curIdx===PHASES.length-1) tgtIdx=curIdx;
+  render();
+}
+function selectTarget(i){
+  if(curIdx===null){curIdx=0;}
+  tgtIdx=Math.max(i,curIdx);
+  render();
+}
+
+function render(){
+  // pills state
+  const cp=document.getElementById('pills-current').children;
+  const tp=document.getElementById('pills-target').children;
+  for(let i=0;i<PHASES.length;i++){
+    cp[i].className='pill'+(i===curIdx?' current':'');
+    let tc='pill';
+    if(i===tgtIdx) tc+=' target';
+    if(curIdx!==null && i<curIdx) tc+=' disabled';
+    tp[i].className=tc;
+  }
+  // summary
+  const s=document.getElementById('summary');
+  const path=document.getElementById('path');
+  if(curIdx===null){
+    s.innerHTML='Choisis ta situation actuelle pour commencer.';
+    path.innerHTML='<div class="path-empty">Ton parcours personnalisé apparaîtra ici.</div>';
+    return;
+  }
+  const count = tgtIdx-curIdx+1;
+  const next = PHASES[curIdx];
+  if(curIdx===tgtIdx){
+    s.innerHTML=`Tu es en phase <b>${next.name}</b>. Concentre-toi sur ce palier — tout est ci-dessous.`;
+  }else{
+    s.innerHTML=`<b>${count} phases</b> entre toi et ton objectif. Prochain cap&nbsp;: <b>${next.name}</b>.`;
+  }
+  // build timeline
+  let html='<div class="timeline">';
+  for(let i=curIdx;i<=tgtIdx;i++){
+    html+=phaseCard(PHASES[i],i,{
+      current:(i===curIdx),
+      open:(i===curIdx),
+      delay:(i-curIdx)*70
+    });
+  }
+  html+='</div>';
+  path.innerHTML=html;
+  bindToggles(path);
+}
+
+/* ---- Full method ---- */
+function renderFull(){
+  const el=document.getElementById('full-timeline');
+  let html='';
+  PHASES.forEach((p,i)=>{ html+=phaseCard(p,i,{open:false,delay:0}); });
+  el.innerHTML=html;
+  bindToggles(el);
+}
+
+function bindToggles(scope){
+  scope.querySelectorAll('[data-toggle]').forEach(h=>{
+    const fn=()=>{
+      const card=h.closest('[data-card]');
+      const body=card.querySelector('.card-body');
+      const open=card.classList.toggle('open');
+      h.setAttribute('aria-expanded',open?'true':'false');
+      body.style.maxHeight = open ? body.scrollHeight+200+'px' : '0px';
+    };
+    h.addEventListener('click',fn);
+    h.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();fn();}
+    });
+  });
+}
+
+document.getElementById('toggleFull').addEventListener('click',function(){
+  const full=document.getElementById('full');
+  const showing=full.classList.toggle('show');
+  this.textContent = showing ? 'Masquer la vue d\u2019ensemble' : 'Voir les 7 phases en entier';
+  if(showing){
+    full.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+});
+
+function setDetail(simple){
+  document.body.classList.toggle('simple',simple);
+  const s=document.getElementById('segSimple'), f=document.getElementById('segFull');
+  s.classList.toggle('on',simple); s.setAttribute('aria-pressed',simple);
+  f.classList.toggle('on',!simple); f.setAttribute('aria-pressed',!simple);
+  // re-open any expanded card to full height so depth never clips
+  document.querySelectorAll('.card.open .card-body').forEach(b=>{ b.style.maxHeight='6000px'; });
+}
+document.getElementById('segSimple').addEventListener('click',()=>setDetail(true));
+document.getElementById('segFull').addEventListener('click',()=>setDetail(false));
+
+buildPills();
+renderFull();
+</script>
+</body>
+</html>
