@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — Template à remplir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   TA COULEUR  —  la SEULE ligne couleur à changer.
+   Par défaut : monochrome (encre). Mets ta couleur dans --accent, tout suit.
+   ========================================================================= */
+:root{
+  --accent:#111114;      /* <- TA couleur (mets la tienne) */
+  --accent-2:#000000;    /* <- variante foncée (dégradés) */
+  --on-accent:#FFFFFF;   /* <- texte SUR ta couleur (#111114 si accent clair) */
+  /* ----- ne touche pas en dessous ----------------------------------------- */
+  --bg:#F7F7F9;
+  --ink:#111114;
+  --body:#4A4A52;
+  --mute:#8C8C95;
+  --line:#E7E7EB;
+  --card:#FFFFFF;
+  --gold-a:var(--accent);
+  --gold-b:var(--accent);
+  --gradient:linear-gradient(90deg,var(--accent) 0%,var(--accent-2) 100%);
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 12px 32px rgba(0,0,0,.06);
+  --maxw:760px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter','DM Sans',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+/* grille de fond 60x60 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,0,0,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,0,0,.025) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+/* 2 lignes verticales or à 14% et 86% */
+.vlines{position:fixed;inset:0;z-index:0;pointer-events:none}
+.vlines span{position:absolute;top:0;bottom:0;width:1px;background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.vlines span:first-child{left:14%}
+.vlines span:last-child{left:86%}
+@media(max-width:768px){.vlines{display:none}}
+
+h1,h2,h3,.display{font-family:'Space Grotesk',system-ui,sans-serif;color:var(--ink);text-transform:uppercase;line-height:1.02;letter-spacing:-.01em;font-weight:800}
+
+/* ---- structure ---- */
+.wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.topbar{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:22px 24px;border-bottom:1px solid var(--line);background:rgba(240,240,242,.85);backdrop-filter:blur(8px)}
+.topbar img{height:28px;width:auto;display:block}
+.logo-slot{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.14em;font-size:.8rem;text-transform:uppercase;color:var(--mute);border:1px dashed var(--line);padding:9px 16px;background:#fff}
+.logo-slot--sm{font-size:.64rem;padding:6px 12px;opacity:.75}
+.stage{padding:48px 0 80px}
+
+/* progression */
+.progress{position:sticky;top:0;z-index:3;height:4px;background:var(--line)}
+.progress__bar{height:100%;width:0;background:var(--gradient);transition:width .45s cubic-bezier(.4,0,.2,1)}
+.stepmeta{font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;font-weight:700;color:var(--mute);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.stepmeta b{color:var(--gold-b)}
+.stepmeta .bar{flex:1;height:1px;background:var(--line)}
+
+/* cartes */
+.card{background:var(--card);border:1px solid var(--line);position:relative;box-shadow:var(--shadow)}
+.card--top::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient)}
+
+/* boutons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  background:var(--gradient);color:var(--on-accent);
+  font-family:'Space Grotesk',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+  padding:18px 34px;border:none;cursor:pointer;font-size:1.02rem;
+  transition:transform .12s ease, filter .2s ease;width:100%;
+}
+.btn:hover{filter:brightness(1.06)}
+.btn:active{transform:translateY(1px)}
+.btn--ghost{background:transparent;color:var(--mute);border:1px solid var(--line);font-size:.82rem;padding:12px 22px;letter-spacing:.08em;width:auto}
+.btn--ghost:hover{filter:none;color:var(--ink);border-color:var(--ink)}
+
+/* ====== LANDING ====== */
+.hero{position:relative;text-align:center;padding:18px 0 8px}
+.hero__mark{position:absolute;top:-30px;right:-20px;width:380px;opacity:.06;transform:rotate(-8deg);pointer-events:none;z-index:0}
+.hero__inner{position:relative;z-index:1}
+.eyebrow{display:inline-block;font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.18em;font-size:.74rem;font-weight:700;color:var(--gold-b);border:1px solid var(--line);padding:8px 16px;margin-bottom:26px;background:#fff}
+.hero h1{font-size:clamp(2rem,5.4vw,3.3rem);margin-bottom:22px}
+.hero h1 .hl{-webkit-text-fill-color:var(--ink);border-bottom:4px dashed var(--accent);padding-bottom:2px}
+.hero__sub{font-size:1.12rem;color:var(--body);max-width:600px;margin:0 auto 30px}
+.badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:14px}
+.badge{font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:.78rem;font-weight:700;color:var(--ink);background:#fff;border:1px solid var(--line);padding:9px 14px;display:inline-flex;align-items:center;gap:7px}
+.badge svg{width:14px;height:14px;flex:none}
+.proofcount{font-size:.92rem;color:var(--mute);margin-bottom:34px}
+.proofcount b{color:var(--ink)}
+
+.author{display:flex;gap:18px;align-items:center;text-align:left;padding:24px;margin:36px 0}
+.author__ph{width:78px;height:78px;flex:none;background:var(--bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.62rem;color:var(--mute);text-align:center;font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.05em;line-height:1.3;overflow:hidden}
+.author__ph img{width:100%;height:100%;object-fit:cover}
+.author__name{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:800;text-transform:uppercase;color:var(--ink);line-height:1.1}
+.author__role{font-size:.86rem;color:var(--gold-b);font-weight:600;margin-bottom:6px}
+.author__bio{font-size:.95rem;color:var(--body)}
+
+.section-label{font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:700;color:var(--mute);margin:46px 0 18px;display:flex;align-items:center;gap:12px}
+.section-label .bar{flex:1;height:1px;background:var(--line)}
+.benefits{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.benefit{background:#fff;padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
+.benefit__n{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1.1rem;color:var(--gold-b);flex:none;min-width:26px}
+.benefit__t{font-size:.98rem;color:var(--ink);font-weight:500}
+
+.testi{display:grid;gap:14px;margin-top:4px}
+.testi__card{padding:22px}
+.testi__quote{font-size:1rem;color:var(--ink);font-style:italic;margin-bottom:12px}
+.testi__who{font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.05em;font-size:.78rem;font-weight:700;color:var(--mute)}
+.placeholder-note{background:repeating-linear-gradient(45deg,#fff,#fff 10px,#F2F2F7 10px,#F2F2F7 20px);border:1px dashed var(--gold-b);padding:16px 18px;font-size:.85rem;color:var(--body)}
+.placeholder-note b{color:var(--gold-b);font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.05em}
+
+.cta-block{margin:42px 0 0}
+
+/* ====== ÉTAPES QUIZ ====== */
+.step{animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.step h2{font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:14px}
+.step__sub{font-size:1.04rem;color:var(--body);margin-bottom:30px}
+
+.options{display:grid;gap:12px}
+.opt{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  background:#fff;border:1px solid var(--line);padding:20px 22px;cursor:pointer;
+  font-family:'Inter',sans-serif;font-size:1.04rem;color:var(--ink);font-weight:500;
+  transition:border-color .15s ease, transform .12s ease, box-shadow .15s ease;
+  position:relative;width:100%;
+}
+.opt:hover{border-color:var(--gold-b);transform:translateX(3px);box-shadow:-3px 0 0 var(--gold-b)}
+.opt.is-selected{border-color:var(--gold-b);box-shadow:inset 0 0 0 1px var(--gold-b)}
+.opt__emoji{font-size:1.3rem;flex:none;line-height:1}
+.opt__txt{flex:1}
+.opt__chev{flex:none;color:var(--line);transition:color .15s,transform .15s}
+.opt:hover .opt__chev{color:var(--gold-b);transform:translateX(3px)}
+
+/* échelle / likert */
+.scale-group{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.scale-row{background:#fff;padding:22px}
+.scale-row__txt{font-size:1rem;color:var(--ink);font-weight:500;margin-bottom:16px}
+.scale-dots{display:flex;gap:8px;justify-content:space-between;max-width:340px}
+.dot{flex:1;aspect-ratio:1;max-width:46px;border:1px solid var(--line);background:#fff;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--mute);font-size:.95rem;transition:all .12s ease;display:flex;align-items:center;justify-content:center}
+.dot:hover{border-color:var(--gold-b);color:var(--ink)}
+.dot.is-on{background:var(--gradient);border-color:transparent;color:var(--on-accent)}
+.scale-ends{display:flex;justify-content:space-between;max-width:340px;margin-top:8px;font-size:.74rem;color:var(--mute);font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.05em}
+
+/* écran "statement" / interstitiel */
+.statement{text-align:center;padding:20px 0}
+.statement h2{font-size:clamp(1.6rem,4.4vw,2.4rem);margin-bottom:20px}
+.statement__body{font-size:1.14rem;color:var(--body);max-width:560px;margin:0 auto 30px}
+.statement__body .big{color:var(--ink);font-weight:600}
+.proofslots{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:28px 0}
+.proofslot{aspect-ratio:4/5;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.62rem;color:var(--mute);text-align:center;font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.04em;line-height:1.4;padding:8px}
+.proofslot img{width:100%;height:100%;object-fit:cover}
+
+.nav-back{margin-top:26px;text-align:center}
+
+/* ====== OPTIN ====== */
+.optin{padding:10px 0}
+.optin__head{text-align:center;margin-bottom:34px}
+.optin__emoji{font-size:2.6rem;margin-bottom:14px}
+.optin h2{font-size:clamp(1.7rem,4.4vw,2.4rem);margin-bottom:14px}
+.optin__sub{font-size:1.08rem;color:var(--body);max-width:520px;margin:0 auto}
+.optin__sub b{color:var(--ink)}
+.form{padding:30px}
+.field{margin-bottom:18px}
+.field label{display:block;font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:.74rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.field input{width:100%;padding:15px 16px;border:1px solid var(--line);background:var(--bg);font-family:'Inter',sans-serif;font-size:1rem;color:var(--ink);transition:border-color .15s}
+.field input:focus{outline:none;border-color:var(--gold-b);background:#fff}
+.rgpd{display:flex;gap:11px;align-items:flex-start;margin:8px 0 22px;font-size:.84rem;color:var(--body);cursor:pointer}
+.rgpd input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--gold-b);cursor:pointer}
+.form__micro{text-align:center;font-size:.85rem;color:var(--mute);margin-top:16px}
+.form__err{color:#c0392b;font-size:.85rem;margin-top:-6px;margin-bottom:14px;display:none}
+.form__err.show{display:block}
+
+/* ====== DONE ====== */
+.done{text-align:center;padding:50px 0;animation:fade .5s ease}
+.done__check{width:84px;height:84px;margin:0 auto 26px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center}
+.done__check svg{width:40px;height:40px}
+.done h2{font-size:clamp(1.8rem,5vw,2.6rem);margin-bottom:16px}
+.done__sub{font-size:1.1rem;color:var(--body);max-width:480px;margin:0 auto}
+.done__wa{display:inline-flex;align-items:center;gap:10px;margin-top:30px;font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:.82rem;font-weight:700;color:var(--mute);border:1px solid var(--line);padding:12px 20px;background:#fff}
+
+/* footer */
+.foot{border-top:1px solid var(--line);padding:30px 24px;text-align:center;position:relative;z-index:1}
+.foot img{height:18px;opacity:.5;margin-bottom:10px}
+.foot p{font-size:.78rem;color:var(--mute)}
+
+@media(max-width:768px){
+  .stage{padding:32px 0 60px}
+  .hero__mark{width:240px;top:-10px;right:-30px}
+  .author{flex-direction:column;text-align:center;align-items:center}
+  .opt{padding:17px 18px}
+}
+/* --- ajouts landing (structure type lecopyquiz) --- */
+.authbar{text-align:center;font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;font-weight:700;color:var(--mute);padding:22px 24px 0}
+.hero__twist{font-size:1.06rem;color:var(--body);margin:0 0 10px;font-style:italic}
+.hero__ex{font-size:.86rem;color:var(--body);background:#fff;border:1px dashed var(--line);border-left:3px solid var(--accent);padding:11px 14px;margin:10px 0 16px;text-align:left;line-height:1.5}
+.hero__ex b{color:var(--ink);font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:.68rem;display:block;margin-bottom:4px}
+.hero__video{margin:20px 0 6px}
+.video-slot{aspect-ratio:16/9;width:100%;background:#fff;border:1px dashed var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;transition:border-color .15s}
+.video-slot:hover{border-color:var(--accent)}
+.video-slot__play{width:56px;height:56px;border-radius:50%;background:var(--gradient);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-size:1.3rem;padding-left:4px}
+.video-slot__label{font-size:.8rem;color:var(--mute);max-width:80%;text-align:center;font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:.04em;line-height:1.4}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0}
+.stat{background:#fff;padding:22px 14px;text-align:center}
+.stat__n{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1.7rem;color:var(--ink);line-height:1}
+.stat__l{font-size:.75rem;color:var(--mute);margin-top:6px;line-height:1.3}
+.finalcta{background:#fff;border:1px solid var(--line);border-top:3px solid transparent;border-image:var(--gradient) 1;padding:40px 26px;text-align:center;margin:22px 0 8px}
+.finalcta h2{font-size:clamp(1.4rem,4vw,2rem);margin-bottom:16px}
+.finalcta .proofcount{margin:16px 0 0}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="vlines"><span></span><span></span></div>
+
+<header class="topbar">
+  <!-- TON LOGO — remplace par:  <img src="ton-logo.png" alt="Ta marque">  (hauteur ~28px) -->
+  <span class="logo-slot">TON LOGO</span>
+</header>
+
+<div class="progress" id="progress" style="display:none"><div class="progress__bar" id="progressBar"></div></div>
+
+<main class="stage">
+  <div class="wrap" id="app"><!-- rendu dynamique --></div>
+</main>
+
+<footer class="foot">
+  <span class="logo-slot logo-slot--sm">TON LOGO</span>
+  <p>© Ta marque — remplace ce pied de page.</p>
+</footer>
+
+<script>
+/* ===========================================================================
+ *  ███  ZONE À MODIFIER  ███
+ *  Tu édites UNIQUEMENT l'objet QUIZ ci-dessous.
+ *  Chaque bloc a une note  // POURQUOI  qui t'explique le rôle stratégique.
+ *  Ne touche pas au MOTEUR (tout en dessous de "NE PAS MODIFIER").
+ * ===========================================================================*/
+
+const QUIZ = {
+
+  /* ----- 1. RÉGLAGES ------------------------------------------------------ */
+  marque: {
+    dejaCompletes: "[ X ]",   // preuve sociale : ton vrai nombre (ou retire la ligne)
+    nbEtapes: 13,             // nb de pages-question (barre de progression)
+    webhookUrl: ""            // URL de ton outil de suivi (vide = mode test)
+  },
+
+  /* ----- 2. LANDING — structure prouvée (type Copy Quiz) ------------------ */
+  landing: {
+    // Barre d'autorité (au-dessus du titre) : nom + 2 preuves chiffrées.
+    barreAutorite: "[ Ton nom ] · [ preuve chiffrée ] · [ preuve chiffrée ]",
+    eyebrow: "Mode template · remplace tout ce qui est entre [ crochets ]",
+    /* TITRE = [action courte] + [livrable NOMMÉ] + [résultat précis + chiffre].
+       Highlight = la spécificité (le chiffre/résultat). */
+    titre: "Complète ce quiz de [ 3 min ] et récupère [ ton plan nommé ] pour [ ton résultat précis + chiffre ]",
+    titreHighlight: "[ ton résultat précis + chiffre ]",
+    // TWIST = le MYSTÈRE : casse l'objection n°1.
+    titreTwist: "…même si [ ton objection n°1 ]",
+    // EXEMPLE concret (pour voir le niveau attendu — remplace par le tien) :
+    titreExemple: "Fais ce quiz de 3 min et repars avec ta Feuille de Route Client pour signer 3 clients à 1 500€ ce mois-ci — même si personne ne te connaît encore.",
+    sousTitre: "[ Sous-titre : reçois — gratuitement — [ ton plan nommé ] personnalisé pour [ ton résultat ] ]",
+    // VIDÉO (1 min) « pourquoi j'ai créé ce quiz » — remplace par ta vraie vidéo.
+    video: { url: "", label: "▶ Ta vidéo (1 min) : pourquoi tu as créé ce quiz" },
+    badges: ["[ bénéfice ]", "[ bénéfice ]", "[ bénéfice ]"],
+
+    avantagesTitre: "[ Nom de ton plan ] — ce que tu repars avec",
+    // Des RÉVÉLATIONS/bénéfices (pas des features). Exemple donné sur le 1er.
+    avantages: [
+      "[ Bénéfice 1 — ex : savoir enfin pourquoi personne ne répond à ta prospection ]",
+      "[ Bénéfice 2 ]",
+      "[ Bénéfice 3 ]",
+      "[ Bénéfice 4 ]"
+    ],
+
+    temoignagesTitre: "[ Titre : ils l'ont fait — ta preuve sociale ]",
+    temoignages: [
+      // { quote: "Verbatim réel.", who: "Prénom — métier" }
+    ],
+
+    auteur: {
+      nom: "Moi, c'est [ Ton prénom ]",
+      role: "[ Ce que tu fais + pour qui, en une ligne ]",
+      bio: "[ Ton histoire courte : depuis quand, tes résultats concrets et chiffrés, ton programme phare (nomme-le). Du factuel, zéro superlatif. ]",
+      photoUrl: ""
+    },
+    // Grille de stats (preuve chiffrée) — 4 blocs.
+    stats: [
+      { chiffre: "[ chiffre ]", label: "[ ce que ça prouve ]" },
+      { chiffre: "[ chiffre ]", label: "[ ce que ça prouve ]" },
+      { chiffre: "[ chiffre ]", label: "[ ce que ça prouve ]" },
+      { chiffre: "[ chiffre ]", label: "[ ce que ça prouve ]" }
+    ],
+    finalTitre: "[ Titre final : prêt à découvrir [ ton plan nommé ] ? ]",
+    ctaTexte: "[ CTA — l'action ]"
+  },
+
+  /* ----- 3. LES ÉTAPES ------------------------------------------------------
+   * Chaque étape te DIT quoi écrire (question), POURQUOI (sousTitre) et donne un EXEMPLE.
+   * Tu remplaces les [ crochets ] par TES mots. Le score {profil:pts} alimente le profil
+   * (silencieux) envoyé avec le lead. Tu gardes la mécanique.
+   * ------------------------------------------------------------------------ */
+  etapes: [
+
+    { id: "engagement", type: "single",
+      question: "❯ Ta 1re question : un micro-oui facile",
+      sousTitre: "Pourquoi : le premier oui crée la cohérence — qui dit oui ici ira plus loin. À faire : une question dont la seule réponse logique est OUI. · Ex : « Si je te donne le plan exact, tu t'engages à l'appliquer ? »",
+      options: [ { txt: "[ Réponse unique — un oui facile ]", emoji: "" } ]
+    },
+
+    { id: "situation", type: "single",
+      question: "❯ Situe ton prospect : où en est-il ?",
+      sousTitre: "Pourquoi : tu ne peux pas parler juste à quelqu'un que tu n'as pas situé. À faire : 3-4 états, chacun oriente vers un profil. · Ex : « Où en es-tu ? » → Je démarre / Quelques clients / Je stagne / Je scale.",
+      options: [
+        { txt: "[ Réponse → profil DÉMARRAGE ]", emoji: "", score: { demarrage: 2 } },
+        { txt: "[ Réponse → DÉMARRAGE / BLOQUÉ ]", emoji: "", score: { demarrage: 1, bloque: 1 } },
+        { txt: "[ Réponse → BLOQUÉ / CROISSANCE ]", emoji: "", score: { bloque: 1, croissance: 1 } },
+        { txt: "[ Réponse → profil CROISSANCE ]", emoji: "", score: { croissance: 2 } }
+      ]
+    },
+
+    { id: "tension", type: "statement",
+      titre: "❯ Écris ici ta phrase de tension",
+      corps: "Nomme une douleur que ta niche ressent vraiment — un fait, un chiffre, une phrase sèche. <span class='big'>Puis ouvre une boucle : « il existe une approche… » sans tout dévoiler.</span> Pourquoi : sans tension, pas de mouvement. <b>Ex :</b> « 8 indépendants sur 10 stagnent — pas par manque de talent, par manque de méthode. »",
+      proofs: 0, cta: "[ CTA ]"
+    },
+
+    { id: "motivation", type: "single",
+      question: "❯ Fais-lui verbaliser son moteur profond",
+      sousTitre: "Pourquoi : quand il écrit son « pourquoi », c'est lui qui s'engage — plus toi. À faire : des réponses qui touchent l'identité, pas juste l'argent. · Ex : « Qu'est-ce qui te pousse vraiment ? » → Liberté / Prouver / Impact / Sécurité.",
+      options: [
+        { txt: "[ Réponse → DÉMARRAGE ]", emoji: "", score: { demarrage: 1 } },
+        { txt: "[ Réponse → BLOQUÉ ]", emoji: "", score: { bloque: 1 } },
+        { txt: "[ Réponse → CROISSANCE ]", emoji: "", score: { croissance: 1 } },
+        { txt: "[ Réponse → DÉMARRAGE ]", emoji: "", score: { demarrage: 1 } }
+      ]
+    },
+
+    { id: "deja_essaye", type: "fork",
+      question: "❯ La question qui sépare deux réalités",
+      sousTitre: "Pourquoi : celui qui a déjà essayé et celui qui n'a jamais osé n'ont pas le même problème. À faire : une question oui/non qui envoie vers 2 branches. · Ex : « As-tu déjà essayé de lancer ton activité ? » → Oui / Non.",
+      options: [
+        { txt: "[ Réponse OUI → sa branche ]", emoji: "", goto: "branche_oui" },
+        { txt: "[ Réponse NON → sa branche ]", emoji: "", goto: "branche_non" }
+      ]
+    },
+
+    { id: "branche_oui", type: "single", next: "reassurance",
+      question: "❯ Branche OUI : son point de blocage précis",
+      sousTitre: "Pourquoi : il met lui-même le doigt sur ce que ton offre résoudra. À faire : 3-4 blocages typiques de ceux qui ont déjà essayé. · Ex : « Ton plus gros blocage ? » → Trouver des clients / Fixer mes prix / Structurer mon offre.",
+      options: [
+        { txt: "[ Blocage → BLOQUÉ ]", emoji: "", score: { bloque: 2 } },
+        { txt: "[ Blocage → BLOQUÉ ]", emoji: "", score: { bloque: 1 } },
+        { txt: "[ Blocage → CROISSANCE ]", emoji: "", score: { croissance: 1 } },
+        { txt: "[ Blocage → CROISSANCE ]", emoji: "", score: { croissance: 1 } }
+      ]
+    },
+
+    { id: "branche_non", type: "single", next: "reassurance",
+      question: "❯ Branche NON : ce qui l'a retenu",
+      sousTitre: "Pourquoi : il s'avoue à lui-même son frein. À faire : 3-4 freins typiques de ceux qui n'ont jamais osé. · Ex : « Qu'est-ce qui t'a retenu ? » → La peur / Le temps / Je sais pas par où commencer.",
+      options: [
+        { txt: "[ Frein → DÉMARRAGE ]", emoji: "", score: { demarrage: 2 } },
+        { txt: "[ Frein → DÉMARRAGE ]", emoji: "", score: { demarrage: 1 } },
+        { txt: "[ Frein → DÉMARRAGE ]", emoji: "", score: { demarrage: 1 } },
+        { txt: "[ Frein → DÉMARRAGE ]", emoji: "", score: { demarrage: 2 } }
+      ]
+    },
+
+    { id: "reassurance", type: "statement",
+      titre: "❯ Referme la fourche : déculpabilise",
+      corps: "Enlève la honte sans enlever la responsabilité, puis reformule le besoin vers ta solution. <span class='big'>Pas une méthode secrète — un plan adapté à son profil.</span> Pourquoi : un prospect qui a honte se ferme. <b>Ex :</b> « C'est normal : personne ne t'a montré la structure. »",
+      proofs: 0, cta: "[ CTA ]"
+    },
+
+    { id: "douleurs", type: "scale",
+      question: "❯ 4-5 affirmations à noter (l'auto-diagnostic)",
+      sousTitre: "Pourquoi : un problème noté 5/5 par lui-même n'est plus discutable. À faire : des phrases-douleurs à la 1re personne. · Ex : « Je cours après mes clients » · « Je brade mes prix » · « J'avance au feeling ».",
+      bornes: { min: "[ borne basse ]", max: "[ borne haute ]" },
+      phrases: [
+        "[ Affirmation-douleur 1 ]",
+        "[ Affirmation-douleur 2 ]",
+        "[ Affirmation-douleur 3 ]",
+        "[ Affirmation-douleur 4 ]"
+      ]
+    },
+
+    { id: "ca_actuel", type: "single",
+      question: "❯ Ancre son point de départ (chiffré)",
+      sousTitre: "Pourquoi : sans point A, pas d'écart, pas d'urgence. À faire : des tranches adaptées à ta niche. · Ex : 0€ / moins de 500€ / 500–2 000€ / plus de 2 000€ par mois.",
+      options: [
+        { txt: "[ Tranche la plus basse → DÉMARRAGE ]", emoji: "", score: { demarrage: 2 } },
+        { txt: "[ Tranche basse → BLOQUÉ ]", emoji: "", score: { bloque: 2 } },
+        { txt: "[ Tranche moyenne → CROISSANCE ]", emoji: "", score: { croissance: 1 } },
+        { txt: "[ Tranche haute → CROISSANCE ]", emoji: "", score: { croissance: 2 } }
+      ]
+    },
+
+    { id: "ca_objectif", type: "single",
+      question: "❯ Ancre sa destination (chiffrée)",
+      sousTitre: "Pourquoi : l'écart entre où il est et où il veut être, c'est ce que tu vends. À faire : des tranches d'objectif. · Ex : un complément / remplacer un salaire / vivre confortablement / scaler.",
+      options: [
+        { txt: "[ Objectif modeste → DÉMARRAGE ]", emoji: "", score: { demarrage: 1 } },
+        { txt: "[ Objectif moyen → BLOQUÉ ]", emoji: "", score: { bloque: 1 } },
+        { txt: "[ Objectif élevé → CROISSANCE ]", emoji: "", score: { croissance: 1 } },
+        { txt: "[ Objectif fort → CROISSANCE ]", emoji: "", score: { croissance: 2 } }
+      ]
+    },
+
+    { id: "preuve", type: "statement",
+      titre: "❯ Place ta preuve, pile au moment du doute",
+      corps: "« D'autres comme toi l'ont fait. » <span class='big'>Une VRAIE capture, un VRAI résultat. Jamais d'invention.</span> Pourquoi : « c'est possible pour quelqu'un comme moi » désamorce la dernière excuse. <b>Ex :</b> 3 captures de résultats clients réels + une phrase de contexte.",
+      proofs: 3, cta: "[ CTA ]"
+    },
+
+    { id: "projection", type: "single",
+      question: "❯ Projette-le dans sa vie d'après",
+      sousTitre: "Pourquoi : on agit pour une image, pas pour une promesse abstraite. À faire : des scènes concrètes de l'après. · Ex : « Objectif atteint, qu'est-ce qui te ferait le plus kiffer ? » → Quitter mon job / Voyager / Temps en famille / Fierté.",
+      options: [
+        { txt: "[ Projection → BLOQUÉ ]", emoji: "", score: { bloque: 1 } },
+        { txt: "[ Projection → CROISSANCE ]", emoji: "", score: { croissance: 1 } },
+        { txt: "[ Projection → DÉMARRAGE ]", emoji: "", score: { demarrage: 1 } },
+        { txt: "[ Projection → CROISSANCE ]", emoji: "", score: { croissance: 1 } }
+      ]
+    },
+
+    { id: "qualif", type: "single",
+      question: "❯ La question qui qualifie (le filtre)",
+      sousTitre: "Pourquoi : elle te dit qui est prêt à être accompagné vs qui veut faire seul. À faire : des réponses qui trient le chaud du curieux. · Ex : « Où en es-tu ? » → Il me manque un plan / Je fais seul / J'ai besoin d'être accompagné.",
+      options: [
+        { txt: "[ Réponse → BLOQUÉ (chaud) ]", emoji: "", score: { bloque: 1 } },
+        { txt: "[ Réponse → CROISSANCE (autonome) ]", emoji: "", score: { croissance: 1 } },
+        { txt: "[ Réponse → DÉMARRAGE (hésitant) ]", emoji: "", score: { demarrage: 1 } },
+        { txt: "[ Réponse → BLOQUÉ (très chaud) ]", emoji: "", score: { bloque: 2 } }
+      ]
+    },
+
+    { id: "engagement_final", type: "single",
+      question: "❯ Le dernier oui avant la capture",
+      sousTitre: "Pourquoi : on verrouille l'intention pendant qu'elle est chaude. À faire : une question qui fait dire oui juste avant le contact. · Ex : « Prêt à recevoir ton plan et à l'appliquer dès cette semaine ? »",
+      options: [ { txt: "[ Réponse unique — le oui final ]", emoji: "" } ]
+    }
+
+  ],
+
+  /* ----- 4. OPTIN (capture) ----------------------------------------------- */
+  optin: {
+    emoji: "",
+    titre: "❯ Titre optin : annonce que le résultat arrive",
+    sousTitre: "[ Sous-titre : dis que tu envoies son résultat / son plan sur WhatsApp ]  ·  Ex : « Ton plan arrive sur WhatsApp dans 2 minutes. »",
+    champs: { prenom: "Prénom", email: "Email", whatsapp: "Numéro WhatsApp" },
+    rgpd: "J'accepte de recevoir mon résultat et des conseils par email / WhatsApp. Je peux me désinscrire à tout moment.",
+    cta: "[ CTA ]",
+    micro: "[ Micro-rassurance : gratuit + ce qu'il reçoit ]"
+  },
+
+  /* ----- 5. ÉCRAN FINAL ---------------------------------------------------- */
+  fin: {
+    titre: "❯ Confirmation",
+    sousTitre: "[ Dis-lui de surveiller son WhatsApp — son plan arrive ]",
+    rappelWhatsapp: "Réponse envoyée sur WhatsApp"
+  }
+};
+
+/* ===========================================================================
+ *  ███  NE PAS MODIFIER EN DESSOUS — MOTEUR DU QUIZ  ███
+ *  (sauf si tu sais ce que tu fais)
+ * ===========================================================================*/
+(function(){
+  const app = document.getElementById('app');
+  const progress = document.getElementById('progress');
+  const progressBar = document.getElementById('progressBar');
+
+  const state = { history: [], answers: {}, scale: {} };
+
+  const byId = id => QUIZ.etapes.find(e => e.id === id);
+  const esc = s => String(s);
+
+  /* ---------- LANDING ---------- */
+  function renderLanding(){
+    progress.style.display = 'none';
+    const L = QUIZ.landing;
+    let titre = esc(L.titre);
+    if(L.titreHighlight && titre.includes(L.titreHighlight)){
+      titre = titre.replace(L.titreHighlight, `<span class="hl">${esc(L.titreHighlight)}</span>`);
+    }
+    const badges = L.badges.map(b => `<span class="badge">${checkSvg()} ${esc(b)}</span>`).join('');
+    const benefits = L.avantages.map((a,i) =>
+      `<div class="benefit"><span class="benefit__n">${String(i+1).padStart(2,'0')}</span><span class="benefit__t">${esc(a)}</span></div>`
+    ).join('');
+    const stats = (L.stats||[]).map(s =>
+      `<div class="stat"><div class="stat__n">${esc(s.chiffre)}</div><div class="stat__l">${esc(s.label)}</div></div>`
+    ).join('');
+
+    const photo = L.auteur.photoUrl
+      ? `<img src="${esc(L.auteur.photoUrl)}" alt="${esc(L.auteur.nom)}">`
+      : 'Photo';
+
+    let testiBlock;
+    if(L.temoignages && L.temoignages.length){
+      testiBlock = `<div class="testi">${L.temoignages.map(t =>
+        `<div class="card card--top testi__card"><p class="testi__quote">“${esc(t.quote)}”</p><div class="testi__who">${esc(t.who)}</div></div>`
+      ).join('')}</div>`;
+    } else {
+      testiBlock = `<div class="placeholder-note"><b>À remplir :</b> mets ici tes VRAIES preuves (captures de résultats, verbatims). N'invente jamais — uniquement du réel et validé.</div>`;
+    }
+
+    const videoBlock = (L.video && L.video.label) ? `
+      <div class="hero__video">
+        <div class="video-slot">
+          <div class="video-slot__play">▶</div>
+          <div class="video-slot__label">${esc(L.video.label)}</div>
+        </div>
+      </div>` : '';
+
+    const ctaBtn = (id) => `<button class="btn" id="${id}">${esc(L.ctaTexte)} →</button>`;
+    const proof = `<p class="proofcount">Déjà réalisé par <b>${QUIZ.marque.dejaCompletes}</b> personnes</p>`;
+
+    app.innerHTML = `
+      ${L.barreAutorite ? `<div class="authbar">${esc(L.barreAutorite)}</div>` : ''}
+      <section class="hero">
+        <div class="hero__inner">
+          <span class="eyebrow">${esc(L.eyebrow)}</span>
+          <h1>${titre}</h1>
+          ${L.titreTwist ? `<p class="hero__twist">${esc(L.titreTwist)}</p>` : ''}
+          ${L.titreExemple ? `<p class="hero__ex"><b>Exemple concret</b> ${esc(L.titreExemple)}</p>` : ''}
+          ${videoBlock}
+          <p class="hero__sub">${esc(L.sousTitre)}</p>
+          <div class="badges">${badges}</div>
+          <div class="cta-block">${ctaBtn('startBtnHero')}</div>
+          ${proof}
+        </div>
+      </section>
+
+      <div class="card card--top author">
+        <div class="author__ph">${photo}</div>
+        <div>
+          <div class="author__name">${esc(L.auteur.nom)}</div>
+          <div class="author__role">${esc(L.auteur.role)}</div>
+          <p class="author__bio">${esc(L.auteur.bio)}</p>
+        </div>
+      </div>
+
+      ${stats ? `<div class="stats">${stats}</div>` : ''}
+
+      <div class="section-label"><span>${esc(L.avantagesTitre)}</span><span class="bar"></span></div>
+      <div class="benefits">${benefits}</div>
+
+      <div class="cta-block">${ctaBtn('startBtnMid')}</div>
+
+      <div class="section-label"><span>${esc(L.temoignagesTitre)}</span><span class="bar"></span></div>
+      ${testiBlock}
+
+      <div class="finalcta">
+        ${L.finalTitre ? `<h2>${esc(L.finalTitre)}</h2>` : ''}
+        ${ctaBtn('startBtn')}
+        ${proof}
+      </div>
+    `;
+    ['startBtnHero','startBtnMid','startBtn'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.onclick = () => goTo(QUIZ.etapes[0].id, true);
+    });
+    window.scrollTo(0,0);
+  }
+
+  /* ---------- NAVIGATION ---------- */
+  function goTo(id, isStart){
+    if(!isStart) state.history.push(currentId());
+    else state.history = [];
+    _current = id;
+    renderStep(id);
+  }
+  let _current = null;
+  function currentId(){ return _current; }
+
+  function back(){
+    const prev = state.history.pop();
+    if(prev){ _current = prev; renderStep(prev); }
+    else renderLanding();
+  }
+
+  function resolveNext(step, optGoto){
+    if(optGoto) return optGoto;
+    if(step.next) return step.next;
+    const idx = QUIZ.etapes.findIndex(e => e.id === step.id);
+    // saute la branche alternative si on sort d'un fork-branch déjà gérée par "next"
+    if(idx >= 0 && idx < QUIZ.etapes.length - 1) return QUIZ.etapes[idx+1].id;
+    return null; // -> optin
+  }
+
+  function advance(step, optGoto){
+    const nxt = resolveNext(step, optGoto);
+    if(nxt && byId(nxt)) goTo(nxt);
+    else renderOptin();
+  }
+
+  function updateProgress(step){
+    progress.style.display = 'block';
+    const total = QUIZ.marque.nbEtapes || QUIZ.etapes.length;
+    const done = state.history.filter(h => { const s = byId(h); return s; }).length;
+    const pct = Math.min(98, Math.round((done / total) * 100) + 6);
+    progressBar.style.width = pct + '%';
+  }
+
+  /* ---------- RENDU D'UNE ÉTAPE ---------- */
+  function renderStep(id){
+    const step = byId(id);
+    if(!step){ renderOptin(); return; }
+    updateProgress(step);
+    if(step.type === 'statement') return renderStatement(step);
+    if(step.type === 'scale') return renderScale(step);
+    return renderChoice(step); // single + fork
+  }
+
+  function stepHeader(step){
+    const total = QUIZ.marque.nbEtapes || QUIZ.etapes.length;
+    const n = state.history.filter(h => byId(h)).length + 1;
+    return `<div class="stepmeta"><span>Étape <b>${n}</b> / ${total}</span><span class="bar"></span></div>`;
+  }
+
+  function renderChoice(step){
+    const opts = step.options.map((o,i) =>
+      `<button class="opt" data-i="${i}">
+         ${o.emoji ? `<span class="opt__emoji">${o.emoji}</span>` : ''}
+         <span class="opt__txt">${esc(o.txt)}</span>
+         <span class="opt__chev">${chevSvg()}</span>
+       </button>`
+    ).join('');
+
+    app.innerHTML = `
+      <div class="step">
+        ${stepHeader(step)}
+        <h2>${esc(step.question)}</h2>
+        ${step.sousTitre ? `<p class="step__sub">${esc(step.sousTitre)}</p>` : ''}
+        <div class="options">${opts}</div>
+        ${backLink()}
+      </div>`;
+
+    app.querySelectorAll('.opt').forEach(btn => {
+      btn.onclick = () => {
+        const o = step.options[+btn.dataset.i];
+        btn.classList.add('is-selected');
+        state.answers[step.id] = o.txt;
+        addScore(o.score);
+        setTimeout(() => advance(step, o.goto), 240);
+      };
+    });
+    bindBack();
+    window.scrollTo(0,0);
+  }
+
+  function renderScale(step){
+    const rows = step.phrases.map((p,i) => `
+      <div class="scale-row">
+        <div class="scale-row__txt">${esc(p)}</div>
+        <div class="scale-dots" data-row="${i}">
+          ${[1,2,3,4,5].map(n => `<button class="dot" data-n="${n}">${n}</button>`).join('')}
+        </div>
+        <div class="scale-ends"><span>${esc(step.bornes.min)}</span><span>${esc(step.bornes.max)}</span></div>
+      </div>`).join('');
+
+    app.innerHTML = `
+      <div class="step">
+        ${stepHeader(step)}
+        <h2>${esc(step.question)}</h2>
+        ${step.sousTitre ? `<p class="step__sub">${esc(step.sousTitre)}</p>` : ''}
+        <div class="scale-group">${rows}</div>
+        <div class="cta-block"><button class="btn" id="scaleNext" disabled style="opacity:.4">Continuer →</button></div>
+        ${backLink()}
+      </div>`;
+
+    const answers = {};
+    app.querySelectorAll('.scale-dots').forEach(group => {
+      group.querySelectorAll('.dot').forEach(dot => {
+        dot.onclick = () => {
+          group.querySelectorAll('.dot').forEach(d => d.classList.remove('is-on'));
+          dot.classList.add('is-on');
+          answers[group.dataset.row] = +dot.dataset.n;
+          const btn = document.getElementById('scaleNext');
+          if(Object.keys(answers).length === step.phrases.length){
+            btn.disabled = false; btn.style.opacity = '1';
+          }
+        };
+      });
+    });
+    document.getElementById('scaleNext').onclick = () => {
+      if(Object.keys(answers).length < step.phrases.length) return;
+      state.scale[step.id] = answers;
+      const sum = Object.values(answers).reduce((a,b)=>a+b,0);
+      // score silencieux : plus la douleur est forte, plus c'est un lead "bloqué"/chaud
+      if(sum >= step.phrases.length * 4) addScore({ bloque: 2 });
+      else if(sum >= step.phrases.length * 3) addScore({ bloque: 1 });
+      advance(step);
+    };
+    bindBack();
+    window.scrollTo(0,0);
+  }
+
+  function renderStatement(step){
+    let proofs = '';
+    if(step.proofs > 0){
+      proofs = `<div class="proofslots">${Array.from({length:step.proofs}).map(()=>
+        `<div class="proofslot">Preuve / capture réelle</div>`).join('')}</div>`;
+    }
+    app.innerHTML = `
+      <div class="step statement">
+        <h2>${esc(step.titre)}</h2>
+        <p class="statement__body">${step.corps}</p>
+        ${proofs}
+        <div class="cta-block"><button class="btn" id="stNext">${esc(step.cta || 'Continuer')} →</button></div>
+        ${backLink()}
+      </div>`;
+    document.getElementById('stNext').onclick = () => advance(step);
+    bindBack();
+    window.scrollTo(0,0);
+  }
+
+  /* ---------- OPTIN ---------- */
+  function renderOptin(){
+    updateProgressFull();
+    const O = QUIZ.optin;
+    app.innerHTML = `
+      <div class="optin">
+        <div class="optin__head">
+          <div class="optin__emoji">${O.emoji}</div>
+          <h2>${esc(O.titre)}</h2>
+          <p class="optin__sub">${O.sousTitre}</p>
+        </div>
+        <div class="card card--top form">
+          <div class="field"><label>${esc(O.champs.prenom)}</label><input id="f_prenom" type="text" autocomplete="given-name"></div>
+          <div class="field"><label>${esc(O.champs.email)}</label><input id="f_email" type="email" autocomplete="email"></div>
+          <div class="field"><label>${esc(O.champs.whatsapp)}</label><input id="f_wa" type="tel" autocomplete="tel" placeholder="+33 6 ..."></div>
+          <div class="form__err" id="formErr">Remplis tous les champs et coche la case pour continuer.</div>
+          <label class="rgpd"><input type="checkbox" id="f_rgpd"><span>${esc(O.rgpd)}</span></label>
+          <button class="btn" id="submitBtn">${esc(O.cta)} →</button>
+          <p class="form__micro">${esc(O.micro)}</p>
+        </div>
+        ${backLink()}
+      </div>`;
+    document.getElementById('submitBtn').onclick = submit;
+    bindBack();
+    window.scrollTo(0,0);
+  }
+
+  function updateProgressFull(){
+    progress.style.display = 'block';
+    progressBar.style.width = '100%';
+  }
+
+  function submit(){
+    const prenom = document.getElementById('f_prenom').value.trim();
+    const email  = document.getElementById('f_email').value.trim();
+    const wa     = document.getElementById('f_wa').value.trim();
+    const rgpd   = document.getElementById('f_rgpd').checked;
+    const err    = document.getElementById('formErr');
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!prenom || !emailOk || !wa || !rgpd){ err.classList.add('show'); return; }
+    err.classList.remove('show');
+
+    const payload = {
+      prenom, email, whatsapp: wa,
+      profil: computeProfile(),
+      reponses: state.answers,
+      echelles: state.scale,
+      date: new Date().toISOString()
+    };
+
+    // === POINT D'INTÉGRATION CRM / WHATSAPP ===
+    // Si webhookUrl est rempli, on envoie le lead. Sinon, on log dans la console (mode test).
+    if(QUIZ.marque.webhookUrl){
+      fetch(QUIZ.marque.webhookUrl, {
+        method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
+      }).catch(e => console.warn('Webhook KO :', e));
+    } else {
+      console.log('%c[QUIZ] Lead capturé (mode test)', 'color:#111114;font-weight:bold', payload);
+    }
+
+    renderDone();
+  }
+
+  function computeProfile(){
+    const totals = {};
+    QUIZ.etapes.forEach(step => {
+      const ans = state.answers[step.id];
+      if(!ans || !step.options) return;
+      const opt = step.options.find(o => o.txt === ans);
+      if(opt && opt.score) for(const k in opt.score) totals[k] = (totals[k]||0) + opt.score[k];
+    });
+    let best = null, max = -1;
+    for(const k in totals){ if(totals[k] > max){ max = totals[k]; best = k; } }
+    return best || 'demarrage';
+  }
+
+  /* ---------- DONE ---------- */
+  function renderDone(){
+    progress.style.display = 'none';
+    const F = QUIZ.fin;
+    app.innerHTML = `
+      <div class="done">
+        <div class="done__check">${checkBigSvg()}</div>
+        <h2>${esc(F.titre)}</h2>
+        <p class="done__sub">${esc(F.sousTitre)}</p>
+        <div class="done__wa">${waSvg()} ${esc(F.rappelWhatsapp)}</div>
+      </div>`;
+    window.scrollTo(0,0);
+  }
+
+  /* ---------- helpers ---------- */
+  function addScore(score){ if(!score) return; /* le score est recalculé à la fin depuis les réponses */ }
+  function backLink(){ return `<div class="nav-back"><button class="btn--ghost" id="backBtn">← Précédent</button></div>`; }
+  function bindBack(){ const b = document.getElementById('backBtn'); if(b) b.onclick = back; }
+
+  function checkSvg(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>`; }
+  function chevSvg(){ return `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>`; }
+  function checkBigSvg(){ return `<svg viewBox="0 0 24 24" fill="none" stroke="var(--on-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`; }
+  function waSvg(){ return `<svg viewBox="0 0 24 24" width="16" height="16" fill="#8A8A8A"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1112 20zm4.6-6c-.3-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.6 0a6.5 6.5 0 01-1.9-1.2 7.2 7.2 0 01-1.3-1.7c-.1-.3 0-.4.1-.5l.4-.5.3-.5v-.5c0-.1-.6-1.5-.8-2s-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 2.8 2.8 0 00-.9 2.1 5 5 0 001 2.6 11.3 11.3 0 004.3 3.8c.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3z"/></svg>`; }
+
+  /* ---------- boot ---------- */
+  renderLanding();
+})();
+</script>
+</body>
+</html>
