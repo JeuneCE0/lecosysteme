@@ -2,7 +2,12 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Boussole">
+<link rel="manifest" href="/manifest.json">
 <title>Boussole — Trouve ta phase et sais quoi faire cette semaine · L'Écosystème</title>
 <meta name="description" content="Tu ne stagnes pas parce que tu ne travailles pas assez. Tu travailles sur la mauvaise phase. Diagnostic en 10 secondes, puis le plan exact de ta phase : qui devenir, quoi croire, quoi apprendre, quoi faire.">
 <link rel="canonical" href="https://go.lecosysteme.com/la-boussole">
@@ -318,7 +323,7 @@
 
   /* formulaire d'accès */
   .gform{position:sticky;top:22px;padding:26px 26px 22px}
-  @media(max-width:920px){.gform{position:static;padding:22px 18px 20px}}
+  @media(max-width:920px){.gform{position:static;padding:22px 18px 20px;max-width:620px;margin:0 auto}}
   .gform .gtag{display:inline-block;font-family:var(--display);font-weight:800;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);background:var(--gold-soft);padding:6px 10px}
   .gform h2{font-size:clamp(24px,3vw,31px);margin-top:14px;line-height:1.02}
   .gform .gsub{margin-top:9px;color:var(--text-2);font-size:16px}
@@ -358,8 +363,8 @@
   .welcome b{font-family:var(--display);font-weight:700}
 
   /* ---------- BARRE COLLANTE ---------- */
-  .sbar{position:fixed;left:0;right:0;top:0;z-index:60;background:rgba(255,255,255,.93);backdrop-filter:saturate(1.4) blur(10px);
-    border-bottom:1px solid var(--line);transform:translateY(-101%);transition:transform .25s ease;padding:9px 0}
+  .sbar{position:fixed;left:0;right:0;top:0;z-index:60;background:var(--card);
+    border-bottom:1px solid var(--line-2);transform:translateY(-101%);transition:transform .25s ease;padding:9px 0}
   .sbar.on{transform:none}
   .sbar .in{max-width:var(--maxw);margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:14px}
   .sbar .now{font-family:var(--display);font-weight:700;font-size:14.5px;color:var(--ink);margin-right:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -390,11 +395,33 @@
   .rv.in{opacity:1;transform:none;transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1)}
   @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
 
+  /* ---------- ZONES SÛRES (encoche, barre d'accueil, mode PWA plein écran) ---------- */
+  .top{padding-top:calc(24px + env(safe-area-inset-top,0px))}
+  .gate .top{padding-top:calc(24px + env(safe-area-inset-top,0px))}
+  .sbar{padding-top:calc(9px + env(safe-area-inset-top,0px))}
+  .wrap{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  /* la barre collante ne doit pas manger le haut des sections vers lesquelles on défile */
+  #diagnostic,#suite,.ph,.tabs{scroll-margin-top:calc(66px + env(safe-area-inset-top,0px))}
+
+  /* ---------- CTA COLLANT (le formulaire est sous la ligne de flottaison) ---------- */
+  .scta{position:fixed;left:0;right:0;bottom:0;z-index:55;background:var(--card);
+    box-shadow:0 -8px 24px -18px rgba(10,10,10,.5);border-top:1px solid var(--line-2);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+    transform:translateY(102%);transition:transform .28s cubic-bezier(.2,.7,.2,1);will-change:transform}
+  .scta.on{transform:none}
+  .scta button{width:100%;background:var(--ink);color:#fff;font-family:var(--display);font-weight:700;font-size:16px;
+    padding:16px 18px;display:flex;align-items:center;justify-content:center;gap:10px}
+  .scta button span{color:var(--gold)}
+  .scta .rea{margin-top:7px;text-align:center;font-size:12.5px;color:var(--text-3)}
+  @media(min-width:921px){.scta{display:none}}
+  /* le CTA ne doit jamais recouvrir le pied de page */
+  body.scta-on .gfoot{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+
   /* ---------- IMPRESSION / PDF ---------- */
   @media print{
     body{background:#fff;font-size:12pt}
     body::before,body::after{display:none}
-    .gate,.sbar,.top,.hero .go,.tabs,.tab-nav,.def-hint,.more,.cta .btns,.done-strip,.ph.later{display:none!important}
+    .gate,.sbar,.scta,.top,.hero .go,.tabs,.tab-nav,.def-hint,.more,.cta .btns,.done-strip,.ph.later{display:none!important}
     .ph-body,.pane,#path,.verdict{display:block!important}
     .ph{page-break-inside:avoid;box-shadow:none;border:1px solid var(--line-2)}
     .card,.diag,.lvl,.rung{box-shadow:none;border:1px solid var(--line-2)}
@@ -413,6 +440,11 @@
     <button type="button" class="print" onclick="window.print()">Imprimer</button>
     <button type="button" id="sbarRedo">Refaire le diagnostic</button>
   </div>
+</div>
+
+<div class="scta" id="scta">
+  <button type="button" id="sctaBtn">Ouvrir ma boussole <span>→</span></button>
+  <div class="rea">Gratuit · Accès immédiat sur cette page</div>
 </div>
 
 <div class="gate" id="gate">
@@ -894,6 +926,7 @@ document.getElementById('v-go').addEventListener('click',()=>{const el=document.
   const welcome=document.getElementById('welcome');
   const sbar=document.getElementById('sbar');
   const sbarNow=document.getElementById('sbarNow');
+  const scta=document.getElementById('scta');
 
   /* --- état local : une seule clé, jamais bloquant si le stockage est fermé --- */
   function read(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
@@ -961,6 +994,8 @@ document.getElementById('v-go').addEventListener('click',()=>{const el=document.
   function reveal(prenom,animate){
     gate.hidden=true;
     resource.hidden=false;
+    scta.classList.remove('on');
+    document.body.classList.remove('scta-on');
     if(prenom&&welcome){
       welcome.innerHTML='<b>Salut '+esc(prenom)+'.</b> Ta boussole est ouverte — commence par le diagnostic, il te prend dix secondes.';
       welcome.hidden=false;
@@ -1014,6 +1049,24 @@ document.getElementById('v-go').addEventListener('click',()=>{const el=document.
       chk[k].forEach((v,j)=>{if(inputs[j]&&v){inputs[j].checked=true;inputs[j].dispatchEvent(new Event('change'))}});
     });
   }
+
+  /* --- CTA collant : visible tant que le formulaire ne l'est pas --- */
+  const petit=matchMedia('(max-width:920px)');
+  let btnVisible=true;
+  function syncScta(){
+    const on=!gate.hidden&&petit.matches&&!btnVisible;
+    scta.classList.toggle('on',on);
+    document.body.classList.toggle('scta-on',on);
+  }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(([e])=>{btnVisible=e.isIntersecting;syncScta();},{threshold:.35}).observe(btn);
+  }
+  petit.addEventListener('change',syncScta);
+  document.getElementById('sctaBtn').addEventListener('click',()=>{
+    const vide=[...form.querySelectorAll('input')].find(i=>!i.value.trim());
+    form.scrollIntoView({behavior:'smooth',block:'center'});
+    if(vide) setTimeout(()=>vide.focus({preventScroll:true}),450);
+  });
 
   /* --- barre collante --- */
   document.getElementById('sbarRedo').addEventListener('click',()=>{
