@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boussole — Trouve ta phase et sais quoi faire cette semaine · L'Écosystème</title>
+<meta name="description" content="Tu ne stagnes pas parce que tu ne travailles pas assez. Tu travailles sur la mauvaise phase. Diagnostic en 10 secondes, puis le plan exact de ta phase : qui devenir, quoi croire, quoi apprendre, quoi faire.">
+<link rel="canonical" href="https://go.lecosysteme.com/la-boussole">
+<link rel="shortcut icon" type="image/x-icon" href="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a77523663d66e43e36a872_favicon.png">
+<link rel="apple-touch-icon" href="https://cdn.prod.website-files.com/69a76d282166408194ccd43e/69a77525e515298389742071_6945681208110433b6df0924_webclip.png">
+<meta name="theme-color" content="#F0F0F2">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://go.lecosysteme.com/la-boussole">
+<meta property="og:site_name" content="L'ÉCOSYSTÈME">
+<meta property="og:title" content="La Boussole — de 0 à tes premiers 10K€ par mois, une phase à la fois">
+<meta property="og:description" content="Trouve ta phase en 10 secondes, et sache exactement quoi devenir, croire, apprendre et faire. Ressource gratuite.">
+<meta property="og:image" content="https://assets.cdn.filesafe.space/NsV7HI2MbE6qHtRp410y/media/68dfdf4dc70a6de3cdc87350.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La Boussole — de 0 à tes premiers 10K€ par mois">
+<meta name="twitter:description" content="Trouve ta phase en 10 secondes, et sache exactement quoi devenir, croire, apprendre et faire.">
+<meta name="twitter:image" content="https://assets.cdn.filesafe.space/NsV7HI2MbE6qHtRp410y/media/68dfdf4dc70a6de3cdc87350.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@600;700;800&family=Teachers:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F0F0F2;
+    --card:#FFFFFF;
+    --card-2:#F7F7F9;
+    --ink:#0A0A0A;
+    --text:#1C1C1F;
+    --text-2:#55555C;
+    --text-3:#8A8A92;
+    --line:#E3E3E8;
+    --line-2:#D2D2D9;
+    --gold:#FFBF00;
+    --gold-2:#FF9D00;
+    --gold-grad:linear-gradient(90deg,#FFBF00,#FF9D00);
+    --gold-soft:#FFF6D9;
+    --gold-ink:#B86E00;
+    --red:#E0492E;
+    --red-soft:#FDECE8;
+    --green:#1F9D55;
+    --green-soft:#E6F6EC;
+    --display:"Eurostile","Saira",system-ui,sans-serif;
+    --body:"Teachers",Georgia,serif;
+    --maxw:980px;
+    --sh:0 10px 30px -18px rgba(10,10,10,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(10,10,10,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(10,10,10,.04) 1px,transparent 1px);background-size:60px 60px}
+  body::after{content:"";position:fixed;top:0;bottom:0;left:14%;width:72%;z-index:0;pointer-events:none;border-left:1px solid rgba(255,157,0,.28);border-right:1px solid rgba(255,157,0,.28)}
+  @media(max-width:860px){body::after{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;position:relative;z-index:1}
+  ::selection{background:#FFE58A;color:#000}
+  a{color:inherit}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  :focus-visible{outline:2px solid var(--gold-2);outline-offset:3px}
+  h1,h2,h3,h4,.disp{font-family:var(--display);font-weight:700;line-height:1.02;color:var(--ink)}
+  ul,ol{list-style:none}
+
+  /* card base : blanc, liseré or en haut, 0 radius */
+  .card{background:var(--card);border-top:3px solid;border-image:var(--gold-grad) 1;box-shadow:var(--sh)}
+
+  /* ---------- TOP ---------- */
+  .top{display:flex;align-items:center;justify-content:space-between;padding:24px 0 0}
+  .top img{height:20px;width:auto;display:block}
+  .top .free{font-size:14px;color:var(--text-3)}
+  @media(max-width:520px){.top img{height:16px}}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:64px 0 48px;text-align:center}
+  @media(max-width:640px){.hero{padding:44px 0 36px}}
+  .hero .kicker{display:inline-block;background:var(--card);border:1px solid var(--line-2);padding:8px 14px;font-size:15px;color:var(--text-2);margin-bottom:22px}
+  .hero .kicker b{color:var(--gold-ink);font-weight:600}
+  .hero h1{font-size:clamp(46px,12vw,124px);line-height:.9;letter-spacing:-.01em;text-transform:uppercase;
+    background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+  .hero .sub{font-family:var(--display);font-weight:700;font-size:clamp(20px,3.2vw,32px);line-height:1.1;margin:14px auto 0;color:var(--ink);max-width:22ch}
+  .hero .lead{margin:22px auto 0;max-width:54ch;font-size:clamp(17px,2.1vw,20px);color:var(--text-2)}
+  .hero .lead b{color:var(--ink);font-weight:600}
+  .hero .go{margin-top:28px;display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;font-family:var(--display);font-weight:700;font-size:16px;padding:16px 26px;text-decoration:none}
+  .hero .go span{color:var(--gold)}
+
+  /* échelle */
+  .scale{margin:44px auto 0;display:grid;grid-template-columns:repeat(3,1fr) 1.1fr;gap:8px;text-align:left}
+  .scale .st{background:var(--card);border-top:3px solid var(--gold-2);padding:14px 14px 12px;box-shadow:var(--sh)}
+  .scale .st.next{background:transparent;border-top:3px dashed var(--line-2);box-shadow:none}
+  .scale .n{font-family:var(--display);font-weight:800;font-size:13px;color:var(--gold-ink)}
+  .scale .next .n{color:var(--text-3)}
+  .scale .p{font-family:var(--display);font-weight:700;font-size:15px;margin-top:2px;line-height:1.1;color:var(--ink)}
+  .scale .next .p{color:var(--text-3)}
+  .scale .c{font-size:14px;color:var(--text-2);margin-top:4px}
+  @media(max-width:700px){.scale{grid-template-columns:1fr 1fr}.scale .st.next{grid-column:1/-1}}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:56px 0}
+  section[hidden]{display:none}
+  @media(max-width:640px){section{padding:44px 0}}
+  .sec-head{text-align:center;max-width:62ch;margin:0 auto}
+  .sec-head h2{font-size:clamp(28px,4.4vw,42px)}
+  .sec-head p{margin-top:12px;color:var(--text-2);font-size:18px}
+
+  /* 4 niveaux */
+  .levels{margin-top:32px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:760px){.levels{grid-template-columns:1fr 1fr}}
+  @media(max-width:420px){.levels{grid-template-columns:1fr}}
+  .lvl{background:var(--card);border-top:3px solid var(--gold-2);padding:20px 18px;box-shadow:var(--sh)}
+  .lvl .ico{width:40px;height:40px;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;color:var(--gold-ink);font-size:16px}
+  .lvl h3{font-size:22px;margin-top:12px}
+  .lvl p{color:var(--text-2);font-size:15.5px;margin-top:8px;line-height:1.45}
+
+  /* ---------- DIAGNOSTIC ---------- */
+  .diag{margin-top:30px;padding:28px 26px}
+  @media(max-width:640px){.diag{padding:20px 16px}}
+  .diag .q{font-family:var(--display);font-weight:700;font-size:clamp(20px,2.6vw,25px);line-height:1.1}
+  .diag .hint{color:var(--text-3);font-size:15px;margin-top:6px}
+  .opts{margin-top:18px;display:grid;gap:10px}
+  .opt{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:center;text-align:left;width:100%;
+    padding:16px 18px 16px 14px;background:var(--card-2);border:1.5px solid var(--line);transition:border-color .15s,background .15s}
+  .opt:hover{border-color:var(--gold-2);background:#fff}
+  .opt .num{font-family:var(--display);font-weight:800;font-size:15px;color:var(--gold-ink);background:var(--gold-soft);height:38px;width:38px;display:flex;align-items:center;justify-content:center}
+  .opt .t{font-size:17px;line-height:1.35;color:var(--ink)}
+  .opt .t small{display:block;color:var(--text-2);font-size:14.5px;margin-top:3px}
+  .opt.on{background:var(--gold-soft);border-color:var(--gold-2)}
+  .opt.on .num{background:var(--gold-grad);color:#000}
+
+  .verdict{margin-top:22px;display:none;border-top:1px solid var(--line);padding-top:22px}
+  .verdict.show{display:block}
+  .verdict .lab{font-size:14px;color:var(--gold-ink);font-weight:600}
+  .verdict h3{font-size:clamp(26px,4.4vw,40px);margin-top:6px;line-height:1}
+  .verdict h3 span{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .verdict .job{margin-top:14px;font-size:18px;line-height:1.5;max-width:58ch;color:var(--text)}
+  .verdict .job .jl{display:block;margin-top:14px;font-family:var(--display);font-weight:700;font-size:15px;color:var(--gold-ink)}
+  .verdict .go{margin-top:18px;display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;font-family:var(--display);font-weight:700;font-size:15px;padding:14px 22px}
+  .verdict .go span{color:var(--gold)}
+
+  /* ---------- PATH ---------- */
+  #path{margin-top:36px;display:none}
+  #path.show{display:block}
+  .done-strip{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;justify-content:center}
+  .done-strip span{font-size:14px;color:var(--text-2);background:var(--green-soft);padding:6px 12px}
+  .done-strip span::before{content:"✓ ";color:var(--green);font-weight:700}
+
+  .ph{background:var(--card);box-shadow:var(--sh);margin-bottom:14px;border-top:3px solid var(--line-2)}
+  .ph.now{border-top:3px solid;border-image:var(--gold-grad) 1}
+  .ph-head{width:100%;text-align:left;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:22px 24px}
+  @media(max-width:640px){.ph-head{padding:18px 16px}}
+  .ph-head .tag{display:inline-block;font-size:13px;font-weight:600;color:var(--gold-ink);background:var(--gold-soft);padding:4px 9px}
+  .ph.later .ph-head .tag{color:var(--text-3);background:var(--card-2)}
+  .ph-head h3{font-size:clamp(24px,3.8vw,34px);margin-top:10px;line-height:1}
+  .ph.later .ph-head h3{color:var(--text-2)}
+  .ph-head .pal{font-size:16px;color:var(--text-2);margin-top:6px}
+  .ph-head .chev{width:38px;height:38px;border:1.5px solid var(--line-2);display:flex;align-items:center;justify-content:center;color:var(--ink);transition:transform .25s;background:#fff}
+  .ph.open .ph-head .chev{transform:rotate(180deg)}
+  .ph-head .chev svg{width:16px;height:16px}
+  .ph-body{display:none;padding:0 24px 26px}
+  @media(max-width:640px){.ph-body{padding:0 14px 20px}}
+  .ph.open .ph-body{display:block}
+
+  .mission{background:var(--gold-soft);padding:18px 20px;margin-bottom:18px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+  .mission .flag{width:34px;height:34px;background:var(--gold-grad);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+  .mission .k{font-size:13.5px;font-weight:600;color:var(--gold-ink)}
+  .mission p{margin-top:4px;font-size:18px;line-height:1.4;color:var(--ink)}
+
+  /* tabs */
+  .tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;background:var(--card-2);padding:6px}
+  .tab{padding:11px 6px;text-align:center;font-family:var(--display);font-weight:700;font-size:14px;color:var(--text-2);border-bottom:3px solid transparent;transition:all .15s}
+  .tab small{display:block;font-family:var(--body);font-weight:400;font-size:12px;color:var(--text-3);margin-top:1px}
+  .tab:hover{color:var(--ink)}
+  .tab.on{background:#fff;color:var(--ink);border-bottom-color:var(--gold-2);box-shadow:var(--sh)}
+  .tab.on small{color:var(--gold-ink)}
+  @media(max-width:560px){.tabs{grid-template-columns:repeat(5,1fr);gap:4px;padding:4px}.tab{font-size:12px;padding:9px 2px}.tab small{display:none}}
+  .pane{display:none;padding:24px 4px 4px}
+  .pane.on{display:block}
+  .pane-h{font-size:15.5px;color:var(--text-2);margin-bottom:16px}
+  .pane-h b{color:var(--ink);font-weight:600}
+  .tab-nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+  .tab-nav button{font-family:var(--display);font-weight:700;font-size:14px;padding:11px 16px;border:1.5px solid var(--line-2);background:#fff}
+  .tab-nav button.nextb{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tab-nav button.nextb span{color:var(--gold)}
+  .tab-nav button:disabled{opacity:.35;cursor:default}
+
+  /* devenir */
+  .id{display:grid;grid-template-columns:1fr 44px 1fr;gap:12px;align-items:stretch}
+  @media(max-width:560px){.id{grid-template-columns:1fr}.id .ar{transform:rotate(90deg);justify-self:center;height:auto}}
+  .id .box{padding:18px;background:var(--card-2)}
+  .id .box.to{background:var(--gold-soft)}
+  .id small{display:block;font-size:13px;color:var(--text-3);margin-bottom:6px}
+  .id .to small{color:var(--gold-ink)}
+  .id .from .v{font-size:17px;color:var(--text-2)}
+  .id .to .v{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.15;color:var(--ink)}
+  .id .ar{display:flex;align-items:center;justify-content:center;color:var(--gold-2);font-size:28px}
+
+  /* croire */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.two{grid-template-columns:1fr}}
+  .two > div{padding:18px}
+  .two .drop{background:var(--red-soft)}
+  .two .keep{background:var(--gold-soft)}
+  .two h4{font-size:15px;margin-bottom:12px}
+  .two .drop h4{color:var(--red)}
+  .two .keep h4{color:var(--gold-ink)}
+  li{position:relative;padding-left:26px;margin-bottom:10px;line-height:1.45}
+  .drop li{color:var(--text)}
+  .drop li::before{content:"✕";position:absolute;left:2px;top:1px;color:var(--red);font-size:13px;font-weight:700}
+  .keep li{color:var(--ink);font-size:17px}
+  .keep li::before{content:"✦";position:absolute;left:0;top:0;color:var(--gold-2);font-size:15px}
+  details{margin-top:14px;background:var(--card-2)}
+  summary{cursor:pointer;padding:12px 16px;font-family:var(--display);font-weight:700;font-size:14px;color:var(--text-2);list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--gold-2);font-size:20px}
+  details[open] summary::after{content:"–"}
+  details ul{padding:2px 16px 14px}
+  details li{color:var(--text-2);font-style:italic}
+  details li::before{content:"?";position:absolute;left:2px;top:0;color:var(--gold-ink);font-weight:700;font-style:normal}
+
+  /* apprendre */
+  .skills{display:grid;gap:10px}
+  .skill{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--card-2);padding:14px 16px;font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink)}
+  .skill i{width:30px;height:30px;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;font-style:normal;color:var(--gold-ink);font-size:13px}
+  .skills-note{margin-top:14px;color:var(--text-2);font-size:15.5px}
+
+  /* faire */
+  .steps li{padding-left:44px;margin-bottom:12px;font-size:17px;color:var(--ink)}
+  .steps li::before{content:attr(data-n);position:absolute;left:0;top:0;width:30px;height:30px;background:var(--ink);color:var(--gold);font-family:var(--display);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .week{margin-top:18px;background:var(--gold-soft);padding:18px 20px}
+  .week .k{font-family:var(--display);font-weight:700;font-size:15px;color:var(--ink)}
+  .week .k em{font-style:normal;color:var(--gold-ink)}
+  .week ol{margin-top:12px}
+  .week li{padding-left:44px;font-size:16.5px;color:var(--text);margin-bottom:10px}
+  .week li::before{content:attr(data-n);position:absolute;left:0;top:0;width:30px;height:30px;background:#fff;color:var(--gold-ink);font-family:var(--display);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .trap{margin-top:18px;background:var(--red-soft);padding:18px 20px}
+  .trap h4{color:var(--red);font-size:15px;margin-bottom:10px}
+  .trap li{color:var(--text);padding-left:26px}
+  .trap li::before{content:"⚠";position:absolute;left:0;top:0;color:var(--red);font-size:14px}
+
+  /* checklist */
+  .chk{background:var(--card-2);padding:20px}
+  .chk .top-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .chk .k{font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink)}
+  .chk .cnt{font-size:14px;color:var(--text-3)}
+  .chk .cnt b{color:var(--gold-ink)}
+  .bar{height:6px;background:#fff;margin:12px 0 14px;position:relative}
+  .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gold-grad);transition:width .3s}
+  .chk label{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;padding:11px 0;border-top:1px solid var(--line);cursor:pointer}
+  .chk label:first-of-type{border-top:0}
+  .chk input{appearance:none;width:22px;height:22px;border:1.5px solid var(--gold-2);background:#fff;margin-top:2px;position:relative;cursor:pointer}
+  .chk input:checked{background:var(--gold-grad);border-color:transparent}
+  .chk input:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#000;font-weight:700;font-size:14px}
+  .chk label span{font-size:17px;line-height:1.4;color:var(--ink)}
+  .chk input:checked + span{color:var(--text-3);text-decoration:line-through}
+  .chk .win{display:none;margin-top:14px;background:var(--green-soft);padding:16px 18px}
+  .chk.full .win{display:block}
+  .chk .win p{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.15;color:var(--ink)}
+  .chk .win p span{color:var(--green)}
+  .chk .win .nx{margin-top:12px;display:inline-block;background:var(--ink);color:#fff;font-family:var(--display);font-weight:700;font-size:14px;padding:12px 18px;text-decoration:none}
+  .chk .win .nx span{color:var(--gold)}
+  .chk .honest{margin-top:12px;color:var(--text-2);font-size:14.5px}
+
+  /* ---------- termes ---------- */
+  .term{cursor:pointer;border-bottom:2px dotted var(--gold-2);color:inherit;white-space:nowrap}
+  .term::after{content:"?";display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;margin-left:4px;background:var(--gold-grad);color:#000;font-family:var(--display);font-weight:800;font-size:11px;vertical-align:2px;line-height:1}
+  .term.open{border-bottom-style:solid}
+  .def{display:block;margin:10px 0 4px;padding:12px 14px;background:var(--gold-soft);border-left:3px solid var(--gold-2);font-size:15px;line-height:1.5;color:var(--text);font-style:normal;text-decoration:none;font-family:var(--body);font-weight:400}
+  .def b{color:var(--gold-ink);font-weight:600;font-family:var(--display)}
+  .def-hint{margin-top:14px;font-size:14.5px;color:var(--text-3)}
+  .def-hint i{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;background:var(--gold-grad);color:#000;font-family:var(--display);font-weight:800;font-size:11px;font-style:normal;vertical-align:1px}
+
+  /* ---------- CTA ---------- */
+  .cta{padding:40px 32px;text-align:center}
+  @media(max-width:640px){.cta{padding:30px 18px}}
+  .cta h2{font-size:clamp(28px,5vw,50px);line-height:1;max-width:20ch;margin:0 auto}
+  .cta h2 span{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cta p{margin:16px auto 0;color:var(--text-2);max-width:56ch;font-size:18px}
+  .cta .btns{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 24px;font-family:var(--display);font-weight:700;font-size:15px;text-decoration:none;border:1.5px solid transparent}
+  .btn.p{background:var(--ink);color:#fff}
+  .btn.p span{color:var(--gold)}
+  .btn.g{border-color:var(--line-2);color:var(--ink);background:#fff}
+  .btn.g:hover{border-color:var(--gold-2)}
+
+  footer{padding:32px 0 40px;color:var(--text-3);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+  footer img{height:15px;opacity:.85}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important}html{scroll-behavior:auto}}
+
+  /* ---------- LOGO (fichier unique, réutilisé partout) ---------- */
+  /* boîtes au ratio exact du fichier (600x49) : sinon le mot-clé se tasse */
+  :root{--logo:url("logo.png")}
+  .logo{display:block;background:var(--logo) left center/contain no-repeat;height:18px;width:220px}
+  .logo.sm{height:14px;width:171px;opacity:.85}
+  @media(max-width:520px){.logo{height:15px;width:184px}}
+
+  /* ---------- GATE ---------- */
+  .gate[hidden]{display:none}
+  .gate .top{padding-top:24px}
+  .gwrap{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:start;padding:40px 0 8px}
+  @media(max-width:920px){.gwrap{grid-template-columns:1fr;gap:30px;padding-top:28px}}
+  .gcopy .kicker{display:inline-block;background:var(--card);border:1px solid var(--line-2);padding:8px 14px;font-size:14.5px;color:var(--text-2);margin-bottom:20px}
+  .gcopy .kicker b{color:var(--gold-ink);font-weight:600}
+  .gcopy h1{font-size:clamp(54px,8.4vw,92px);line-height:.86;letter-spacing:-.015em;text-transform:uppercase;
+    background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+  .gcopy .sub{font-family:var(--display);font-weight:700;font-size:clamp(21px,2.9vw,30px);line-height:1.08;margin-top:14px;color:var(--ink);max-width:21ch}
+  .gcopy .lead{margin-top:16px;font-size:17.5px;color:var(--text-2);max-width:48ch}
+  .gcopy .lead b{color:var(--ink);font-weight:600}
+  .glist{margin-top:26px;border-top:1px solid var(--line)}
+  .glist li{padding:13px 0 13px 30px;margin:0;border-bottom:1px solid var(--line);font-size:16px;color:var(--text-2);line-height:1.4}
+  .glist li b{color:var(--ink);font-weight:700;font-family:var(--display)}
+  .glist li::before{content:"✦";position:absolute;left:4px;top:13px;color:var(--gold-2);font-size:14px}
+  .ladder{margin-top:22px;display:grid;gap:6px}
+  .rung{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;background:var(--card);border-left:3px solid var(--gold-2);padding:12px 14px;box-shadow:var(--sh)}
+  .rung i{font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.05em;color:var(--gold-ink);font-style:normal}
+  .rung b{font-family:var(--display);font-weight:700;font-size:16.5px;color:var(--ink);display:block;line-height:1.1}
+  .rung span{font-size:14.5px;color:var(--text-2);display:block;margin-top:2px}
+
+  /* formulaire d'accès */
+  .gform{position:sticky;top:22px;padding:26px 26px 22px}
+  @media(max-width:920px){.gform{position:static;padding:22px 18px 20px}}
+  .gform .gtag{display:inline-block;font-family:var(--display);font-weight:800;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);background:var(--gold-soft);padding:6px 10px}
+  .gform h2{font-size:clamp(24px,3vw,31px);margin-top:14px;line-height:1.02}
+  .gform .gsub{margin-top:9px;color:var(--text-2);font-size:16px}
+  .gform form{margin-top:20px;display:grid;gap:10px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:430px){.row2{grid-template-columns:1fr}}
+  .fld{position:relative}
+  .fld input{width:100%;font-family:var(--body);font-size:16.5px;color:var(--ink);background:var(--card-2);
+    border:1.5px solid var(--line);border-radius:0;padding:23px 14px 8px;transition:border-color .15s,background .15s;-webkit-appearance:none}
+  .fld input:hover{border-color:var(--line-2)}
+  .fld input:focus{outline:none;border-color:var(--gold-2);background:#fff}
+  .fld label{position:absolute;left:15px;top:16px;font-size:16px;color:var(--text-3);pointer-events:none;transition:transform .15s,font-size .15s,color .15s;transform-origin:left top}
+  .fld input:focus + label,.fld input:not(:placeholder-shown) + label{transform:translateY(-9px);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink);font-family:var(--display);font-weight:800}
+  .fld.bad input{border-color:var(--red);background:var(--red-soft)}
+  .fld.bad label{color:var(--red)}
+  .gbtn{margin-top:6px;width:100%;background:var(--ink);color:#fff;font-family:var(--display);font-weight:700;font-size:16px;
+    padding:18px 20px;display:flex;align-items:center;justify-content:center;gap:10px;transition:opacity .15s}
+  .gbtn span{color:var(--gold)}
+  .gbtn:hover{opacity:.9}
+  .gbtn[disabled]{opacity:.6;cursor:default}
+  .gerr{font-size:14.5px;color:var(--red);line-height:1.35}
+  .gerr:empty{display:none}
+  .gnote{margin-top:12px;font-size:14px;color:var(--text-3);text-align:center;line-height:1.4}
+  .gsafe{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:8px 18px;flex-wrap:wrap;justify-content:center;font-size:13.5px;color:var(--text-3)}
+  .gsafe i{font-style:normal;color:var(--green);font-weight:700;margin-right:4px}
+  .gfoot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:34px 0 40px;color:var(--text-3);font-size:13.5px}
+  .legal{display:flex;gap:16px;flex-wrap:wrap}
+  .legal a{color:var(--text-3);text-decoration:none;border-bottom:1px solid transparent}
+  .legal a:hover{color:var(--gold-ink);border-bottom-color:var(--gold-2)}
+
+  /* ---------- RESSOURCE : accueil personnalisé ---------- */
+  #resource[hidden]{display:none}
+  /* le titre du hero est un .h1 : le seul <h1> de la page est celui du gate */
+  .hero .h1{font-family:var(--display);font-weight:700;font-size:clamp(46px,12vw,124px);line-height:.9;letter-spacing:-.01em;text-transform:uppercase;
+    background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+  .welcome{margin-top:22px;background:var(--gold-soft);border-left:3px solid var(--gold-2);padding:13px 16px;font-size:16px;color:var(--ink);line-height:1.4}
+  .welcome b{font-family:var(--display);font-weight:700}
+
+  /* ---------- BARRE COLLANTE ---------- */
+  .sbar{position:fixed;left:0;right:0;top:0;z-index:60;background:rgba(255,255,255,.93);backdrop-filter:saturate(1.4) blur(10px);
+    border-bottom:1px solid var(--line);transform:translateY(-101%);transition:transform .25s ease;padding:9px 0}
+  .sbar.on{transform:none}
+  .sbar .in{max-width:var(--maxw);margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:14px}
+  .sbar .now{font-family:var(--display);font-weight:700;font-size:14.5px;color:var(--ink);margin-right:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sbar .now em{font-style:normal;color:var(--gold-ink)}
+  .sbar button{font-family:var(--display);font-weight:700;font-size:13px;padding:9px 13px;border:1.5px solid var(--line-2);background:#fff;white-space:nowrap}
+  .sbar button:hover{border-color:var(--gold-2)}
+  @media(max-width:640px){.sbar .logo{display:none}.sbar .print{display:none}.sbar .now{font-size:13.5px}}
+
+  /* ---------- SUITE : autres ressources ---------- */
+  .more{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.more{grid-template-columns:1fr}}
+  .more a{display:block;background:var(--card);box-shadow:var(--sh);border-top:3px solid var(--line-2);padding:18px 20px;text-decoration:none;transition:border-color .15s}
+  .more a:hover{border-top-color:var(--gold-2)}
+  .more .k{font-size:13px;color:var(--gold-ink);font-weight:600}
+  .more b{display:block;font-family:var(--display);font-weight:700;font-size:19px;margin-top:5px;color:var(--ink);line-height:1.1}
+  .more .d{display:block;font-size:15px;color:var(--text-2);margin-top:5px;line-height:1.4}
+
+  /* ---------- ONGLETS : défilement horizontal sur petit écran ---------- */
+  @media(max-width:560px){
+    .tabs{display:flex;overflow-x:auto;scroll-snap-type:x proximity;gap:4px;scrollbar-width:none}
+    .tabs::-webkit-scrollbar{display:none}
+    .tab{flex:0 0 auto;min-width:38%;scroll-snap-align:start;padding:10px 14px;font-size:13.5px}
+    .tab small{display:block;font-size:11px}
+  }
+
+  /* ---------- APPARITION AU SCROLL ---------- */
+  .rv{opacity:0;transform:translateY(16px)}
+  .rv.in{opacity:1;transform:none;transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1)}
+  @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
+
+  /* ---------- IMPRESSION / PDF ---------- */
+  @media print{
+    body{background:#fff;font-size:12pt}
+    body::before,body::after{display:none}
+    .gate,.sbar,.top,.hero .go,.tabs,.tab-nav,.def-hint,.more,.cta .btns,.done-strip,.ph.later{display:none!important}
+    .ph-body,.pane,#path,.verdict{display:block!important}
+    .ph{page-break-inside:avoid;box-shadow:none;border:1px solid var(--line-2)}
+    .card,.diag,.lvl,.rung{box-shadow:none;border:1px solid var(--line-2)}
+    .pane{padding-top:14px;page-break-inside:avoid}
+    .chk .win{display:block!important}
+    .rv{opacity:1!important;transform:none!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="sbar" id="sbar">
+  <div class="in">
+    <span class="logo sm" role="img" aria-label="L'Écosystème"></span>
+    <span class="now" id="sbarNow">Trouve ta phase</span>
+    <button type="button" class="print" onclick="window.print()">Imprimer</button>
+    <button type="button" id="sbarRedo">Refaire le diagnostic</button>
+  </div>
+</div>
+
+<div class="gate" id="gate">
+  <div class="wrap">
+    <div class="top">
+      <span class="logo" role="img" aria-label="L'Écosystème"></span>
+      <span class="free">Ressource gratuite</span>
+    </div>
+
+    <div class="gwrap">
+      <div class="gcopy">
+        <div class="kicker">Méthode ECS · <b>3 phases</b> · 10 secondes pour trouver la tienne</div>
+        <h1>Boussole</h1>
+        <p class="sub">De 0 à tes premiers 10K€ par mois, une phase à la fois.</p>
+        <p class="lead">Entrepreneur, consultant, formateur, coach, créateur — si tu vends ton expertise ou ton service, ceci est pour toi. Tu ne stagnes pas parce que tu ne travailles pas assez. <b>Tu travailles sur la mauvaise phase.</b></p>
+
+        <ul class="glist">
+          <li><b>Le diagnostic.</b> Une question, ta phase exacte. Pas de quiz de 40 écrans.</li>
+          <li><b>Les 4 niveaux de ta phase.</b> Qui devenir, quoi croire, quoi apprendre, quoi faire.</li>
+          <li><b>Ton plan de la semaine.</b> Trois actions concrètes. Pas une de plus.</li>
+          <li><b>La checklist de passage.</b> Pour savoir quand tu as vraiment le droit de passer à la suite.</li>
+        </ul>
+
+        <div class="ladder">
+          <div class="rung"><i>Phase I</i><div><b>Positionnement</b><span>Avant le premier euro</span></div></div>
+          <div class="rung"><i>Phase II</i><div><b>Momentum</b><span>Tes 3 premiers clients · 0 → 1–5K€</span></div></div>
+          <div class="rung"><i>Phase III</i><div><b>Validation</b><span>Tes premiers 10K€ · 1–5K€ → 10K€+</span></div></div>
+        </div>
+      </div>
+
+      <div class="gform card">
+        <span class="gtag">Accès gratuit</span>
+        <h2>Ouvre ta boussole</h2>
+        <p class="gsub">Tes coordonnées, et la ressource s'ouvre juste en dessous. Aucune vidéo à regarder, aucun appel à réserver.</p>
+
+        <form id="gateForm" novalidate>
+          <div class="row2">
+            <div class="fld"><input id="f-prenom" name="prenom" type="text" placeholder=" " autocomplete="given-name" required><label for="f-prenom">Prénom</label></div>
+            <div class="fld"><input id="f-nom" name="nom" type="text" placeholder=" " autocomplete="family-name" required><label for="f-nom">Nom</label></div>
+          </div>
+          <div class="fld"><input id="f-email" name="email" type="email" placeholder=" " autocomplete="email" inputmode="email" required><label for="f-email">Email</label></div>
+          <div class="fld"><input id="f-tel" name="tel" type="tel" placeholder=" " autocomplete="tel" inputmode="tel" required><label for="f-tel">Téléphone</label></div>
+          <p class="gerr" id="gateErr" role="alert"></p>
+          <button class="gbtn" type="submit" id="gateBtn">Ouvrir ma boussole <span>→</span></button>
+          <p class="gnote">Accès immédiat, directement sur cette page.</p>
+        </form>
+
+        <div class="gsafe">
+          <span><i>✓</i>Gratuit</span>
+          <span><i>✓</i>Sans carte bancaire</span>
+          <span><i>✓</i>Désinscription en un clic</span>
+        </div>
+      </div>
+    </div>
+
+    <footer class="gfoot">
+      <span class="logo sm" role="img" aria-label="L'Écosystème"></span>
+      <div class="legal">
+        <a href="/politique-de-confidentialite.html">Politique de confidentialité</a>
+        <a href="/cgv.html">CGV</a>
+        <a href="/mentions-legales.html">Mentions légales</a>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<main id="resource" hidden>
+
+<div class="wrap">
+  <div class="top">
+    <span class="logo" role="img" aria-label="L'Écosystème"></span>
+    <span class="free">Ressource gratuite</span>
+  </div>
+
+  <div class="welcome" id="welcome" hidden></div>
+
+  <header class="hero">
+    <div class="kicker">Méthode ECS · <b>3 phases</b> · 10 secondes pour trouver la tienne</div>
+    <div class="h1">Boussole</div>
+    <p class="sub">De 0 à tes premiers 10K€ par mois, une phase à la fois.</p>
+    <p class="lead">Entrepreneur, consultant, formateur, coach, créateur — si tu vends ton expertise ou ton service, ceci est pour toi. Tu ne stagnes pas parce que tu ne travailles pas assez. <b>Tu travailles sur la mauvaise phase.</b> Trouve la tienne, et tu sauras exactement quoi devenir, croire, apprendre et faire. Rien de plus, rien de moins.</p>
+    <a class="go" href="#diagnostic">Trouver ma phase <span>↓</span></a>
+
+    <div class="scale" aria-label="Les trois phases">
+      <div class="st"><div class="n">Phase I</div><div class="p">Positionnement</div><div class="c">Avant le premier euro</div></div>
+      <div class="st"><div class="n">Phase II</div><div class="p">Momentum</div><div class="c">Tes 3 premiers clients · 0 → 1–5K€</div></div>
+      <div class="st"><div class="n">Phase III</div><div class="p">Validation</div><div class="c">Tes premiers 10K€ · 1–5K€ → 10K€+</div></div>
+      <div class="st next"><div class="n">Et après ?</div><div class="p">On en parle</div><div class="c"><a href="https://wa.me/message/EUGKVQ7JXWUPA1" target="_blank" rel="noopener" style="color:var(--gold-ink);font-weight:600;text-decoration:none">Écris-moi sur WhatsApp →</a></div></div>
+    </div>
+  </header>
+</div>
+
+<!-- 4 NIVEAUX -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Chaque phase se franchit sur 4 niveaux</h2>
+      <p>Changer ce que tu fais ne suffit pas. Tu changes d'abord qui tu es, puis ce que tu crois, puis ce que tu sais faire. Et là, ce que tu fais tient dans le temps.</p>
+    </div>
+    <div class="levels">
+      <div class="lvl"><div class="ico">1</div><h3>Devenir</h3><p>L'identité à adopter. La bascule la plus profonde — et celle qu'on saute le plus souvent.</p></div>
+      <div class="lvl"><div class="ico">2</div><h3>Croire</h3><p>Les pensées qui te freinent, et celles qui doivent les remplacer.</p></div>
+      <div class="lvl"><div class="ico">3</div><h3>Apprendre</h3><p>Les compétences du palier. Pas plus. Le reste, c'est de la dispersion.</p></div>
+      <div class="lvl"><div class="ico">4</div><h3>Faire</h3><p>Les actions, les pièges, et la checklist qui dit si tu es prêt pour la suite.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGNOSTIC -->
+<section id="diagnostic">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Où en es-tu vraiment&nbsp;?</h2>
+      <p>Réponds avec tes chiffres, pas avec ton ambition. Si tu hésites entre deux, prends celle du dessous.</p>
+    </div>
+
+    <div class="diag card">
+      <div class="q">Laquelle de ces situations est la tienne aujourd'hui&nbsp;?</div>
+      <div class="hint">Une seule réponse.</div>
+      <div class="opts" id="opts"></div>
+
+      <div class="verdict" id="verdict">
+        <div class="lab">Ton diagnostic</div>
+        <h3 id="v-title"></h3>
+        <div class="job" id="v-job"></div>
+        <button class="go" id="v-go">Voir ma phase en détail <span>↓</span></button>
+      </div>
+    </div>
+
+    <div id="path"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="suite" hidden>
+  <div class="wrap">
+    <div class="cta card">
+      <h2>Tu sais où tu en es. Tu sais quoi faire. <span>Reste à le faire.</span></h2>
+      <p>Cette boussole te donne la direction. Elle ne marche pas à ta place. Si tu veux qu'on regarde ta situation ensemble — ta phase, ton blocage, et ce que tu fais cette semaine — écris-moi directement. Pas de formulaire, pas de tunnel : un message, et on discute.</p>
+      <div class="btns">
+        <a class="btn p" href="https://wa.me/message/EUGKVQ7JXWUPA1" target="_blank" rel="noopener">Discuter sur WhatsApp <span>→</span></a>
+        <a class="btn g" href="#diagnostic">Refaire le diagnostic</a>
+      </div>
+    </div>
+    <div class="more">
+      <a href="/les-methodes"><span class="k">Aller plus loin</span><b>La méthode ECS complète</b><span class="d">Le parcours entier, phase par phase, jusqu'à 500K€/mois.</span></a>
+      <a href="/checklist"><span class="k">Auditer</span><b>Les checklists ECS</b><span class="d">Passe ta machine au crible, système par système.</span></a>
+    </div>
+
+    <footer>
+      <span class="logo sm" role="img" aria-label="L'Écosystème"></span>
+      <span>Méthode ECS — la clarté se trouve dans l'action.</span>
+      <div class="legal">
+        <a href="/politique-de-confidentialite.html">Politique de confidentialité</a>
+        <a href="/cgv.html">CGV</a>
+        <a href="/mentions-legales.html">Mentions légales</a>
+      </div>
+    </footer>
+  </div>
+</section>
+
+</main>
+
+<script>
+const PHASES = [
+  {
+    num:"I", name:"Positionnement", palier:"Avant le premier euro",
+    situation:"J'ai des compétences, mais pas d'offre claire ni de client idéal précis.",
+    sit_sub:"Je peux « aider tout le monde » — donc je n'ai encore vendu à personne.",
+    mission:"Avoir une offre signature claire et spécifique, pour un client idéal précis.",
+    job:"Choisir. Un client, une promesse, une offre. Tout le reste attend.",
+    verdict:"Tu n'as pas un problème de visibilité. Tu as un problème de choix. Tant que tu refuses de te positionner pour « ne pas te fermer de portes », aucune porte ne s'ouvre.",
+    idFrom:"Mon ancienne identité — salarié, étudiant, freelance sans cap",
+    idTo:"L'entrepreneur qui s'assume intérieurement",
+    croyances:[
+      "Je n'ai rien à apporter. Il y a déjà des gens qui font mieux que moi.",
+      "Suis-je vraiment légitime&nbsp;?",
+      "Je ne vais pas me positionner, parce que je peux aider tout le monde et je me fermerais des possibilités."
+    ],
+    mantras:[
+      "Si la vie m'a donné ce désir de servir les autres, alors j'en ai l'entière légitimité et capacité.",
+      "La clarté se trouve dans l'action. J'agis avec confiance et enthousiasme. Je fais confiance au process."
+    ],
+    questions:[
+      "Quelle est mon histoire, et quels challenges ai-je déjà dépassés&nbsp;?",
+      "Qu'ai-je accompli qui pourrait être un tremplin pour mon autorité&nbsp;?",
+      "Qu'est-ce qui est facile pour moi, et sur quoi on me demande naturellement conseil&nbsp;?",
+      "Quels sont les sujets sur lesquels j'adore apprendre&nbsp;?",
+      "Qui est mon client idéal&nbsp;?",
+      "Quelle est ma promesse&nbsp;?",
+      "Comment j'inverse le risque&nbsp;?"
+    ],
+    competences:["Créer une offre irrésistible"],
+    actions:["Clarifier ton client idéal et ton offre irrésistible dans un sprint de 5 jours (le 5 Days Challenge)."],
+    semaine:[
+      "Écris ton histoire en 6 lignes&nbsp;: 3 galères dépassées, 3 résultats obtenus. C'est là que se cache ton autorité.",
+      "Liste 10 personnes à qui tu as déjà donné un conseil qui a marché. Ton client idéal est dans cette liste.",
+      "Formule ta promesse en une phrase&nbsp;: « J'aide [qui] à [résultat] en [délai] — sinon [garantie]. » Une seule. Pas trois."
+    ],
+    erreurs:[
+      "Rester dans sa tête pendant des semaines sans se confronter au marché.",
+      "Se comparer et rester focalisé sur ce qui nous manque, en pensant que les autres sont meilleurs que nous."
+    ],
+    checklist:[
+      "J'ai défini mon client idéal.",
+      "J'ai défini mon offre irrésistible."
+    ]
+  },
+  {
+    num:"II", name:"Momentum", palier:"Passer de 0 à 1–5K€",
+    situation:"J'ai une offre. Zéro vente, ou quelques euros de temps en temps.",
+    sit_sub:"Je crée du contenu, je peaufine mon site — mais je n'ai jamais vraiment proposé.",
+    mission:"Avoir lancé ton offre signature auprès de tes ressources déjà existantes, et obtenu tes 3 premiers OUI.",
+    job:"Vendre à ceux qui te connaissent déjà. Trois OUI avant de penser à une audience.",
+    verdict:"Tu n'as pas besoin d'audience. Tu as besoin de courage. Les trois premiers clients sont dans ton téléphone — et tu le sais.",
+    idFrom:"L'entrepreneur qui s'assume intérieurement",
+    idTo:"L'entrepreneur qui a maintenant des clients",
+    croyances:[
+      "Je vais être rejeté si je propose une offre.",
+      "Je ne peux pas demander d'argent à des personnes que je connais.",
+      "Vais-je vraiment être capable d'aider ces personnes&nbsp;?"
+    ],
+    mantras:[
+      "Si j'ai un service et des connaissances qui peuvent changer la vie des gens, alors j'ai l'obligation morale et spirituelle de tout faire pour le mettre entre leurs mains.",
+      "Demander à l'autre d'investir sur lui, c'est le plus beau cadeau que je puisse lui faire pour l'aider à évoluer et à croire en lui.",
+      "L'argent est une énergie. Demander de l'argent, c'est faire circuler l'énergie dans ma vie et celle de mon client."
+    ],
+    questions:[
+      "Qui me connaît&nbsp;? Qui je connais&nbsp;?",
+      "À qui pourrais-je faire une offre irrésistible&nbsp;?",
+      "Qui connaît mes clients idéaux&nbsp;?"
+    ],
+    competences:["Déployer une Power Offer","Stratégie de lancement simple","Closing"],
+    actions:[
+      "Lancer une Power Offer.",
+      "Déployer une stratégie de lancement PSP.",
+      "Closer tes premiers clients."
+    ],
+    semaine:[
+      "Liste 30 personnes qui te connaissent, ou qui connaissent ton client idéal. Pas 300. 30.",
+      "Envoie ta Power Offer à 10 d'entre elles aujourd'hui — en message privé, vocal ou écrit. Pas en post.",
+      "Bloque 5 créneaux d'appel dans ton agenda avant même d'avoir des réponses. Tu remplis, tu ne cherches pas."
+    ],
+    erreurs:[
+      "Mettre plus d'importance au regard des autres qu'à sa propre vie et celle de ses clients.",
+      "Croire que la perfection se trouve en restant dans sa grotte.",
+      "Passer des semaines sur des éléments graphiques, des images, un site internet… plutôt que d'aller au contact du marché.",
+      "Croire qu'avoir peur est une raison pour ne pas avancer."
+    ],
+    checklist:[
+      "J'ai effectué une Power Offer.",
+      "J'ai exécuté une stratégie de lancement.",
+      "J'ai généré mes premières conversations.",
+      "J'ai réalisé mes premières ventes."
+    ]
+  },
+  {
+    num:"III", name:"Validation", palier:"Passer de 1–5K€ à 10–20K€",
+    situation:"J'ai signé mes premiers clients, entre 1 et 5K€ par mois. Mais c'est irrégulier.",
+    sit_sub:"Tout vient de mon réseau. Quand il s'épuise, mon chiffre aussi.",
+    mission:"Avoir déployé une stratégie de communication sur un canal précis pour te faire connaître, démontrer ton expertise, et générer 10 ventes sur une audience tiède et chaude.",
+    job:"Un canal, une méthode, dix ventes. Tu deviens visible — et tu proposes, sans t'excuser.",
+    verdict:"Ton offre marche. La preuve&nbsp;: des gens ont payé. Le problème maintenant, c'est que trop peu de gens savent qu'elle existe — et que tu la proposes trop rarement à ceux qui le savent.",
+    idFrom:"L'entrepreneur à temps partiel",
+    idTo:"L'entrepreneur pleinement incarné",
+    croyances:[
+      "Je ne suis pas encore légitime — les autres font mieux que moi.",
+      "Proposer mon service me bloque&nbsp;: le marketing et la vente, ce n'est pas moi.",
+      "Recevoir de l'argent me met mal à l'aise.",
+      "Que vont penser les autres de mes contenus&nbsp;?",
+      "Vais-je vraiment être capable d'aider ces clients&nbsp;?"
+    ],
+    mantras:[
+      "Partager mon message, c'est réaliser ma mission. Chaque fois que je partage, j'impacte le monde.",
+      "Proposer mes services, c'est offrir la plus belle chose que j'ai — le plus beau don que je puisse faire au monde."
+    ],
+    questions:[
+      "Quelle est mon expertise, et qui en aurait besoin&nbsp;?",
+      "Comment créer un service dont les gens ont besoin&nbsp;?",
+      "Comment packager ce service&nbsp;?",
+      "Quelles sont les premières actions pour faire connaître mon offre à mon réseau&nbsp;?",
+      "Comment étendre mon réseau et démontrer mon expertise&nbsp;?"
+    ],
+    competences:["Méthode ACE","Setting","Stratégie de croissance"],
+    actions:[
+      "Développer ton réseau et démontrer ton expertise grâce à la méthode ACE.",
+      "Développer la confiance et générer des appels grâce au setting.",
+      "Re-déployer une stratégie de lancement PSP."
+    ],
+    semaine:[
+      "Choisis UN canal. Écris-le quelque part. Les autres sont en pause pour 90 jours.",
+      "Publie 3 contenus qui démontrent&nbsp;: un résultat obtenu, une méthode que tu utilises, une erreur que fait ton client idéal.",
+      "Ouvre 10 conversations privées avec des gens qui ont réagi — et propose un appel à 3 d'entre eux. Cette semaine, pas la prochaine."
+    ],
+    erreurs:[
+      "Changer de niche.",
+      "Avoir une audience trop petite et croire que c'est un problème de contenu.",
+      "Ne pas proposer assez son offre et rester en mode « contenu friendzone ».",
+      "Croire qu'avoir peur est une raison pour ne pas avancer.",
+      "S'attarder à la forme."
+    ],
+    checklist:[
+      "Je suis à l'aise pour générer des ventes.",
+      "J'ai généré mes premiers 10K€.",
+      "Je suis capable de générer un chiffre à 5 chiffres en moins de 10 jours quand j'en ai besoin."
+    ]
+  }
+];
+
+const CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>';
+const DEFS=[
+  ["Power Offer","Une offre directe que tu proposes à ton réseau existant — ceux qui te connaissent déjà — pour signer tes tout premiers clients vite, sans audience. Promesse forte, risque inversé, prix qui enclenche l'action."],
+  ["PSP","Le tunnel organique simple de la méthode : communauté privée (WhatsApp, Skool, groupe fermé…) → setting → appel de vente. Tu rassembles, tu crées le lien en privé, tu proposes l'appel."],
+  ["méthode ACE","La méthode de la phase Validation pour développer ton réseau et démontrer ton expertise sur un canal. C'est ce qui te rend visible et installe ton autorité."],
+  ["setting","La conversation, souvent en messages privés, qui crée du lien, qualifie la personne et décroche un rendez-vous. Ce n'est pas la vente. C'est ce qui la prépare."],
+  ["closing","L'appel de vente lui-même. Tu accompagnes le prospect dans sa décision, et tu conclus."],
+  ["closer","Conclure la vente lors de l'appel : accompagner la personne dans sa décision, et obtenir le oui."],
+  ["offre irrésistible","Une promesse précise, pour un client précis, avec un délai et une garantie. Si elle s'adresse à tout le monde, elle n'est irrésistible pour personne."],
+  ["inverse le risque","Prendre le risque à la place du client : garantie de résultat, remboursement, engagement. Ce qui rend le « oui » facile."],
+  ["audience tiède et chaude","Tiède : t'a déjà croisé une ou deux fois. Chaude : te suit et te fait confiance. (Froide : ne te connaît pas encore — ce n'est pas encore ton sujet.)"],
+  ["5 Days Challenge","Le sprint de clarification de la phase Positionnement : en cinq jours, tu définis ton client idéal et ton offre. Cinq jours, pas cinq mois."],
+  ["offre signature","Ton offre principale, celle sur laquelle tu construis tout : un client précis, une promesse précise, un prix. Pas un catalogue."]
+];
+function T(s){
+  const hits=[];
+  DEFS.forEach(([w,d],i)=>{
+    const re=new RegExp('(^|[^\\w-])('+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')(?![\\w-])','i');
+    if(re.test(s)) s=s.replace(re,(m,a,b)=>{hits.push([i,b]);return `${a}\u0000${hits.length-1}\u0000`;});
+  });
+  return s.replace(/\u0000(\d+)\u0000/g,(m,k)=>{const [i,b]=hits[+k];return `<span class="term" data-def="${DEFS[i][1].replace(/"/g,'&quot;')}" data-w="${b}">${b}</span>`;});
+}
+const li=a=>a.map(x=>`<li>${T(x)}</li>`).join('');
+const nli=a=>a.map((x,k)=>`<li data-n="${String(k+1).padStart(2,'0')}">${T(x)}</li>`).join('');
+const TABS=[['Devenir','qui tu es'],['Croire','ce que tu penses'],['Apprendre','tes compétences'],['Faire','tes actions'],['Checklist','es-tu prêt ?']];
+
+function phaseBody(p,i){
+  const next=PHASES[i+1];
+  const nextTxt=next?`Prochain cap&nbsp;: <span>${next.name}</span> — ${next.palier.toLowerCase()}.`:`Tes premiers 10K€ sont là. <span>La suite, on la voit ensemble.</span>`;
+  const nextBtn=next?`<button class="nx" data-next="${i+1}">Ouvrir la phase ${next.num} <span>→</span></button>`:`<a class="nx" href="https://wa.me/message/EUGKVQ7JXWUPA1" target="_blank" rel="noopener">M'écrire sur WhatsApp <span>→</span></a>`;
+  const panes=[
+    `<div class="pane-h"><b>Devenir.</b> Qui tu dois être pour que le reste tienne.</div>
+     <div class="id">
+       <div class="box from"><small>Tu quittes</small><div class="v">${p.idFrom}</div></div>
+       <div class="ar">→</div>
+       <div class="box to"><small>Tu deviens</small><div class="v">${p.idTo}</div></div>
+     </div>`,
+    `<div class="pane-h"><b>Croire.</b> Ce que tu lâches, et ce que tu te répètes à la place.</div>
+     <div class="two">
+       <div class="drop"><h4>À lâcher</h4><ul>${li(p.croyances)}</ul></div>
+       <div class="keep"><h4>À te répéter</h4><ul>${li(p.mantras)}</ul></div>
+     </div>
+     <details><summary>Les questions à te poser à ce palier</summary><ul>${li(p.questions)}</ul></details>`,
+    `<div class="pane-h"><b>Apprendre.</b> Les seules compétences qui comptent ici.</div>
+     <div class="skills">${p.competences.map((c,k)=>`<div class="skill"><i>${k+1}</i><span>${T(c)}</span></div>`).join('')}</div>
+     <p class="skills-note">Tout ce qui n'est pas dans cette liste peut attendre. Une formation de plus sur autre chose, c'est une phase de plus sans avancer.</p>`,
+    `<div class="pane-h"><b>Faire.</b> Dans cet ordre.</div>
+     <ol class="steps">${nli(p.actions)}</ol>
+     <div class="week"><div class="k">Cette semaine, <em>concrètement</em></div><ol>${nli(p.semaine)}</ol></div>
+     <div class="trap"><h4>Les pièges qui font perdre des mois à ce palier</h4><ul>${li(p.erreurs)}</ul></div>`,
+    `<div class="pane-h"><b>Checklist de passage.</b> Coche uniquement ce qui est vrai aujourd'hui.</div>
+     <div class="chk" data-chk="${i}">
+       <div class="top-row"><span class="k">Es-tu prêt pour la suite ?</span><span class="cnt"><b>0</b> / ${p.checklist.length}</span></div>
+       <div class="bar"><i></i></div>
+       ${p.checklist.map((c,j)=>`<label><input type="checkbox"><span>${c}</span></label>`).join('')}
+       <div class="win"><p>Phase ${p.num} franchie. ${nextTxt}</p>${nextBtn}</div>
+       <div class="honest">Une case cochée par ambition, c'est une phase sautée. Et une phase sautée se paie plus tard.</div>
+     </div>`
+  ];
+  return `
+    <div class="mission"><div class="flag">🎯</div><div><div class="k">Le résultat à atteindre dans cette phase</div><p>${T(p.mission)}</p></div></div>
+    <p class="def-hint">Un mot t'échappe ? Touche le <i>?</i> à côté, la définition s'ouvre juste en dessous.</p>
+    <div class="tabs" role="tablist">${TABS.map((t,k)=>`<button class="tab${k===0?' on':''}" role="tab" data-tab="${k}">${t[0]}<small>${t[1]}</small></button>`).join('')}</div>
+    ${panes.map((h,k)=>`<div class="pane${k===0?' on':''}" data-pane="${k}">${h}
+      <div class="tab-nav">
+        <button data-prev ${k===0?'disabled':''}>← Précédent</button>
+        ${k<4?`<button class="nextb" data-nexttab>Suivant : ${TABS[k+1][0]} <span>→</span></button>`:''}
+      </div></div>`).join('')}`;
+}
+
+function phaseCard(p,i,state){
+  const tag=state==='now'?'À travailler maintenant':'Phase suivante — pas encore';
+  return `
+  <div class="ph ${state} ${state==='now'?'open':''}" id="ph-${i}">
+    <button class="ph-head" aria-expanded="${state==='now'}" data-toggle="${i}">
+      <div>
+        <span class="tag">Phase ${p.num} · ${tag}</span>
+        <h3>${p.name}</h3>
+        <div class="pal">${p.palier}</div>
+      </div>
+      <div class="chev">${CHEV}</div>
+    </button>
+    <div class="ph-body">${phaseBody(p,i)}</div>
+  </div>`;
+}
+
+const opts=document.getElementById('opts');
+PHASES.forEach((p,i)=>{
+  const b=document.createElement('button');b.className='opt';b.type='button';
+  b.innerHTML=`<span class="num">${p.num}</span><span class="t">${p.situation}<small>${p.sit_sub}</small></span>`;
+  b.addEventListener('click',()=>choose(i));opts.appendChild(b);
+});
+
+let cur=null;
+function choose(i){
+  cur=i;
+  if(window.BOUSSOLE)BOUSSOLE.onPhase(i);
+  [...opts.children].forEach((b,k)=>b.classList.toggle('on',k===i));
+  const p=PHASES[i];
+  document.getElementById('v-title').innerHTML=`Tu es en phase ${p.num} — <span>${p.name}</span>`;
+  document.getElementById('v-job').innerHTML=`${p.verdict}<span class="jl">Ton seul job maintenant</span>${p.job}`;
+  document.getElementById('verdict').classList.add('show');
+  const path=document.getElementById('path');
+  let html='';
+  if(i>0) html+='<div class="done-strip">'+PHASES.slice(0,i).map(q=>`<span>Phase ${q.num} · ${q.name}</span>`).join('')+'</div>';
+  for(let k=i;k<PHASES.length;k++) html+=phaseCard(PHASES[k],k,k===i?'now':'later');
+  path.innerHTML=html;path.classList.add('show');bind(path);
+  document.getElementById('suite').hidden=false;
+}
+
+function setTab(card,k){
+  card.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',+t.dataset.tab===k));
+  card.querySelectorAll('.pane').forEach(pn=>pn.classList.toggle('on',+pn.dataset.pane===k));
+}
+function bind(scope){
+  scope.querySelectorAll('[data-toggle]').forEach(h=>h.addEventListener('click',()=>{
+    const card=h.closest('.ph');const open=card.classList.toggle('open');h.setAttribute('aria-expanded',open);
+  }));
+  scope.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>setTab(t.closest('.ph'),+t.dataset.tab)));
+  scope.querySelectorAll('[data-nexttab]').forEach(b=>b.addEventListener('click',()=>{
+    const card=b.closest('.ph');const k=+b.closest('.pane').dataset.pane+1;setTab(card,k);
+    card.querySelector('.tabs').scrollIntoView({behavior:'smooth',block:'start'});
+  }));
+  scope.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',()=>{
+    const card=b.closest('.ph');const k=+b.closest('.pane').dataset.pane-1;if(k>=0)setTab(card,k);
+    card.querySelector('.tabs').scrollIntoView({behavior:'smooth',block:'start'});
+  }));
+  scope.querySelectorAll('.term').forEach(tm=>tm.addEventListener('click',e=>{
+    e.preventDefault();e.stopPropagation();
+    const host=tm.closest('li, p, .v, .skill > span')||tm.parentElement;
+    let d=host.querySelector(':scope > .def');
+    if(d){d.remove();tm.classList.remove('open');return;}
+    host.querySelectorAll('.term.open').forEach(x=>x.classList.remove('open'));
+    d=document.createElement('span');d.className='def';d.innerHTML=`<b>${tm.dataset.w}</b> — ${tm.dataset.def}`;
+    host.appendChild(d);tm.classList.add('open');
+  }));
+  scope.querySelectorAll('.chk input').forEach(cb=>cb.addEventListener('change',()=>{
+    const box=cb.closest('.chk');const all=box.querySelectorAll('input');
+    const n=[...all].filter(x=>x.checked).length;
+    box.querySelector('.cnt b').textContent=n;
+    box.querySelector('.bar i').style.width=(n/all.length*100)+'%';
+    box.classList.toggle('full',n===all.length);
+    if(window.BOUSSOLE)BOUSSOLE.onCheck(box);
+  }));
+  scope.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>{
+    const card=document.getElementById('ph-'+b.dataset.next);if(!card)return;
+    card.classList.add('open');card.querySelector('[data-toggle]').setAttribute('aria-expanded','true');
+    card.scrollIntoView({behavior:'smooth',block:'start'});
+  }));
+}
+document.getElementById('v-go').addEventListener('click',()=>{const el=document.getElementById('ph-'+cur);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});});
+</script>
+
+<script>
+/* ===== ACCÈS À LA RESSOURCE : optin → GHL (tag BOUSSOLE) ===== */
+(function(){
+  const GHL={
+    baseUrl:'https://services.leadconnectorhq.com',
+    locationId:'NsV7HI2MbE6qHtRp410y',
+    apiKey:'pit-892a9601-3e0c-4f75-a860-06cd08f9f314',
+    tag:'BOUSSOLE',
+    source:'Boussole — Ressource gratuite'
+  };
+  const KEY='ecs_boussole_v1';
+  const gate=document.getElementById('gate');
+  const resource=document.getElementById('resource');
+  const form=document.getElementById('gateForm');
+  const btn=document.getElementById('gateBtn');
+  const err=document.getElementById('gateErr');
+  const welcome=document.getElementById('welcome');
+  const sbar=document.getElementById('sbar');
+  const sbarNow=document.getElementById('sbarNow');
+
+  /* --- état local : une seule clé, jamais bloquant si le stockage est fermé --- */
+  function read(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+  function write(patch){try{localStorage.setItem(KEY,JSON.stringify(Object.assign(read(),patch)))}catch(e){}}
+
+  /* --- validation --- */
+  const EMAIL=/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+  function field(name){return form.querySelector('[name="'+name+'"]')}
+  function bad(input,msg){
+    input.closest('.fld').classList.add('bad');
+    err.textContent=msg;
+    input.focus();
+    return false;
+  }
+  function validate(){
+    err.textContent='';
+    form.querySelectorAll('.fld').forEach(f=>f.classList.remove('bad'));
+    const p=field('prenom'),n=field('nom'),e=field('email'),t=field('tel');
+    if(p.value.trim().length<2) return bad(p,'Ton prénom, s’il te plaît.');
+    if(n.value.trim().length<2) return bad(n,'Ton nom, s’il te plaît.');
+    if(!EMAIL.test(e.value.trim())) return bad(e,'Cet email ne ressemble pas à un email.');
+    if(t.value.replace(/\D/g,'').length<9) return bad(t,'Ce numéro semble incomplet.');
+    return true;
+  }
+
+  /* 0692/0693 et 0262/0263 = La Réunion (+262), les autres numéros en 0 = France (+33). */
+  function normPhone(v){
+    let p=v.replace(/[^\d+]/g,'');
+    if(p.slice(0,2)==='00') p='+'+p.slice(2);
+    if(p[0]!=='+'){
+      if(/^0(69[23]|26[23])/.test(p)) p='+262'+p.slice(1);
+      else if(p[0]==='0') p='+33'+p.slice(1);
+    }
+    return p;
+  }
+
+  async function pushToGHL(data){
+    const ctrl=new AbortController();
+    const kill=setTimeout(()=>ctrl.abort(),8000);
+    try{
+      const res=await fetch(GHL.baseUrl+'/contacts/upsert',{
+        method:'POST',
+        signal:ctrl.signal,
+        headers:{'Authorization':'Bearer '+GHL.apiKey,'Version':'2021-07-28','Content-Type':'application/json'},
+        body:JSON.stringify({
+          locationId:GHL.locationId,
+          firstName:data.prenom,
+          lastName:data.nom,
+          name:data.prenom+' '+data.nom,
+          email:data.email,
+          phone:data.tel,
+          source:GHL.source,
+          tags:[GHL.tag]
+        })
+      });
+      return res.ok;
+    }catch(e){
+      return false;
+    }finally{clearTimeout(kill);}
+  }
+
+  const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  /* --- ouverture de la ressource --- */
+  function reveal(prenom,animate){
+    gate.hidden=true;
+    resource.hidden=false;
+    if(prenom&&welcome){
+      welcome.innerHTML='<b>Salut '+esc(prenom)+'.</b> Ta boussole est ouverte — commence par le diagnostic, il te prend dix secondes.';
+      welcome.hidden=false;
+    }
+    if(animate){
+      const target=document.getElementById('diagnostic');
+      requestAnimationFrame(()=>{if(target)target.scrollIntoView({behavior:'smooth',block:'start'})});
+    }
+    startReveal();
+  }
+
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    if(!validate()) return;
+    const data={
+      prenom:field('prenom').value.trim(),
+      nom:field('nom').value.trim(),
+      email:field('email').value.trim(),
+      tel:normPhone(field('tel').value)
+    };
+    btn.disabled=true;
+    btn.innerHTML='Ouverture de ta boussole…';
+    // L'accès n'est jamais bloqué par l'API : on enregistre, on ouvre, quoi qu'il arrive.
+    await pushToGHL(data);
+    write({ok:true,prenom:data.prenom});
+    reveal(data.prenom,true);
+  });
+
+  /* --- persistance de la progression --- */
+  window.BOUSSOLE={
+    onPhase:function(i){
+      write({phase:i});
+      const p=(typeof PHASES!=='undefined')?PHASES[i]:null;
+      if(p&&sbarNow) sbarNow.innerHTML='Ta phase&nbsp;: <em>'+p.num+' · '+p.name+'</em>';
+    },
+    onCheck:function(box){
+      const st=read(),all=st.chk||{};
+      all[box.dataset.chk]=[...box.querySelectorAll('input')].map(x=>x.checked);
+      write({chk:all});
+    }
+  };
+
+  function restore(st){
+    if(st.phase==null||typeof choose!=='function') return;
+    choose(st.phase);
+    const chk=st.chk||{};
+    Object.keys(chk).forEach(k=>{
+      const box=document.querySelector('.chk[data-chk="'+k+'"]');
+      if(!box) return;
+      const inputs=box.querySelectorAll('input');
+      chk[k].forEach((v,j)=>{if(inputs[j]&&v){inputs[j].checked=true;inputs[j].dispatchEvent(new Event('change'))}});
+    });
+  }
+
+  /* --- barre collante --- */
+  document.getElementById('sbarRedo').addEventListener('click',()=>{
+    const d=document.getElementById('diagnostic');
+    if(d)d.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  window.addEventListener('scroll',()=>{
+    sbar.classList.toggle('on',!resource.hidden&&window.scrollY>520);
+  },{passive:true});
+
+  /* --- apparition au scroll --- */
+  let revealed=false;
+  function startReveal(){
+    if(revealed) return; revealed=true;
+    if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const els=document.querySelectorAll('#resource .sec-head, #resource .scale .st, #resource .lvl, #resource .diag, #resource .cta, #resource .more a');
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+    },{rootMargin:'0px 0px -8% 0px',threshold:.06});
+    els.forEach((el,i)=>{el.classList.add('rv');el.style.transitionDelay=(Math.min(i,4)*40)+'ms';io.observe(el)});
+    // filet de sécurité : rien ne doit rester invisible si l'observer ne se déclenche pas
+    setTimeout(()=>els.forEach(el=>el.classList.add('in')),2500);
+  }
+
+  /* --- retour d'un visiteur déjà inscrit --- */
+  const st=read();
+  if(st.ok){
+    reveal(st.prenom,false);
+    restore(st);
+  }
+})();
+</script>
+</body>
+</html>
