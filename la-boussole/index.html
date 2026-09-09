@@ -294,7 +294,8 @@
 
   /* ---------- LOGO (fichier unique, réutilisé partout) ---------- */
   /* boîtes au ratio exact du fichier (600x49) : sinon le mot-clé se tasse */
-  :root{--logo:url("logo.png")}
+  /* chemin absolu : servie sans slash final, la page résoudrait « logo.png » à la racine */
+  :root{--logo:url("/la-boussole/logo.png")}
   .logo{display:block;background:var(--logo) left center/contain no-repeat;height:18px;width:220px}
   .logo.sm{height:14px;width:171px;opacity:.85}
   @media(max-width:520px){.logo{height:15px;width:184px}}
