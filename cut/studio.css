@@ -401,10 +401,11 @@ html:not(.js) [data-k], html:not(.js) [data-mots] .m { --k: 1 !important; }
 .st-fenetre .mentions a { color: var(--ink-2); }
 .st-fenetre .pay-err { font-size: 13px; color: #ff8a5c; }
 .st-fenetre .pay-err:empty { display: none; }
-.st-fenetre .cut-quiz { max-width: none; padding: 0; margin: 0; background: none; box-shadow: none; animation: none; }
+.st-page .st-fenetre .cut-quiz { max-width: none; padding: 0; margin: 0; border-radius: 0; background: none; box-shadow: none; animation: none; }
 .st-fenetre .cut-quiz h2 { font-size: 22px; }
 .st-page .sheet { z-index: 80; background: rgba(5, 5, 4, .7); }
 .st-page .cut-quiz { background: var(--ui); box-shadow: 0 0 0 1px var(--ui-trait), 0 40px 100px rgba(0, 0, 0, .6); }
+.st-page .cut-quiz .cut-btn--primary { background: var(--cut); color: #fff; font-weight: 700; box-shadow: 0 8px 24px rgba(255, 75, 15, .32); }
 .st-page .cut-choice span { border-color: #4a443a; }
 .st-page .cut-choice input:checked + span { background: var(--cut); border-color: var(--cut); color: #fff; }
 .st-page .cut-input, .st-page .cut-textarea { background: var(--ui-2); border-color: #3a3530; }
