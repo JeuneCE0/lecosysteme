@@ -140,6 +140,7 @@
     lecture = true; vitesse = v || 1;
     finLecture = Math.min(TOTAL - .001, jusqua || TOTAL);
     tLecture = tCourant;
+    yImpose = -1;
     studio.classList.add("joue");
     $$("[data-lecture]").forEach(function (b) { b.setAttribute("aria-label", "Pause"); b.setAttribute("aria-pressed", "true"); });
   }
@@ -321,7 +322,7 @@
       v.style.left = pc(s.debut); v.style.width = pc(s.duree); v.style.setProperty("--img", "url(" + MEDIA + s.plan + ".jpg)");
       v.innerHTML = "<span>" + s.plan + (s.etal[1] < .5 ? "_brut" : "") + ".mov</span>";
       clipsV.push(v);
-      var cle = el("i", "st-tl-cle", pV); cle.style.left = pc(s.debut + s.duree * .22);
+      var cle = el("i", "st-tl-cle", pF); cle.style.left = pc(s.debut + s.duree * .22);
       if (s.i > 0) { var f = el("div", "st-clip st-clip--fx", pF); f.style.left = pc(s.debut - .3); f.style.width = pc(.6); f.title = "Coupe glitch"; }
       if (s.volet) { var fv = el("div", "st-clip st-clip--fx st-clip--long", pF, "<span>Volet</span>"); fv.style.left = pc(s.debut + s.duree * .1); fv.style.width = pc(s.duree * .8); }
     });
@@ -436,17 +437,20 @@
   }
 
   /* Image par image */
-  var tCourant = 0, dernierInstant = 0, horloge = 0;
+  var tCourant = 0, dernierInstant = 0, horloge = 0, yImpose = -1;
   function image(instant) {
     requestAnimationFrame(image);
     // Lenis 1.3 n'a pas de boucle propre (autoRaf désactivé) : il avance ici, avant la lecture de la position.
     if (lenis) lenis.raf(instant);
     var dt = dernierInstant ? Math.min(.1, (instant - dernierInstant) / 1000) : 0;
     dernierInstant = instant; horloge += dt;
+    // Un défilement venu d'ailleurs (doigt, molette, script, clavier) reprend la main sur la lecture.
+    if (lecture && yImpose >= 0 && Math.abs(window.scrollY - yImpose) > 3) arreter();
     if (lecture) {
       tLecture += dt * vitesse;
       if (tLecture >= finLecture) { tLecture = finLecture; arreter(); }
-      defilerImmediat(tLecture * pps);
+      yImpose = Math.round(tLecture * pps);
+      defilerImmediat(yImpose);
       tCourant = tLecture;
     } else if (gel) {
       tCourant = tGel;
@@ -497,11 +501,12 @@
       var q = borne((p - .04) / .82, 0, .9999), g = Math.floor(q * s.sous.length), mots = s.sous[g];
       if (g !== sousGroupe) {
         sousGroupe = g;
+        sousEl.classList.remove("neuf"); void sousEl.offsetWidth; sousEl.classList.add("neuf");
         sousEl.innerHTML = "";
         mots.forEach(function (m, j) { var sp = el("span", "", sousEl); sp.textContent = m; if (j < mots.length - 1) sousEl.appendChild(document.createTextNode(" ")); });
       }
       var w = Math.floor((q * s.sous.length - g) * (mots.length + .6));
-      $$("span", sousEl).forEach(function (sp, j) { sp.className = j < w ? "dit" : j === w ? "dit actif" : ""; });
+      $$("span", sousEl).forEach(function (sp, j) { sp.className = j === Math.min(w, mots.length - 1) ? "actif" : ""; });
     }
 
     // Inspecteur
@@ -744,7 +749,7 @@
     var rn = $("#r-n", simu), rt = $("#r-t", simu), o = {}, b = {}, affiche = -1, cible = 0, boucle = 0;
     $$("[data-o]", simu).forEach(function (e) { o[e.getAttribute("data-o")] = e; });
     $$("[data-b]", simu).forEach(function (e) { b[e.getAttribute("data-b")] = e; });
-    function duree(h) { var tot = Math.round(h * 60), hh = Math.floor(tot / 60), mm = tot % 60; return hh ? hh + " h" + (mm ? " " + deux(mm) : "") : mm + " min"; }
+    function duree(h) { var tot = Math.round(h * 60), hh = Math.floor(tot / 60), mm = tot % 60; return hh ? hh + "\u202fh" + (mm ? "\u202f" + deux(mm) : "") : mm + "\u202fmin"; }
     function compte() {
       affiche = affiche < 0 || reduit ? cible : affiche + (cible - affiche) * .18;
       if (Math.abs(cible - affiche) < .5) affiche = cible;
@@ -780,6 +785,6 @@
   if (fenetre && fenetre.hasAttribute("data-ouverte")) aller(S[0].duree * S[0].maintien, false);
   else if (window.scrollY < 2) {
     if (reduit) aller(S[0].duree * S[0].maintien, false);
-    else setTimeout(function () { if (window.scrollY < 2) lire(S[0].debut + S[0].duree * S[0].maintien, 1); }, 450);
+    else setTimeout(function () { if (window.scrollY < 2) lire(S[0].debut + S[0].duree * S[0].maintien, 1.7); }, 250);
   }
 })();
